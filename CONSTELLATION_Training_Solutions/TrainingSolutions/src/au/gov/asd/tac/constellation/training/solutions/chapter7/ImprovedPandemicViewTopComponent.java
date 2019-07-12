@@ -1,0 +1,160 @@
+/*
+ * Copyright 2010-2019 Australian Signals Directorate
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package au.gov.asd.tac.constellation.training.solutions.chapter7;
+
+import au.gov.asd.tac.constellation.graph.GraphReadMethods;
+import au.gov.asd.tac.constellation.graph.monitor.AttributeValueMonitor;
+import au.gov.asd.tac.constellation.graph.monitor.Monitor;
+import au.gov.asd.tac.constellation.graph.monitor.MonitorListener;
+import au.gov.asd.tac.constellation.graph.monitor.MonitorManager;
+import au.gov.asd.tac.constellation.graph.monitor.MonitorTransition;
+import au.gov.asd.tac.constellation.graph.monitor.MonitorTransitionFilter;
+import au.gov.asd.tac.constellation.training.solutions.chapter3.PandemicConcept;
+import au.gov.asd.tac.constellation.visual.javafx.JavafxStyleManager;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.Properties;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import org.netbeans.api.settings.ConvertAsProperties;
+import org.openide.awt.ActionID;
+import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
+import org.openide.awt.UndoRedo;
+import org.openide.util.HelpCtx;
+import org.openide.util.NbBundle.Messages;
+import org.openide.windows.TopComponent;
+
+/**
+ * Improved Pandemic View Top Component.
+ */
+@ConvertAsProperties(
+        dtd = "-//au.gov.asd.tac.constellation.training.solutions.chapter7//ImprovedPandemicView//EN",
+        autostore = false)
+@TopComponent.Description(
+        preferredID = "ImprovedPandemicViewTopComponent",
+        iconBase = "au/gov/asd/tac/constellation/training/solutions/chapter7/biohazard.png",
+        persistenceType = TopComponent.PERSISTENCE_ALWAYS)
+@TopComponent.Registration(
+        mode = "explorer",
+        openAtStartup = false)
+@ActionID(
+        category = "Window",
+        id = "au.gov.asd.tac.constellation.training.solutions.chapter7.ImprovedPandemicViewTopComponent")
+@ActionReferences({
+    @ActionReference(path = "Menu/Views", position = 2100)
+    ,
+    @ActionReference(path = "Shortcuts", name = "CS-Y")})
+@TopComponent.OpenActionRegistration(
+        displayName = "#CTL_ImprovedPandemicViewAction",
+        preferredID = "ImprovedPandemicViewTopComponent")
+@Messages({
+    "CTL_ImprovedPandemicViewAction=Improved Pandemic View",
+    "CTL_ImprovedPandemicViewTopComponent=Improved Pandemic View",
+    "HINT_ImprovedPandemicViewTopComponent=Improved Pandemic View"})
+public final class ImprovedPandemicViewTopComponent extends TopComponent implements UndoRedo.Provider, HelpCtx.Provider {
+
+    private final MonitorListener listener;
+    private final MonitorTransitionFilter transitionFilter;
+    private final AttributeValueMonitor outbreakMonitor;
+    private final MonitorManager manager;
+
+    private JFXPanel container;
+    private PandemicViewPane pandemicPane;
+
+    public ImprovedPandemicViewTopComponent() {
+        setName(Bundle.CTL_ImprovedPandemicViewTopComponent());
+        setToolTipText(Bundle.HINT_ImprovedPandemicViewTopComponent());
+        initComponents();
+
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(500, 500));
+
+        listener = (MonitorManager monitorManager, Monitor monitor, GraphReadMethods graph, boolean newGraph, int updateCount) -> {
+            pandemicPane.refresh(graph);
+        };
+        transitionFilter = new MonitorTransitionFilter(
+                MonitorTransition.UNDEFINED_TO_PRESENT,
+                MonitorTransition.CHANGED,
+                MonitorTransition.ADDED,
+                MonitorTransition.REMOVED_AND_ADDED
+        );
+        outbreakMonitor = new AttributeValueMonitor(PandemicConcept.VertexAttribute.OUTBREAK);
+        manager = new MonitorManager(2);
+        manager.addMonitorListener(listener, transitionFilter, outbreakMonitor);
+
+        container = new JFXPanel();
+
+        Platform.setImplicitExit(false);
+        Platform.runLater(() -> {
+            pandemicPane = new PandemicViewPane();
+            container.setScene(new Scene(pandemicPane));
+            container.getScene().getStylesheets().add(JavafxStyleManager.getMainStyleSheet());
+            add(container, BorderLayout.CENTER);
+            manager.start();
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
+    @Override
+    public void componentOpened() {
+        manager.start();
+    }
+
+    @Override
+    public void componentClosed() {
+        manager.stop();
+    }
+
+    @Override
+    public HelpCtx getHelpCtx() {
+        return new HelpCtx(getClass().getName());
+    }
+
+    void writeProperties(final Properties p) {
+// better to version settings since initial version as advocated at
+        // http://wiki.apidesign.org/wiki/PropertyFiles
+        p.setProperty("version", "1.0");
+// TODO store your settings
+    }
+
+    void readProperties(final Properties p) {
+        String version = p.getProperty("version");
+// TODO read your settings according to their version
+    }
+}
