@@ -20,3 +20,7 @@ This guide will introduce you to the most common ways to customise Constellation
 in order to solve domain-specific problems. Each chapter will introduce a new 
 concept interspersed with a series of practical exercises. These exercises will 
 build on each other to form a complete solution to a hypothetical scenario.
+
+## More Information
+This repository should follow everything mentioned in the Constellation 
+[README](https://github.com/constellation-app/constellation/blob/master/README.md).
