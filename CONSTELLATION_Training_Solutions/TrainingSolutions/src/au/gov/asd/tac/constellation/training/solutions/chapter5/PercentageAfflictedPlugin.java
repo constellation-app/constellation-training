@@ -29,6 +29,7 @@ import au.gov.asd.tac.constellation.pluginframework.PluginType;
 import au.gov.asd.tac.constellation.pluginframework.parameters.PluginParameter;
 import au.gov.asd.tac.constellation.pluginframework.parameters.PluginParameters;
 import au.gov.asd.tac.constellation.pluginframework.parameters.types.SingleChoiceParameterType;
+import au.gov.asd.tac.constellation.pluginframework.parameters.types.SingleChoiceParameterType.SingleChoiceParameterValue;
 import au.gov.asd.tac.constellation.pluginframework.templates.SimpleEditPlugin;
 import au.gov.asd.tac.constellation.schema.analyticschema.concept.AnalyticConcept;
 import au.gov.asd.tac.constellation.training.solutions.Outbreak;
@@ -53,7 +54,7 @@ public class PercentageAfflictedPlugin extends SimpleEditPlugin {
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        PluginParameter diseaseParameter = SingleChoiceParameterType.build(DISEASE_PARAMETER_ID);
+        PluginParameter<SingleChoiceParameterValue> diseaseParameter = SingleChoiceParameterType.build(DISEASE_PARAMETER_ID);
         diseaseParameter.setName(DISEASE_PARAMETER_LABEL);
         parameters.addParameter(diseaseParameter);
         return parameters;

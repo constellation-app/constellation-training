@@ -20,7 +20,7 @@ import au.gov.asd.tac.constellation.pluginframework.Plugin;
 import au.gov.asd.tac.constellation.pluginframework.PluginInfo;
 import au.gov.asd.tac.constellation.pluginframework.PluginType;
 import au.gov.asd.tac.constellation.pluginframework.parameters.PluginParameters;
-import au.gov.asd.tac.constellation.views.mapview.utilities.MapExporter;
+import au.gov.asd.tac.constellation.views.mapview.exporters.MapExporter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,7 +42,7 @@ import org.openide.util.lookup.ServiceProviders;
 })
 @NbBundle.Messages("TextGeoExporter=Export to Text")
 @PluginInfo(pluginType = PluginType.EXPORT, tags = {"EXPORT"})
-public class TextGeoExporter extends AbstractGeoExportPlugin {
+public class TextGeoExporter extends AbstractGeoExportPlugin implements MapExporter {
 
     @Override
     protected FileChooser.ExtensionFilter getExportType() {

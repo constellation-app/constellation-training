@@ -34,22 +34,22 @@ public class PandemicLogger extends DefaultConstellationLogger {
     private static final Logger LOGGER = Logger.getLogger(PandemicLogger.class.getName());
 
     @Override
-    public void applicationStart() {
+    public void applicationStarted() {
         LOGGER.info("Application Started...");
     }
 
     @Override
-    public void applicationStop() {
+    public void applicationStopped() {
         LOGGER.info("Application Stopped...");
     }
 
     @Override
-    public void pluginStart(Graph graph, Plugin plugin, PluginParameters pp) {
+    public void pluginStarted(final Plugin plugin, final PluginParameters pp, final Graph graph) {
         LOGGER.info("Plugin Started...");
     }
 
     @Override
-    public void pluginStop(Plugin plugin, PluginParameters pp) {
+    public void pluginStopped(Plugin plugin, PluginParameters pp) {
         LOGGER.info("Plugin Stopped...");
     }
 
