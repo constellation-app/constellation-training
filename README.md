@@ -21,6 +21,15 @@ in order to solve domain-specific problems. Each chapter will introduce a new
 concept interspersed with a series of practical exercises. These exercises will 
 build on each other to form a complete solution to a hypothetical scenario.
 
+# Special Instructions 
+> Presently we are in the process of migrating our repositories from NetBeans 8 to 
+NetBeans 11. Everything is up to date besides the training documentation. Until 
+this is updated, you will need to checkout this 
+[commit](https://github.com/constellation-app/constellation-training/commit/89c394624ac18b574104af03863924a30cc3ea90)
+in this repository to follow along the code and documentation and this 
+[README](https://github.com/constellation-app/constellation/tree/v1.3.1).
+
+
 ## More Information
 This repository should follow everything mentioned in the Constellation 
 [README](https://github.com/constellation-app/constellation/blob/master/README.md).
