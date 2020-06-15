@@ -57,7 +57,7 @@ public class ChainCitiesPlugin extends RecordStoreQueryPlugin implements DataAcc
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        final PluginParameter<DateTimeRangeParameterValue> datetime = DateTimeRangeParameterType.build(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
+        final PluginParameter<DateTimeRangeParameterValue> datetime = CoreGlobalParameters.DATETIME_RANGE_PARAMETER;
         parameters.addParameter(datetime);
         return parameters;
     }
