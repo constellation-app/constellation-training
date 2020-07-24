@@ -1,0 +1,7 @@
+source.Type,source.Identifier,source.Gender,source.Hair colour,source.Height,transaction.Type,transaction.Activity,destination.Type,destination.Identifier,destination.Gender,destination.Hair colour,destination.Height,LocationDestination.Type,LocationDestination.Identifier,destination.Geo.Latitude,destination.Geo.Longitude
+Person,Gary,Male,Black,187,Relationship,Lunch,Person,Michael,Male,Black,163,Location,The Blue Duck,-27.482,153.019
+Person,Greg,Male,Brown,180,Relationship,Lunch,Person,Michael,Male,Black,163,Location,The Blue Duck,-27.482,153.019
+Person,Greg,Male,Brown,180,Relationship,Lunch,Person,Gary,Male,Black,187,Location,The Blue Duck,-27.482,153.019
+Person,Greg,Male,Brown,180,Relationship,Lunch,Person,Jemma,Female,Brown,189,Location,The Blue Duck,-27.482,153.019
+Person,Gary,Male,Black,187,Relationship,Lunch,Person,Jemma,Female,Brown,189,Location,The Blue Duck,-27.482,153.019
+Person,Michael,Male,Black,163,Relationship,Lunch,Person,Jemma,Female,Brown,189,Location,The Blue Duck,-27.482,153.019
