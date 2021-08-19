@@ -16,7 +16,6 @@
 package au.gov.asd.tac.constellation.training.exercises;
 
 import au.gov.asd.tac.constellation.graph.attribute.IntegerAttributeDescription;
-import au.gov.asd.tac.constellation.graph.attribute.ZonedDateTimeAttributeDescription;
 import au.gov.asd.tac.constellation.graph.processing.GraphRecordStoreUtilities;
 import au.gov.asd.tac.constellation.graph.processing.Record;
 import au.gov.asd.tac.constellation.graph.schema.analytic.concept.AnalyticConcept;
@@ -64,19 +63,21 @@ public class OutbreakUtilities {
      */
     public static Outbreak spreadDisease(Outbreak outbreak, int hostPopulation, List<Outbreak> neighboutOutbreaks, List<Integer> neighbourPopulations, List<Integer> neighbourDailyFlightVolumes, int numberOfDays) {
         final Map<String, Integer> spreadOutbreakData = new HashMap<>();
-        outbreak.getOutbreakData().forEach((diseaseName, afflicted) -> {
-            spreadOutbreakData.put(diseaseName, (int) Math.min(Math.floor(afflicted * Math.pow(1 + DAILY_LOCAL_SPREAD_FACTOR, numberOfDays)), hostPopulation));
-        });
-        for (int i = 0; i < neighboutOutbreaks.size(); i++) {
-            final Outbreak neighbourOutbreak = neighboutOutbreaks.get(i);
-            final double population = neighbourPopulations.get(i);
-            final double neighbourDailyFlightVolume = neighbourDailyFlightVolumes.get(i);
-            neighbourOutbreak.getOutbreakData().forEach((diseaseName, afflicted) -> {
-                spreadOutbreakData.put(diseaseName,
-                        Math.min((spreadOutbreakData.containsKey(diseaseName) ? spreadOutbreakData.get(diseaseName) : 0)
-                                + (int) Math.ceil(neighbourDailyFlightVolume * (afflicted / population) * numberOfDays), hostPopulation)
-                );
+        if (outbreak != null) {
+            outbreak.getOutbreakData().forEach((diseaseName, afflicted) -> {
+                spreadOutbreakData.put(diseaseName, (int) Math.min(Math.floor(afflicted * Math.pow(1 + DAILY_LOCAL_SPREAD_FACTOR, numberOfDays)), hostPopulation));
             });
+            for (int i = 0; i < neighboutOutbreaks.size(); i++) {
+                final Outbreak neighbourOutbreak = neighboutOutbreaks.get(i);
+                final double population = neighbourPopulations.get(i);
+                final double neighbourDailyFlightVolume = neighbourDailyFlightVolumes.get(i);
+                neighbourOutbreak.getOutbreakData().forEach((diseaseName, afflicted) -> {
+                    spreadOutbreakData.put(diseaseName,
+                            Math.min((spreadOutbreakData.containsKey(diseaseName) ? spreadOutbreakData.get(diseaseName) : 0)
+                                    + (int) Math.ceil(neighbourDailyFlightVolume * (afflicted / population) * numberOfDays), hostPopulation)
+                    );
+                });
+            }
         }
         return new Outbreak(spreadOutbreakData);
     }
@@ -287,7 +288,7 @@ public class OutbreakUtilities {
          * @return the datetime when the Flight departs.
          */
         public String getDepartureTime() {
-            return ZonedDateTimeAttributeDescription.getAsString(ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC));
+            return ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC).toString();
         }
 
         /**
