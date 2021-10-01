@@ -61,16 +61,16 @@ public class TotalInfectionsFormatter extends BinFormatter {
         @Override
         public void setKey(final GraphReadMethods graph, final int attribute, final int element) {
             bin.setKey(graph, attribute, element);
-            key = bin.key == null ? -1
-                    : ((Outbreak) bin.key).getNumberOfDiseases() == 0 ? 0
-                    : ((Outbreak) bin.key).getOutbreakData().values().stream().reduce((x, y) -> {
+            key = bin.getKeyAsObject() == null ? -1
+                    : ((Outbreak) bin.getKeyAsObject()).getNumberOfDiseases() == 0 ? 0
+                    : ((Outbreak) bin.getKeyAsObject()).getOutbreakData().values().stream().reduce((x, y) -> {
                         return x + y;
                     }).get();
         }
 
         @Override
         public void prepareForPresentation() {
-            label = bin.key == null ? null : String.valueOf(key);
+            label = bin.getKeyAsObject() == null ? null : String.valueOf(key);
         }
 
     }

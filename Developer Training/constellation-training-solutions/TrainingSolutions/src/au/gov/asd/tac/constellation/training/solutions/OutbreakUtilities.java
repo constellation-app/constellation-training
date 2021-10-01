@@ -294,7 +294,7 @@ public class OutbreakUtilities {
          * @return the datetime when the Flight departs.
          */
         public String getDepartureTime() {
-            return ZonedDateTimeAttributeDescription.getAsString(ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC));
+            return ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC).toString();
         }
 
         /**
