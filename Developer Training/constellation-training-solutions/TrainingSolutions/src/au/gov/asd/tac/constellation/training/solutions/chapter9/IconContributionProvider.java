@@ -86,8 +86,13 @@ public class IconContributionProvider extends ConversationContributionProvider {
         }
 
         @Override
-        public String toString() {
+        protected String getText() {
             return "Icon Contribution";
+        }
+        
+        @Override
+        public String toString() {
+            return getText();
         }
     }
 }

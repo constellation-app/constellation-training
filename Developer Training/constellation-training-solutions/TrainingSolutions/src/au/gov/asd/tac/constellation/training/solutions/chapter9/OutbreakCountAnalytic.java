@@ -102,7 +102,7 @@ public class OutbreakCountAnalytic extends AnalyticPlugin<ScoreResult> {
     }
 
     @Override
-    public Class<? extends AnalyticResult> getResultType() {
+    public Class<? extends AnalyticResult<?>> getResultType() {
         return ScoreResult.class;
     }
 }

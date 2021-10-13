@@ -77,14 +77,14 @@ public class SpecifiedDiseaseFormatter extends BinFormatter {
         @Override
         public void setKey(final GraphReadMethods graph, final int attribute, final int element) {
             bin.setKey(graph, attribute, element);
-            key = bin.key == null ? -1
-                    : !((Outbreak) bin.key).getDiseases().contains(diseaseName) ? 0
-                    : ((Outbreak) bin.key).getOutbreakData().get(diseaseName);
+            key = bin.getKeyAsObject() == null ? -1
+                    : !((Outbreak) bin.getKeyAsObject()).getDiseases().contains(diseaseName) ? 0
+                    : ((Outbreak) bin.getKeyAsObject()).getOutbreakData().get(diseaseName);
         }
 
         @Override
         public void prepareForPresentation() {
-            label = bin.key == null ? null : String.valueOf(key) + " people infected with " + diseaseName;
+            label = bin.getKeyAsObject() == null ? null : String.valueOf(key) + " people infected with " + diseaseName;
         }
 
     }

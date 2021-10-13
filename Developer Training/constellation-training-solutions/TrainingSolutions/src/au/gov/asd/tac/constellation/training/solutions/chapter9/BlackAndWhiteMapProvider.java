@@ -54,7 +54,8 @@ public class BlackAndWhiteMapProvider extends MapProvider {
         final File defaultMap = ConstellationInstalledFileLocator.locate(
                 "modules/ext/Black&White.mbtiles",
                 "au.gov.asd.tac.constellation.training.solutions",
-                false, BlackAndWhiteMapProvider.class.getProtectionDomain());
+                BlackAndWhiteMapProvider.class.getProtectionDomain()
+        );
         final String connection = String.format("jdbc:sqlite:%s", defaultMap.getAbsolutePath());
         final int zoom = (int) coordinate.zoom;
         final float gridSize = PApplet.pow(2, coordinate.zoom);
