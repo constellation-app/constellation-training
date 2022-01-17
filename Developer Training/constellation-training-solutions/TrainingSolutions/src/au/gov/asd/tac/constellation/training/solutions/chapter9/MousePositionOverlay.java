@@ -50,17 +50,17 @@ public class MousePositionOverlay extends MapOverlay {
 
         // draw mouse position overlay
         renderer.noStroke();
-        renderer.fill(mousePressed ? highlightColor : backgroundColor);
+        renderer.fill(mousePressed ? HIGHLIGHT_COLOUR : BACKGROUND_COLOUR);
         renderer.rect(x, y, width, height);
 
-        float yOffset = y + margin;
+        float yOffset = y + MARGIN;
 
         // draw location info
         final String mouseX = String.valueOf(renderer.mouseX) + "px";
         final String mouseY = String.valueOf(renderer.mouseY) + "px";
         drawLabel("Mouse", x + 60, yOffset);
-        drawValue(mouseX, x + 60, yOffset, valueBoxMediumWidth, false, false);
-        drawValue(mouseY, x + 60 + valueBoxMediumWidth + padding, yOffset, valueBoxMediumWidth, false, false);
+        drawValue(mouseX, x + 60, yOffset, VALUE_BOX_MEDIUM_WIDTH, false, false);
+        drawValue(mouseY, x + 60 + VALUE_BOX_MEDIUM_WIDTH + PADDING, yOffset, VALUE_BOX_MEDIUM_WIDTH, false, false);
     }
 
     @Override

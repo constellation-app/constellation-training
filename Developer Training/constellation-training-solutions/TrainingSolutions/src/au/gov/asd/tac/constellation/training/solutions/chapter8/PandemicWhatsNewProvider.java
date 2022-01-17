@@ -15,7 +15,7 @@
  */
 package au.gov.asd.tac.constellation.training.solutions.chapter8;
 
-import au.gov.asd.tac.constellation.functionality.whatsnew.WhatsNewProvider;
+import au.gov.asd.tac.constellation.views.whatsnew.WhatsNewProvider;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
