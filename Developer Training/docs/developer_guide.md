@@ -133,14 +133,12 @@ are stored in and managed by a **module suite**.
 1.  Click on *File \> New Project*, then select *Module Suite* under the
     *NetBeans Modules* category. Click *Next*.
 
-> ![](media/image1.png){width="5.679166666666666in"
-> height="3.9069444444444446in"}
+![](media/image1.png)
 
 2.  Enter 'TrainingExercises' as the project name for your module suite.
     Specify a convenient project location of your choice.
 
-![](media/image2.png){width="6.268055555555556in"
-height="4.311805555555556in"}
+![](media/image2.png)
 
 3.  Click Finish.
 
@@ -154,13 +152,11 @@ newly created Training module.
 
 2.  Deselect all modules except platform.
 
-![](media/image3.png){width="6.268055555555556in"
-height="4.161111111111111in"}
+![](media/image3.png)
 
 3.  Select *Add Project* and browse to the Constellation module suite.
 
-![](media/image4.png){width="6.268055555555556in"
-height="4.161111111111111in"}
+![](media/image4.png)
 
 4.  Click *OK,* to finalise configuration of your module suite.
 
@@ -169,7 +165,7 @@ height="4.161111111111111in"}
 Verify that Constellation runs by right clicking on your new module
 suite and selecting *Run*.
 
-![](media/image5.png){width="3.9375in" height="7.3125in"}
+![](media/image5.png)
 
 Pressing the F6 key is a shortcut for running your main project. When
 you have multiple projects open, you can specify the main project by
@@ -180,8 +176,7 @@ run when you don't specify otherwise.
 Once Constellation has finished loading, you should be presented with
 the Constellation Tutorial Page.
 
-![](media/image6.png){width="5.729166666666667in"
-height="3.4611111111111112in"}
+![](media/image6.png)
 
 1.1.4: Creating a Module
 
@@ -193,21 +188,19 @@ In order to start writing code, we first need a module to store it in.
 2.  Enter *EnvironmentTestModule* as the project name for your module,
     then click *Next*.
 
-![](media/image7.png){width="5.727083333333334in"
-height="3.348611111111111in"}
+![](media/image7.png)
 
 3.  Enter "org.company.test" as code name base and module display name
     and "Environment Test Module" for your module display name, then
     click ***Finish***.
 
-![](media/image8.png){width="5.909027777777778in"
-height="3.454861111111111in"}
+![](media/image8.png)
 
 4.  You should now see your new module in the *Modules* directory of
     your module suite. To open your new module, right click it and
     select *Open Project*.
 
-![](media/image9.png){width="3.59375in" height="2.5625in"}
+![](media/image9.png)
 
 **1.1.5: Configuring a Module**
 
@@ -218,28 +211,25 @@ an open module and selecting *Properties*.
     that your module is Java 8 compliant. This can be achieved by
     clicking *Sources* and setting the *Source Level* to 1.8.
 
-![](media/image10.png){width="6.5in" height="5.054166666666666in"}
+![](media/image10.png)
 
 2.  You can also add or remove dependencies for your module under the
     *Libraries* category. At this stage we have no required dependencies
     but we will visit this page later in the section.
 
-> ![](media/image11.png){width="6.268055555555556in"
-> height="4.873611111111111in"}
+![](media/image11.png)
 
 3.  You can give your module a name, category and description under the
     *Display* category.
 
-> ![](media/image12.png){width="6.268055555555556in"
-> height="4.873611111111111in"}
+![](media/image12.png)
 
 4.  Finally, once you have some code in your module, you can manage
     whether packages are public or private to other modules under the
     *API Versioning* category. You can also increment the version number
     of your module here.
 
-> ![](media/image13.png){width="6.268055555555556in"
-> height="4.873611111111111in"}
+![](media/image13.png)
 
 5.  Click *OK* to finalise configuration of your module.
 
@@ -253,31 +243,27 @@ some code to it and observing the output.
 
 2.  Leave the action type as Always Enabled and click Next.
 
-![](media/image14.png){width="6.268055555555556in"
-height="4.5993055555555555in"}
+![](media/image14.png)
 
 3.  Set the *Category*, *Menu* and *Position* as shown below and then
     click *Next.*
 
-![](media/image15.png){width="6.268055555555556in"
-height="4.370833333333334in"}
+![](media/image15.png)
 
 4.  Set the *Class Name* and *Display Name* as shown below and then
     click *Finish*.
 
-![](media/image16.png){width="6.268055555555556in"
-height="4.370833333333334in"}
+![](media/image16.png)
 
 5.  This will create a class called **TestAction**. Paste the following
     code inside this class:
 
-\@Override
-
+```java
+@Override
 public void **actionPerformed**(ActionEvent e) {
-
-System.*out*.println(\"Your Environment is Configured Correctly!\");
-
+    System.*out*.println(\"Your Environment is Configured Correctly!\");
 }
+```
 
 6.  Run your project, and find the action you just created (remember you
     can search for it using the quick search bar) and run it. Observe
@@ -324,14 +310,13 @@ Right click on the *Modules* directory inside your module suite and
 select *Add Existing...*. Browse to the TrainingExercises module as
 displayed below and click *Open Project*.
 
-![](media/image17.png){width="5.46875in" height="4.197916666666667in"}
+![](media/image17.png)
 
 As the module you are importing currently belongs to another module
 suite, NetBeans will warn you that it will be removed from its existing
 module suite:
 
-![](media/image18.png){width="6.268055555555556in"
-height="1.7256944444444444in"}
+![](media/image18.png)
 
 Click *OK* to confirm.
 
@@ -340,7 +325,7 @@ should add all of its modules as dependencies. Recall from **1.1.5**
 that this can be achieved by clicking *Add Dependency...* under the
 *Libraries* category within your module's properties.
 
-![](media/image19.png){width="5.375in" height="5.59375in"}
+![](media/image19.png)
 
 Select all modules beginning with "Core" (you can hold the shift key to
 select a range) and click *OK* to add them as dependencies of your
@@ -541,8 +526,7 @@ fully working data access plugin in Constellation. To begin, find and
 open the **ImportInfectedCitiesPlugin** skeleton class in the chapter2
 package of the Training Exercises module.
 
-![](media/image20.png){width="3.7729166666666667in"
-height="2.4451388888888888in"}
+![](media/image20.png)
 
 **2.1.1: Create a plugin**
 
@@ -554,22 +538,19 @@ class extend **RecordStoreQueryPlugin** and use the NetBeans hint
 "Implement all abstract methods" to implement the required
 **query(...)** method.
 
+```java
 public class **ImportInfectedCitiesPlugin** extends
 RecordStoreQueryPlugin {
 
-\@Override
-
+@Override
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
-
 PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 \...
-
 }
-
 }
+```
 
 **2.1.2: Register your plugin**
 
@@ -581,10 +562,11 @@ feature that allows classes to register themselves for lookup at
 runtime. Constellation uses this framework extensively to provide most
 of its extension mechanisms.
 
-\@ServiceProvider(service = Plugin.class)
-
+```java
+@ServiceProvider(service = Plugin.class)
 public class **ImportInfectedCitiesPlugin** extends
 RecordStoreQueryPlugin {
+```
 
 The **ServiceProvider** annotation registers a class as providing an
 implementation of another class. Any registered classes can later be
@@ -601,8 +583,10 @@ public and provide a convenient way for other developers to find your
 plugin. Open the **PandemicPluginRegistry** class from the default
 package of the exercise module and add:
 
+```java
 public static final String *IMPORT_INFECTED_CITIES* =
 ImportInfectedCitiesPlugin.class.getName();
+```
 
 We will discuss how these registry classes are used in Chapter 4 when we
 need to instantiate and execute another plugin from our plugin.
@@ -615,16 +599,16 @@ interface (NetBeans will again help you implement the required methods)
 and should include another **\@ServiceProvider** annotation registering
 it as implementing the **DataAccessPlugin** interface
 
-\@ServiceProviders({
-
-\@ServiceProvider(service = DataAccessPlugin.class),
-
-\@ServiceProvider(service = Plugin.class)
+```java
+@ServiceProviders({
+@ServiceProvider(service = DataAccessPlugin.class),
+@ServiceProvider(service = Plugin.class)
 
 })
 
 public class **ImportInfectedCitiesPlugin** extends
 RecordStoreQueryPlugin implements DataAccessPlugin {
+```
 
 **2.1.4: Specify the type and position of your plugin in the Data Access
 View:**
@@ -638,25 +622,23 @@ below to specify you want your plugin to appear in the experimental
 group. Note that the type needs to be a registered type name from an
 implementation of **DataAccessPluginType**.
 
-\@Override
-
+```java
+@Override
 public String **getType**() {
-
 return DataAccessPluginCoreType.*EXPERIMENTAL*;
-
 }
+```
 
 Within a section, plugins are ordered based on their requested position.
 You can specify this position by implementing another method from the
 **DataAccessPlugin** interface:
 
-\@Override
-
+```java
+@Override
 public int **getPosition**() {
-
 return 0;
-
 }
+```
 
 Higher positions appear after lower positions. A position of 0 requests
 your plugin to appear first in the section.
@@ -667,51 +649,47 @@ Each plugin in Constellation has a human readable name that is displayed
 in the user interface. You can specify the name of your plugin by
 overriding the **getName()** method from the **AbstractPlugin** class:
 
-\@Override
-
+```java
+@Override
 public String **getName**() {
-
 return \"Import Infected Cities\";
-
 }
+```
 
 However, Constellation provides a shortcut for this by specifying an
 **\@NbBundle** message with a key identical to the class name. Delete
 your implementation of **getName()** and replace it with an
 **\@NbBundle** annotation on your class:
 
-\@ServiceProviders({
-
-\@ServiceProvider(service = DataAccessPlugin.class),
-
-\@ServiceProvider(service = Plugin.class)
-
+```java
+@ServiceProviders({
+@ServiceProvider(service = DataAccessPlugin.class),
+@ServiceProvider(service = Plugin.class)
 })
 
-\@NbBundle.*Messages*(\"ImportInfectedCitiesPlugin=Import Infected
+@NbBundle.*Messages*(\"ImportInfectedCitiesPlugin=Import Infected
 Cities\")
 
 public class **ImportInfectedCitiesPlugin** extends
 RecordStoreQueryPlugin implements DataAccessPlugin {
+```
 
 Finally, remove the **UnsupportedOperationException** from the body of
 your query method and replace it with code to print out a message when
 the plugin is run. At this stage we return an empty record store so
 nothing will be added to the graph.
 
-\@Override
-
+```java
+@Override
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
 
 PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 System.*out*.println(\"Testing Infected Cities Plugin\");
-
 return new GraphRecordStore();
-
 }
+```
 
 If you compile and run Constellation at this stage, you should see your
 plugin appear in the Data Access View as expected:
@@ -734,37 +712,32 @@ Adding nodes and transactions to the graph involves adding data to the
 **RecordStore** instance returned from our query method. To begin with,
 we will add a single node to the graph.
 
+```java
 \@Override
-
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
 
 PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 RecordStore result = new GraphRecordStore();
-
 result.add();
-
 result.set(GraphRecordStoreUtilities.*SOURCE* +
-
 VisualConcept.VertexAttribute.*IDENTIFIER*, \"Me\");
 
 result.set(GraphRecordStoreUtilities.*SOURCE* +
 AnalyticConcept.VertexAttribute.*TYPE*,
-
 AnalyticConcept.*VertexType*.*PERSON*);
 
 return result;
-
 }
+```
 
 If you compile and run Constellation again, your plugin will now add a
 single node to the graph. You should see that Constellation has assisted
 you by setting icon and colour values for the node based on the type you
 specified.
 
-![](media/image21.png){width="3.28125in" height="2.9270833333333335in"}
+![](media/image21.png)
 
 Looking at the code, the query method performs three main tasks:
 
@@ -801,45 +774,36 @@ As mentioned above, to add a transaction to the graph all that is needed
 is to specify both source and destination node attributes (and
 optionally transaction attributes) in a single row of the RecordStore:
 
+```java
 \@Override
-
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
 
 PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 RecordStore result = new GraphRecordStore();
-
 result.add();
-
 result.set(GraphRecordStoreUtilities.*SOURCE* +
-
 VisualConcept.VertexAttribute.*IDENTIFIER*, \"Me\");
 
 result.set(GraphRecordStoreUtilities.*SOURCE* +
 AnalyticConcept.VertexAttribute.*TYPE*,
-
 AnalyticConcept.*VertexType*.*PERSON*);
 
 result.set(GraphRecordStoreUtilities.*DESTINATION* +
-
 VisualConcept.VertexAttribute.*IDENTIFIER*, \"You\");
 
 result.set(GraphRecordStoreUtilities.*DESTINATION* +
 AnalyticConcept.VertexAttribute.*TYPE*,
-
 AnalyticConcept.*VertexType*.*PERSON*);
 
 result.set(GraphRecordStoreUtilities.*TRANSACTION* +
-
 AnalyticConcept.TransactionAttribute.*TYPE*,
-
 AnalyticConcept.*TransactionType*.*COMMUNICATION*);
 
 return result;
-
 }
+```
 
 Running Constellation again will now demonstrate that the plugin will
 add a new transaction to the graph, as well as the source and
@@ -847,8 +811,7 @@ destination nodes for that transaction. Again, the schema has provided
 assistance by setting an appropriate transaction colour based on the
 specified transaction type.
 
-![](media/image22.png){width="6.268055555555556in"
-height="2.6881944444444446in"}
+![](media/image22.png)
 
 Finally, we will modify our query method to perform the task we
 originally intended: to import all cities from our data set that have at
@@ -859,61 +822,44 @@ will perform the data access queries we required.
 The **OutbreakUtilities** class has many useful methods that will be
 used throughout this training document to simplify our development.
 
-\@Override
+```java
+@Override
 
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction, PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 RecordStore result = new GraphRecordStore();
-
 for (OutbreakUtilities.*City* city :
 OutbreakUtilities.*getInfectedCities*()) {
-
 result.add();
-
 result.set(GraphRecordStoreUtilities.*SOURCE*
-
 \+ VisualConcept.*VertexAttribute*.*IDENTIFIER*, city.getName());
-
 result.set(GraphRecordStoreUtilities.*SOURCE* +
 AnalyticConcept.*VertexAttribute*.*TYPE*,
-
 AnalyticConcept.*VertexType*.*LOCATION*);
-
 result.set(GraphRecordStoreUtilities.*SOURCE* + \"Population\",
 city.getPopulation());
-
 result.set(GraphRecordStoreUtilities.*SOURCE*
-
 \+ SpatialConcept.*VertexAttribute*.*LATITUDE*, city.getLatitude());
-
 result.set(GraphRecordStoreUtilities.*SOURCE*
-
 \+ SpatialConcept.*VertexAttribute*.*LONGITUDE*, city.getLongitude());
-
 result.set(GraphRecordStoreUtilities.*SOURCE*
-
 \+ \"Outbreak\", city.getOutbreak());
-
 }
-
 return result;
-
 }
+```
 
 Running your plugin now will import all infected cities into
 Constellation, with a result similar to:
 
-![](media/image23.png){width="6.268055555555556in"
-height="3.5277777777777777in"}
+![](media/image23.png)
 
 While the data is now successfully importing, one problem arises when
 you attempt to histogram the city populations in order to find the
 cities with the largest populations:
 
-![](media/image24.png){width="6.267361111111111in"
-height="1.207638888888889in"}
+![](media/image24.png)
 
 Notice that the populations are not sorting correctly as integers, but
 rather as strings. This occurs because, unless directed otherwise, new
@@ -922,9 +868,11 @@ attributes. This can be corrected by appending a type to the end of a
 column key ("\<" + type + "\>") when specifying **RecordStore** column
 values:
 
+```java
 result.set(GraphRecordStoreUtilities.*SOURCE* + \"Population\" + \"\<\"
 + IntegerAttributeDescription.*ATTRIBUTE_NAME* + \"\>\",
 city.getPopulation());
+```
 
 Running the plugin again will show that the population attribute now
 sorts correctly as it has been added to the graph as an integer
@@ -934,6 +882,7 @@ As the process of adding a city to a **RecordStore** is such a common
 task, **OutbreakUtilities** provides another convenience method that
 will do this for us. This allows us to simplify our query method:
 
+```java
 \@Override
 
 protected RecordStore **query**(RecordStore query, PluginInteraction
@@ -956,6 +905,7 @@ GraphRecordStoreUtilities.*SOURCE*);
 return result;
 
 }
+```
 
 **Chapter 3: Schemas**
 
@@ -988,13 +938,12 @@ several parameters used for schema construction. Ensure
 **PandemicSchemaFactory** is registered as a **SchemaFactory** class,
 and that it extends **AnalyticSchemaFactory**.
 
-\@ServiceProvider(service = SchemaFactory.class)
-
+```java
+@ServiceProvider(service = SchemaFactory.class)
 public class **PandemicSchemaFactory** extends AnalyticSchemaFactory {
-
 ...
-
 }
+```
 
 A schema should always be assigned a name. This name will be saved into
 Constellation graph files so that the schema can be recalled on load,
@@ -1002,37 +951,31 @@ and so it is important to remember that changing this name will break
 any previously saved graphs which use this schema. Give
 **PandemicSchemaFactory** a unique name.
 
+```java
 public static final String *NAME* =
 \"au.gov.asd.tac.constellation.training.schema.PandemicSchemaFactory\";
-
-\@Override
-
+@Override
 public String **getName**() {
-
 return *NAME*;
-
 }
+```
 
 It is also required to give a schema a label and a description, whose
 values will be displayed to the user within Constellation. Give
 **PandemicSchemaFactory** a label and description.
 
-\@Override
-
+```java
+@Override
 public String **getLabel**() {
-
 return \"Pandemic Graph\";
-
 }
 
-\@Override
-
+@Override
 public String **getDescription**() {
-
 return \"This graph provides support for analysing a pandemic - for
 training purposes\";
-
 }
+```
 
 The position of a schema will determine where it sits within the 'New
 Graph' menu in Constellation. Lower positions are considered more
@@ -1040,13 +983,12 @@ important by Constellation, and the schema with the lowest position will
 become the default graph type. Give **PandemicSchemaFactory** a position
 which will ensure it is the default schema factory.
 
-\@ServiceProvider(service = SchemaFactory.class, position = 0)
-
+```java
+@ServiceProvider(service = SchemaFactory.class, position = 0)
 public class **PandemicSchemaFactory** extends AnalyticSchemaFactory {
-
 ...
-
 }
+```
 
 There are other attributes we could specify here, such as the key
 attributes created schemas or the default labels for the graph, but for
@@ -1075,23 +1017,18 @@ registering some existing schema concepts to **PandemicSchemaFactory**.
     as a graph by providing knowledge of types and other relevant
     attributes.
 
-\@Override
-
+```java
+@Override
 public Set\<Class\<? extends SchemaConcept\>\>
 **getRegisteredConcepts**() {
-
 final Set\<Class\<? extends SchemaConcept\>\> registeredConcepts = new
 HashSet\<\>();
-
 registeredConcepts.add(*ConstellationViewsConcept*.class);
-
 registeredConcepts.add(VisualConcept.class);
-
 registeredConcepts.add(AnalyticConcept.class);
-
 return Collections.*unmodifiableSet*(registeredConcepts);
-
 }
+```
 
 **3.1.3: Building a Schema**
 
@@ -1100,26 +1037,23 @@ factory will create, which is done using the **Schema** class. Try
 creating a pandemic schema class (which should extend as
 **AnalyticSchema**) as an inner class within **PandemicSchemaFactory**.
 
+```java
 protected class **PandemicSchema** extends AnalyticSchema {
-
 public **PandemicSchema**(SchemaFactory factory) {
-
 super(factory);
-
 }
-
 }
+```
 
 To complete this step, you must also tell the schema factory that the
 pandemic schema is the schema it should be building.
 
-\@Override
-
+```java
+@Override
 public Schema **createSchema**() {
-
 return new PandemicSchema(this);
-
 }
+```
 
 Try running Constellation and creating a Pandemic Graph. This graph
 should successfully open.
@@ -1133,26 +1067,21 @@ added to it. Try implementing the **completeVertex** method in the
 CONSTELLATION and running the 'Import Infected Cities' plugin from the
 previous chapter.
 
-\@Override
-
+```java
+@Override
 public void **completeVertex**(final GraphWriteMethods graph, final int
 vertex) {
-
 final int typeAttributeId =
 AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
-
 final SchemaVertexType vertexType =
 graph.getObjectValue(typeAttributeId, vertex);
-
 if (AnalyticConcept.*VertexType*.*LOCATION*.equals(vertexType)) {
-
 graph.setStringValue(typeAttributeId, vertex, \"City\");
-
 }
 
 super.completeVertex(graph, vertex);
-
 }
+```
 
 **Schema Attributes**
 
@@ -1186,32 +1115,23 @@ concept to a schema, all of its children will also be registered. Open
 and complete the **PandemicConcept** class now, assigning
 **AnalyticConcept** as its parent.
 
-\@ServiceProvider(service = SchemaConcept.class)
-
+```java
+@ServiceProvider(service = SchemaConcept.class)
 public class **PandemicConcept** extends SchemaConcept {
-
-\@Override
-
+@Override
 public String **getName**() {
-
 return \"Pandemic\";
-
 }
 
-\@Override
-
+@Override
 public Set\<Class\<? extends SchemaConcept\>\> **getParents**() {
-
 final Set\<Class\<? extends SchemaConcept\>\> parentSet = new
 HashSet\<\>();
-
 parentSet.add(AnalyticConcept.class);
-
 return Collections.*unmodifiableSet*(parentSet);
-
 }
-
 }
+```
 
 **3.2.2: Building a Schema Attribute**
 
@@ -1224,22 +1144,19 @@ that we have placed our schema attribute within the static inner class
 **VertexAttribute**. This is not required but is a convenient way to
 group attributes and types for ease of use later.
 
+```java
 public static class ***VertexAttribute*** {
-
 \...
 
 public static final SchemaAttribute *OUTBREAK* = new
 SchemaAttribute.Builder(GraphElementType.*VERTEX*,
 StringAttributeDescription.*ATTRIBUTE_NAME*, \"Outbreak\")
-
 .setDescription(\"An outbreak consisting of one or more diseases and
 their influence\")
-
 .create()
-
 .build();
-
 }
+```
 
 [You also need to build a population schema attribute.]{.ul} Take some
 time to look over the properties which can be set using the schema
@@ -1252,19 +1169,15 @@ with your concept by overriding the **getSchemaAttributes** method.
 Register your outbreak schema attribute to the **PandemicConcept**
 class.
 
-\@Override
-
+```java
+@Override
 public Collection\<SchemaAttribute\> **getSchemaAttributes**() {
-
 final List\<SchemaAttribute\> schemaAttributes = new ArrayList\<\>();
-
 \...
-
 schemaAttributes.add(*VertexAttribute*.*OUTBREAK*);
-
 return Collections.*unmodifiableCollection*(schemaAttributes);
-
 }
+```
 
 Once your concept is complete, don't forget that you will need to
 register it to a schema before you will be able to make use of it within
@@ -1296,24 +1209,18 @@ primitive type), we can make use of the simplified
 the number of operations we have to define. Open and examine the
 **OutbreakAttributeDescription** class.
 
-\@ServiceProvider(service = AttributeDescription.class)
-
+```java
+@ServiceProvider(service = AttributeDescription.class)
 public class **OutbreakAttributeDescription** extends
 AbstractObjectAttributeDescription {
-
 public static final String *ATTRIBUTE_NAME* = \"outbreak\";
-
 public static final Class\<?\> *NATIVE_CLASS* = Outbreak.class;
-
 public static final Outbreak *DEFAULT_VALUE* = null;
-
 public **OutbreakAttributeDescription**() {
-
 super(*ATTRIBUTE_NAME*, *NATIVE_CLASS*, *DEFAULT_VALUE*);
-
 }
-
 }
+```
 
 An attribute description will typically store and manage an array of
 attribute values where each index within the array will represent an
@@ -1328,42 +1235,35 @@ The **Outbreak** class contains **toString** and **valueOf** methods for
 converting to and from a string, so have a go at using these to complete
 the attribute description.
 
-\@Override
-
+```java
+@Override
 public void **setString**(int id, String value) {
-
 data\[id\] = Outbreak.*valueOf*(value);
-
 }
 
-\@Override
-
+@Override
 public String **getString**(int id) {
-
 return data\[id\] == null ? null : data\[id\].toString();
-
 }
+```
 
 Now we should go back to the **PandemicConcept** class and redefine the
 existing outbreak schema attribute as an outbreak type attribute instead
 of a string type attribute.
 
+```java
 public static class ***VertexAttribute*** {
-
 \...
 
 public static final SchemaAttribute *OUTBREAK* = new
 SchemaAttribute.Builder(GraphElementType.*VERTEX*,
 OutbreakAttributeDescription.*ATTRIBUTE_NAME*, \"Outbreak\")
-
 .setDescription(\"An outbreak consisting of one or more diseases and
 their influence\")
-
 .create()
-
 .build();
-
 }
+```
 
 Now if you run Constellation, right click on your Outbreak attribute in
 the Attribute Editor and choose *Modify Attribute*, you should see its
@@ -1379,62 +1279,49 @@ and saving a Pandemic Graph in Constellation, and observing how the
 outbreak information is lost. Now open and complete the
 **OutbreakIOProvider** class.
 
-\@ServiceProvider(service = AbstractGraphIOProvider.class)
-
+```java
+@ServiceProvider(service = AbstractGraphIOProvider.class)
 public class **OutbreakIOProvider** extends AbstractGraphIOProvider {
 
-\@Override
-
+@Override
 public String **getName**() {
-
 return OutbreakAttributeDescription.*ATTRIBUTE_NAME*;
-
 }
-
 }
+```
 
 Constellation .star files store the graph as compressed JSON, so our IO
 provider should define how to write 'Outbreak' attributes in the JSON
 format, and how to read the resulting JSON data back into an 'Outbreak'
 attribute type.
 
-\@Override
-
+```java
+@Override
 public void **readObject**(int attributeId, int elementId, JsonNode
 jnode, GraphWriteMethods graph, Map\<Integer, Integer\> vertexMap,
 Map\<Integer, Integer\> transactionMap, GraphByteReader byteReader,
 ImmutableObjectCache cache) throws IOException {
 
 final String attributeValue = jnode.isNull() ? null : jnode.textValue();
-
 graph.setStringValue(attributeId, elementId, attributeValue);
-
 }
 
-\@Override
-
+@Override
 public void **writeObject**(Attribute attribute, int elementId,
 JsonGenerator jsonGenerator, GraphReadMethods graph, GraphByteWriter
 byteWriter, boolean verbose) throws IOException {
-
 if (verbose \|\| !graph.isDefaultValue(attribute.getId(), elementId)) {
-
 final String attributeValue = graph.getStringValue(attribute.getId(),
 elementId);
 
 if (attributeValue == null) {
-
 jsonGenerator.writeNullField(attribute.getName());
-
 } else {
-
 jsonGenerator.writeStringField(attribute.getName(), attributeValue);
-
 }
-
 }
-
 }
+```
 
 Try opening and saving a Pandemic Graph in Constellation again and
 observe that it no longer fails.
@@ -1462,39 +1349,32 @@ class, making it easy to see what aspects of a vertex type can be
 modified. Note that once a type has been built, it is immutable. Let's
 go ahead and build a 'city' vertex type for **PandemicConcept**.
 
+```java
 public static class ***VertexType*** {
 
 public static final SchemaVertexType *CITY* = new
 SchemaVertexType.Builder(\"City\")
-
 .setDescription(\"A node representing a city, eg. Canberra,
 Australia.\")
-
 .setColor(ConstellationColor.*CLOUDS*)
-
 .setForegroundIcon(AnalyticIconProvider.*GLOBE*)
-
 .setBackgroundIcon(IconManager.*getIcon*(\"Flat Square\"))
-
 .build();
-
 }
+```
 
 Creating a transaction type involves a very similar process. Let's go
 ahead and build a 'flight' transaction type for **PandemicConcept**.
 
+```java
 public static class ***TransactionType*** {
-
 public static final SchemaTransactionType *FLIGHT* = new
 SchemaTransactionType.Builder(\"Flight\")
-
 .setDescription(\"A flight route connecting two locations.\")
-
 .setColor(ConstellationColor.*BANANA*)
-
 .build();
-
 }
+```
 
 Take some time to look over the properties which can be set using the
 vertex type and transaction type builders.
@@ -1504,30 +1384,24 @@ vertex type and transaction type builders.
 In order for our schema to make use of these types, we will need to
 register them to **PandemicConcept**.
 
-\@Override
-
+```java
+@Override
 public List\<SchemaVertexType\> **getSchemaVertexTypes**() {
-
 final List\<SchemaVertexType\> schemaVertexTypes = new ArrayList\<\>();
-
 schemaVertexTypes.add(*VertexType*.*CITY*);
-
 return Collections.*unmodifiableList*(schemaVertexTypes);
-
 }
 
-\@Override
-
+@Override
 public List\<SchemaTransactionType\> **getSchemaTransactionTypes**() {
-
 final List\<SchemaTransactionType\> schemaTransactionTypes = new
 ArrayList\<\>();
 
 schemaTransactionTypes.add(*TransactionType*.*FLIGHT*);
 
 return Collections.*unmodifiableList*(schemaTransactionTypes);
-
 }
+```
 
 Now if you run Constellation and run the 'Import Infected Cities' plugin
 again, your City nodes should have the icons and colour we specified.
@@ -1544,13 +1418,12 @@ attributes or types, so let's try adding an icon now.
 Before we build an icon, we should create an **IconProvider**. Open
 **PandemicIconProvider**; it should look something like this:
 
-\@ServiceProvider(service = IconProvider.class)
-
+```java
+@ServiceProvider(service = IconProvider.class)
 public class **PandemicIconProvider** implements IconProvider {
-
 \...
-
 }
+```
 
 **3.5.2: Building a Constellation Icon**
 
@@ -1561,26 +1434,21 @@ we will use the **FileIconData** to load a PNG file from the codebase,
 but it is worth noting that several other **IconData** implementations
 exist for loading icons in different ways.
 
+```java
 public static final ConstellationIcon *BIOHAZARD* = new
 ConstellationIcon.Builder(\"Biohazard\", new
 FileIconData(\"modules/ext/biohazard.png\",
 \"au.gov.asd.tac.Constellation.training\"))
-
 .addCategory(\"Training\")
-
 .build();
 
-\@Override
-
+@Override
 public List\<ConstellationIcon\> **getIcons**() {
-
 final List\<ConstellationIcon\> pandemicIcons = new ArrayList\<\>();
-
 pandemicIcons.add(*BIOHAZARD*);
-
 return Collections.*unmodifiableList*(pandemicIcons);
-
 }
+```
 
 The **FileIconData** class makes use of NetBeans
 **InstalledFileLocator** service internally. This allows you to safely
@@ -1593,13 +1461,12 @@ Finally, we should set this icon wherever we wish to use it; in this
 case we will use it to represent our pandemic schema. Override the
 **getIcon** method on **PandemiSchemaFactory** to achieve this.
 
-\@Override
-
+```java
+@Override
 public ConstellationIcon **getIcon**() {
-
 return PandemicIconProvider.*BIOHAZARD*;
-
 }
+```
 
 Try creating a new icon yourselves and adding it to the 'City' schema
 type. This will involve building a new **ConstellationIcon**, and
@@ -1673,32 +1540,24 @@ To add parameters to a plugin, you will need to implement the
 **createParameters()** method on your **Plugin** class. Do this now,
 adding the following code to your class:
 
+```java
 private static final String *CITIES_PARAMETER_ID* =
-
 PluginParameter.buildId(ImportCustomCitiesPlugin.class, \"cities\");
 
-\@Override
-
+@Override
 public PluginParameters **createParameters**() {
-
 PluginParameters parameters = new PluginParameters();
-
 PluginParameter\<StringParameterValue\> citiesParameter =
-
 StringParameterType.*build*(*CITIES_PARAMETER_ID*);
-
 citiesParameter.setName(\"Cities\");
-
 citiesParameter.setDescription(\"Enter the names of cities to import,
 one per line\");
 
 StringParameterType.*setLines*(citiesParameter, 10);
-
 parameters.addParameter(citiesParameter);
-
 return parameters;
-
 }
+```
 
 This method adds a single string parameter to our plugin, specifying
 that the value should be edited in a text box with 10 lines. We also
@@ -1719,8 +1578,7 @@ Cities plugin alongside the Import Infected Cities plugin in the Data
 Access View. Expanding the plugin's parameter pane will reveal our
 cities parameter which can be filled in:
 
-![](media/image25.png){width="6.268055555555556in"
-height="1.9083333333333334in"}
+![](media/image25.png)
 
 You can now enter in city names but running the plugin will cause no
 effect because we have not modified our query method to use the values
@@ -1728,14 +1586,13 @@ entered into our new parameter.
 
 **4.1.2: Modify the query method to use the user entered city names:**
 
-\@Override
-
+```java
+@Override
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
 
 PluginParameters parameters) throws InterruptedException,
 PluginException {
-
 RecordStore result = new GraphRecordStore();
 
 final String citiesString =
@@ -1744,21 +1601,16 @@ parameters.getStringValue(*CITIES_PARAMETER_ID*);
 String\[\] cityNames = citiesString.split(\"**\\n**\", -1);
 
 for (String cityName : cityNames) {
-
 final OutbreakUtilities.*City* city =
 OutbreakUtilities.*getCity*(cityName);
-
 result.add();
 
 OutbreakUtilities.*addCityToRecord*(city, result,
-
 GraphRecordStoreUtilities.*SOURCE*);
-
 }
-
 return result;
-
 }
+```
 
 The query method now retrieves the user entered string from its
 parameter using the parameter ID as a key, splits the string on newline
@@ -1769,11 +1621,9 @@ similar to the previous plugin.
 Compile and run Constellation to demonstrate that the plugin now adds
 the correct city nodes to the graph based on the user input.
 
-![](media/image26.png){width="6.268055555555556in"
-height="2.0083333333333333in"}
+![](media/image26.png)
 
-![](media/image27.png){width="6.268055555555556in"
-height="1.7861111111111112in"}
+![](media/image27.png)
 
 **4.1.3: Handling Errors:**
 
@@ -1783,33 +1633,27 @@ a **NullPointerException** to be thrown. Luckily, Constellation will
 handle exceptions thrown from a plugin by rolling back any changes the
 plugin has made and presenting the exception stack trace in a dialog:
 
-![](media/image28.png){width="6.268055555555556in"
-height="2.0083333333333333in"}
+![](media/image28.png)
 
-![](media/image29.png){width="6.268055555555556in"
-height="2.165277777777778in"}
+![](media/image29.png)
 
 While this works and will protect the data integrity of the graph,
 Constellation provides a more elegant way of handling errors by using
 the **PluginException** class. Add a null check to your query method:
 
+```java
 for (String cityName : cityNames) {
-
 final OutbreakUtilities.*City* city =
 OutbreakUtilities.*getCity*(cityName);
 
 if (city == null) {
-
 throw new PluginException(PluginNotificationLevel.*WARNING*, \"Unknown
 City: \" +
-
 cityName);
-
 }
-
 \...
-
 }
+```
 
 Throwing a **PluginException** from your plugin allows you to customise
 the way in which Constellation responds to the error. Depending on the
@@ -1851,13 +1695,12 @@ included but other options can be specified by overriding the
 **getRecordStoreType()** method. For instance, all selected transactions
 could be returned by:
 
-\@Override
-
+```java
+@Override
 public String **getRecordStoreType**() {
-
 return GraphRecordStoreUtilities.*TRANSACTION*;
-
 }
+```
 
 We will not override this method as we need the default behaviour.
 
@@ -1868,8 +1711,8 @@ the default behaviour of the **RecordStoreQueryPlugin** and reading the
 rows of the query **RecordStore.** To begin with, modify our query
 method to print the name of each city to the console.
 
-\@Override
-
+```java
+@Override
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction,
 
@@ -1877,22 +1720,15 @@ PluginParameters parameters) throws InterruptedException,
 PluginException {
 
 RecordStore result = new GraphRecordStore();
-
 query.reset();
-
 while (query.next()) {
-
 final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-
 VisualConcept.VertexAttribute.*IDENTIFIER*);
-
 System.*out*.println(cityName);
-
 }
-
 return result;
-
 }
+```
 
 A **RecordStore** has an inbuilt row pointer that makes accessing its
 rows in order more convenient, so the first thing the new query method
@@ -1907,51 +1743,40 @@ city names to the console.
 The next step is to perform a query for each selected city and add the
 resulting flights to the graph:
 
-\@Override
-
+```java
+@Override
 protected RecordStore **query**(RecordStore query, PluginInteraction
 interaction, PluginParameters parameters) throws InterruptedException,
 PluginException {
 
 RecordStore result = new GraphRecordStore();
-
 query.reset();
 
 while (query.next()) {
-
 final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-
 VisualConcept.*VertexAttribute*.*IDENTIFIER*);
 
 for (OutbreakUtilities.*Flight* flight :
 OutbreakUtilities.*getFlights*(cityName)) {
 
 final *City* source = flight.getSource();
-
 final *City* destination = flight.getDestination();
-
 result.add();
 
 OutbreakUtilities.*addCityToRecord*(source, result,
-
 GraphRecordStoreUtilities.*SOURCE*);
-
 result.set(GraphRecordStoreUtilities.*TRANSACTION* +
-
 TemporalConcept.*TransactionAttribute*.*DATETIME*,
 flight.getDepartureTime());
 
 OutbreakUtilities.*addCityToRecord*(destination, result,
-
 GraphRecordStoreUtilities.*DESTINATION*);
-
 }
-
 }
 
 return result;
-
 }
+```
 
 By now you should find the new code familiar as it follows the same
 pattern we used in Chapter 2 to add transactions to the graph. As each
@@ -1968,18 +1793,18 @@ As with cities, adding flights to a **RecordStore** is such a common
 occurrence that **OutbreakUtilities** provides a convenience method for
 this also:
 
+```java
 \...
 
 for (OutbreakUtilities.*Flight* flight :
 OutbreakUtilities.*getFlights*(cityName)) {
-
 result.add();
 
 OutbreakUtilities.*addFlightToRecord*(flight, result);
-
 }
 
 \...
+```
 
 **4.2.3: Add Plugin Interaction**
 
@@ -1989,26 +1814,22 @@ section, we will use these mechanisms to provide a simple progress bar
 display along with a status message that will update as each city is
 processed.
 
+```java
 Modify your **ChainCitiesPlugin.query()** method:
-
 \...
 
 RecordStore result = new GraphRecordStore();
-
 int currentStep = 0;
-
 query.reset();
 
 while (query.next()) {
-
 final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-
 VisualConcept.VertexAttribute.*IDENTIFIER*);
-
 interaction.setProgress(currentStep++, query.size(), \"Processing: \" +
 cityName, true);
 
 \...
+```
 
 As we process each city, we call **setProgress(...)** on the provided
 **PluginInteraction** object. This allows us to both pass a progress
@@ -2042,22 +1863,19 @@ need to add a datetime range parameter to our plugin by implementing the
 **createParameters()** method, similar to our
 **ImportCustomCitiesPlugin**:
 
-\@Override
-
+```java
+@Override
 public PluginParameters **createParameters**() {
-
 PluginParameters parameters = new PluginParameters();
 
 final
 PluginParameter\<DateTimeRangeParameterType.*DateTimeRangeParameterValue*\>
 datetime =
 DateTimeRangeParameterType.*build*(CoreGlobalParameters.*DATETIME_RANGE_PARAMETER_ID*);
-
 parameters.addParameter(datetime);
-
 return parameters;
-
 }
+```
 
 A significant difference this time is that we have used a globally
 defined parameter ID, instead of creating our own as we did in the
@@ -2084,8 +1902,8 @@ a start and end time and only returns flights where the departure time
 falls within this range. Add the following to the top of our existing
 query method:
 
+```java
 final DateTimeRange datetimeRange =
-
 parameters.getDateTimeRangeValue(CoreGlobalParameters.*DATETIME_RANGE_PARAMETER_ID*);
 
 final long startTime =
@@ -2099,6 +1917,7 @@ takes a time range:
 
 for (OutbreakUtilities.*Flight* flight :
 OutbreakUtilities.*getFlights*(cityName, startTime, endTime)) {
+```
 
 Running your plugin now will show that the datetime range entered in the
 global Data Access View parameters will be used to filter the flights
@@ -2128,8 +1947,8 @@ to occur in the query method, the new content would not be included.
 **SimpleQueryPlugin** in order to add content to the graph. This means
 that we can also add functionality at this time by doing the same:
 
-\@Override
-
+```java
+@Override
 protected void **edit**(final GraphWriteMethods wg, final
 PluginInteraction interaction, final PluginParameters parameters) throws
 InterruptedException, PluginException {
@@ -2150,8 +1969,8 @@ PluginExecution.*withPlugin*(deselectAllPlugin).executeNow(wg);
 PluginExecution.*withPlugin*(treesPlugin).executeNow(wg);
 
 PluginExecution.*withPlugin*(resetPlugin).executeNow(wg);
-
 }
+```
 
 The new implementation of **edit(...)** performs 3 tasks:
 
@@ -2179,7 +1998,9 @@ In situations like this, where a plugin is to be called with no options,
 **PluginExecution** provides a more convenient syntax that looks up the
 plugin and executes it in one line:
 
+```java
 PluginExecution.*withPlugin*(*ArrangementPluginRegistry*.*TREES*).*executeNow*(wg);
+```
 
 **Chapter 5: Analytic Plugins**
 
@@ -2222,34 +2043,30 @@ To iterate through all the IDs of vertices on the graph, for example, we
 could use the following loop (assuming we have a **GraphReadMethods** or
 **GraphWriteMethods** called graph):
 
+```java
 for (int vertexPosition = 0; vertexPosition \<
 graph.getVertexCount();vertexPosition++) {
-
 final int vertexId = graph.getVertex(vertexPosition);
-
 }
+```
 
 This example is for vertices but similar code works for other graph
 elements. Graph element IDs are used by the rest of the API, so with
 these IDs we could now answer a question such as 'what is the highest
 degree (number of neighbours) of a vertex in the graph?'
 
+```java
 int maxDegree = 0;
-
 for (int vertexPosition = 0; vertexPosition \<
 graph.getVertexCount();vertexPosition++) {
-
 final int vertexId = graph.getVertex(vertexPosition);
-
 final int degree = graph.getVertexNeighbourCount(vertexId);
 
 if (degree \> maxDegree) {
-
 maxDegree = degree;
-
 }
-
 }
+```
 
 In the above code, maxDegree will hold the maximum degree at the end of
 the loop. The method **getVertexNeighbourCount()** is answering a
@@ -2259,12 +2076,14 @@ population, but for this we also need the ID of the population attribute
 on the graph. We can get this from the attribute itself in the relevant
 **SchemaConcept**.
 
+```java
 final int populationAttributeId =
 PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
 
 final int population = graph.getIntValue(populationAttributeId,
 vertexId); graph.setIntValue(populationAttributeId, vertexId,
 population+1000);
+```
 
 The above code sets the value of the population attribute for the node
 with ID vertexId to 1000 more than its previous value. Note that we use
@@ -2345,16 +2164,14 @@ of diseases would be even nicer. We can build such a parameter using
 **SingleChoiceParameterType**. Add the following code to the
 **createParameters()** method to achieve this:
 
+```java
 PluginParameters parameters = new PluginParameters();
-
 PluginParameter diseaseParameter =
 SingleChoiceParameterType.*build*(*DISEASE_PARAMETER_ID*);
-
 diseaseParameter.setName(*DISEASE_PARAMETER_LABEL*);
-
 parameters.addParameter(diseaseParameter);
-
 return parameters;
+```
 
 **5.1.2: Updating the parameters**
 
@@ -2366,28 +2183,22 @@ do this we need reference to the graph. Luckily we can implement the
 method to do this -- it is run after parameter creation, but before the
 parameters are presented to the user.
 
-\@Override
-
+```java
+@Override
 public void **updateParameters**(Graph graph, PluginParameters
 parameters) {
 
 final Set\<String\> diseases = new HashSet\<\>();
-
 final ReadableGraph readableGraph = graph.getReadableGraph();
-
 try {
-
 \...
-
 } finally {
-
 readableGraph.release();
-
 }
 SingleChoiceParameterType.*setOptions*(parameters.getParameters().get(*DISEASE_PARAMETER_ID*),
 new ArrayList\<\>(diseases));
-
 }
+```
 
 So this is the skeleton of the method, but we haven't actually pulled
 the diseases from the graph yet. You might notice that the graph
@@ -2419,6 +2230,7 @@ and the attribute IDs of type (to determine if nodes are cities),
 population and outbreak. The following code retrieves all this
 information from the graph and the parameters.
 
+```java
 final String diseaseName =
 parameters.getStringValue(*DISEASE_PARAMETER_ID*);
 
@@ -2430,6 +2242,7 @@ AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
 
 final int populationAttributeId =
 PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
+```
 
 The **get()** method used above is a shortcut for retrieving the
 attribute ID of a **SchemaAttribute** object from the given graph. This
@@ -2448,6 +2261,7 @@ for, the type name of the attribute, the name of the attribute, a
 description, and a default value. It will return the ID of the newly
 added attribute.
 
+```java
 final String percentageAfflictedAttributeName = \"percentage afflicted
 with \" + diseaseName;
 
@@ -2456,6 +2270,7 @@ graph.addAttribute(GraphElementType.*VERTEX*,
 FloatAttributeDescription.*ATTRIBUTE_NAME*,
 percentageAfflictedAttributeName, percentageAfflictedAttributeName, 0,
 null);
+```
 
 **5.1.4: Performing the calculations**
 
@@ -2466,19 +2281,17 @@ attributes, and setting of the new attribute for nodes that are cities
 and have the disease of interest. We add the following code to complete
 the **edit** method.
 
+```java
 for (int vertexPosition = 0; vertexPosition \<
 graph.getVertexCount();vertexPosition++) {
-
 final int vertexId = graph.getVertex(vertexPosition);
 
 if (graph.getObjectValue(typeAttributeId,
 vertexId).equals(PandemicConcept.*VertexType*.*CITY*)) {
-
 final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId,
 vertexId);
 
 if (outbreak != null && outbreak.getDiseases().contains(diseaseName)) {
-
 final float population = graph.getIntValue(populationAttributeId,
 vertexId);
 
@@ -2487,12 +2300,10 @@ outbreak.getAffectedPopulation(diseaseName)) / population;
 
 graph.setFloatValue(percentageAfflictedAttributeId, vertexId,
 percentageAfflicted);
-
 }
-
 }
-
 }
+```
 
 **5.1.5: Making an action**
 
@@ -2515,23 +2326,22 @@ the user for parameters). Now might be a good time to add the class name
 to the registry so that we can access it nicely. The constructor should
 end up looking like this:
 
+```java
 public **PercentageAfflictedAction**(final GraphNode context) {
-
 super(context, PandemicPluginRegistry.*PERCENTAGE_AFFLICTED*, true);
-
 }
+```
 
 Secondly, we need to tell the action where in the menu we would like it
 to appear. This is done through annotations. Add the following to the
 top of the class:
 
-\@ActionReferences({
-
-\@ActionReference(path = \"Menu/Tools\", position = 0),
-
-\@ActionReference(path = \"Shortcuts\", name = \"C-P\")
-
+```java
+@ActionReferences({
+@ActionReference(path = \"Menu/Tools\", position = 0),
+@ActionReference(path = \"Shortcuts\", name = \"C-P\")
 })
+```
 
 The first **\@ActionReference** annotation gives the menu location (the
 syntax being menu/submenu/submenu... for as many levels as you like) and
@@ -2595,31 +2405,28 @@ iterations are as follows:
 
 To iterate over the neighbours of a vertex with ID vertexId , you can
 
+```java
 for (int vertexNeighbourPosition = 0; vertexNeighbourPosition \<
 graph.getVertexNeighbourCount(vertexId); vertexNeighbourPosition++) {
-
 final int neighbourId = graph.getVertexNeighbour(vertexId,
 vertexNeighbourPosition);
-
 \...
-
 }
+```
 
 To iterate over the transactions between two neighbouring nodes vertexId
 and neighbourId, you can
 
+```java
 final int neighbourLink = graph.getLink(vertexId, neighbourId);
-
 for (int neighbourTransactionPosition = 0; neighbourTransactionPosition
 \< graph.getLinkTransactionCount(neighbourLink);
 neighbourTransactionPosition++) {
-
 final int transactionId = graph.getLinkTransaction(neighbourLink,
 neighbourTransactionPosition);
-
 \...
-
 }
+```
 
 Finally, to test whether the vertex with ID vertexId is the destination
 node of the transaction with ID transactionId you can
@@ -2651,6 +2458,7 @@ attributes of interest. 'x' and 'y' belong to **VisualConcept**, which
 contains all the attributes relating to the display of a graph (e.g.
 color, selected, icon etc.).
 
+```java
 final int latitudeAttributeId =
 SpatialConcept.*VertexAttribute*.*LATITUDE*.get(writableGraph);
 
@@ -2665,12 +2473,11 @@ VisualConcept.*VertexAttribute*.*X*.get(writableGraph);
 
 if (latitudeAttributeId == GraphConstants.*NOT_FOUND* \|\|
 longitudeAttributeId == GraphConstants.*NOT_FOUND*) {
-
 throw new PluginException(PluginNotificationLevel.*ERROR*, \"Required
 attributes \'Geo.Latitude\' and \'Geo.Longitude\' do not exist on this
 graph!\");
-
 }
+```
 
 **5.3.2: The logic of the arrangement**
 
@@ -2678,14 +2485,13 @@ Now that we have the relevant attributes, we need to iterate over all
 vertices in the graph, setting the values of their 'x' and 'y'
 attributes based on their latitude and longitude attributes.
 
+```java
 final int vertexCount = writableGraph.getVertexCount();
 
 for (int vertexPosition = 0; vertexPosition \< vertexCount;
 vertexPosition++) {
-
 interaction.setProgress(vertexPosition, vertexCount, \"Arranging by
 Geographic Coordinates\...\", true);
-
 final int vertexId = writableGraph.getVertex(vertexPosition);
 
 final float vertexLatitude =
@@ -2695,10 +2501,9 @@ final float vertexLongitude =
 writableGraph.getFloatValue(longitudeAttributeId, vertexId);
 
 writableGraph.setFloatValue(yAttributeId, vertexId, vertexLatitude);
-
 writableGraph.setFloatValue(xAttributeId, vertexId, vertexLongitude);
-
 }
+```
 
 **5.3.3: Register the plugin**
 
@@ -2728,11 +2533,11 @@ go into it in any more detail than that -- see the API docs for more
 information. Add the following code to the **actionPerformed()** method
 to complete our arrangement:
 
+```java
 PluginExecutor.*startWith*(PandemicPluginRegistry.*ARRANGE_BY_GEOGRAPHIC_COORDINATES*)
-
 .followedBy(CorePluginRegistry.*RESET*)
-
 .executeWriteLater(context.getGraph());
+```
 
 Using the graph you saved earlier, run your new plugin from the Arrange
 menu, noting that each city node will move to its latitude-longitude
@@ -2858,29 +2663,25 @@ In **toEditTranslator**(String dataType) we need to add the following
 code to return a translator from Outbreak to String (used when the user
 requests to edit the attribute value):
 
+```java
 if (dataType.equals(StringAttributeDescription.*ATTRIBUTE_NAME*)) {
-
 return v -\> {
-
 return v == null ? null : ((Outbreak) v).toString();
-
 };
-
 }
+```
 
 In **fromEditTranslator**(String dataType) we need to add the following
 code to return a translator from String to Outbreak (used when the user
 commits an edit to the attribute value):
 
+```java
 if (dataType.equals(StringAttributeDescription.*ATTRIBUTE_NAME*)) {
-
 return v -\> {
-
 return v == null ? null : Outbreak.*valueOf*((String) v);
-
 };
-
 }
+```
 
 We need to check the dataType parameter to determine which translator to
 return in each of these parameters. This is because we could have an
@@ -3110,11 +2911,11 @@ In the constructor for the **TotalInfectionsFormatter**, we need to make
 a call to the super constructor with two arguments; the name and
 position of the formatter in the histogram's drop-down list.
 
+```java
 public **TotalInfectionsFormatter**() {
-
 super(\"Total People Infected \", 1);
-
 }
+```
 
 In the **appliesToBin**(final Bin bin) method we need to check whether
 this formatter is appropriate for a given default bin. This gets called
@@ -3123,8 +2924,10 @@ drop-down list. In this case we need to check that the bin is an
 **AttributeBin** which is binning Outbreak attributes. The following
 statement achieves this:
 
+```java
 return bin instanceof AttributeBin && ((AttributeBin)
 bin).getAttributeType().equals(OutbreakAttributeDescription.*ATTRIBUTE_NAME*);
+```
 
 Note that **AttributeBin** is the default bin type for all attributes
 whose native types are objects. Attributes whose native types are
@@ -3155,16 +2958,15 @@ Now bin.key will be the Outbreak attribute value corresponding to the
 graph current element. We now need to set the key for this bin to be the
 total number of infected people in this Outbreak.
 
+```java
 key = bin.key == null ? -1
-
 : ((Outbreak) bin.key).getNumberOfDiseases() == 0 ? 0
-
 : ((Outbreak) bin.key).getOutbreakData().values().stream().reduce((x, y)
 -\> {
 
 return x + y;
-
 }).get();
+```
 
 Note that we set -1 for null because the key for this bin must be a
 primitive int.
@@ -3207,22 +3009,17 @@ type attribute.
 We implement **createParameters** to return a **PluginParameters**
 object with a single String parameter for the disease name.
 
-\@Override
-
+```java
+@Override
 public PluginParameters **createParameters**() {
-
 PluginParameters parameters = new PluginParameters();
-
 PluginParameter diseaseNameParam =
 StringParameterType.*build*(*DISEASE_NAME_PARAMETER_ID*);
-
 diseaseNameParam.setName(*DISEASE_NAME_PARAMETER_LABEL*);
-
 parameters.addParameter(diseaseNameParam);
-
 return parameters;
-
 }
+```
 
 **6.6.2: Use the parameters in the construction of the bin**
 
@@ -3232,8 +3029,10 @@ constructor. After doing this we will need to pass the parameter value
 entered by the user through to the bin's constructor. We do this by
 changing **createBin** to:
 
+```java
 return new SpecifiedDiseaseBin((AttributeBin) bin,
 parameters.getStringValue(*DISEASE_NAME_PARAMETER*));
+```
 
 **6.6.3: Set the key and label for the bin**
 
@@ -3289,6 +3088,7 @@ the node, otherwise false. To implement this rule we first need to
 gather all the relevant attribute values from the graph -- the type of
 the node, the node's Outbreak and the node's population.
 
+```java
 final int typeAttr =
 AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
 
@@ -3299,9 +3099,7 @@ final int populationAttr =
 PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
 
 final SchemaVertexType type = graph.getObjectValue(typeAttr, vertex);
-
 final Outbreak outbreak = graph.getObjectValue(outbreakAttr, vertex);
-
 final int population = graph.getIntValue(populationAttr, vertex);
 
 Now we want to check, if the node is a city node, whether any disease in
@@ -3310,34 +3108,29 @@ exceeds the population of the city:
 
 if (type.equals(PandemicConcept.*VertexType*.*CITY*) && outbreak !=
 null) {
-
 for (final int numInfected : outbreak.getOutbreakData().values()) {
-
 if (numInfected \> population) {
-
 return true;
-
 }
-
 };
 
 return false;
-
 }
 
 return false;
+```
 
 Note that it might be a good idea for to wrap the above code block in a
 check to see if the attributes we are retrieving actually exist,
 returning false if they don't:
 
+```java
 if (typeAttr != GraphConstants.*NOT_FOUND* && outbreakAttr !=
 GraphConstants.*NOT_FOUND* && populationAttr !=
 GraphConstants.*NOT_FOUND*) {
-
 // \...
-
 }
+```
 
 **6.7.3: Per-vertex quality scores**
 
@@ -3383,39 +3176,26 @@ to the NetBeans documentation for details on how to do this and what
 options are available. For this exercise you can make use of the
 provided **PandemicViewTopComponent** class.
 
-\@ConvertAsProperties(...)
-
-\@TopComponent.*Description*(...)
-
-\@TopComponent.*Registration*(...)
-
-\@ActionID(...)
-
-\@ActionReferences({
-
-\@ActionReference(path = \"Menu/Views\", position = 2100),
-
-\@ActionReference(path = \"Shortcuts\", name = \"CS-Z\")})
-
-\@TopComponent.*OpenActionRegistration*(...)
-
+```java
+@ConvertAsProperties(...)
+@TopComponent.*Description*(...)
+@TopComponent.*Registration*(...)
+@ActionID(...)
+@ActionReferences({
+@ActionReference(path = \"Menu/Views\", position = 2100),
+@ActionReference(path = \"Shortcuts\", name = \"CS-Z\")})
+@TopComponent.*OpenActionRegistration*(...)
 @*Messages*(...)
 
 public final class **PandemicViewTopComponent** extends TopComponent {
-
 public **PandemicViewTopComponent**() {
-
 setName(Bundle.*CTL_PandemicViewTopComponent*());
-
 setToolTipText(Bundle.*HINT_PandemicViewTopComponent*());
-
 initComponents();
-
 setLayout(new BorderLayout());
-
 setPreferredSize(new Dimension(500, 500));
-
 }
+```
 
 **7.1.2: Creating a Pane**
 
@@ -3423,79 +3203,61 @@ Now we should create a pane to display using the top component. For this
 exercise, we will make a JavaFX **BorderPane**, however for your own
 views you can choose to use any JavaFX or Swing pane.
 
+```java
 public class **PandemicViewPane** extends BorderPane {
-
 public **PandemicViewPane**() {
-
 setPadding(new Insets(5));
-
 }
-
 }
+```
 
 So we don't get bogged down in GUI code, let's keep things simple --
 we'll define a **TextArea** to write output to, and a **Button** to run
 the 'spread infection' plugin. Note that we will call this plugin using
 the plugin registry we previously created.
 
+```java
 private final TextArea summary;
-
 private final FlowPane options;
-
 public **PandemicViewPane**() {
-
 ...
 
 summary = new TextArea();
-
 setCenter(summary);
-
 final Button infectButton = new Button(\"Spread Infection\");
-
 infectButton.setOnAction(event -\> {
-
 PluginExecution.*withPlugin*(PandemicPluginRegistry.*SPREAD_INFECTION*).executeLater(GraphManager.*getDefault*().getActiveGraph());
-
 });
 
 options = new FlowPane();
-
 options.setAlignment(Pos.*CENTER_RIGHT*);
-
 options.getChildren().add(infectButton);
-
 setBottom(options);
-
 }
+```
 
 We will now add a **refresh** method to our pane which simply updates
 the pane with the list of all outbreaks on the graph ordered by the
 number of unique diseases within that outbreak.
 
+```java
 private final AbstractAttributeInteraction interaction =
 AbstractAttributeInteraction.*getInteraction*(OutbreakAttributeDescription.*ATTRIBUTE_NAME*);
 
 \...
 
 public final void **refresh**(final GraphReadMethods graph) {
-
 Platform.*runLater*(() -\> {
-
 final ProgressIndicator progress = new ProgressIndicator();
-
 progress.setMaxSize(50, 50);
-
 setCenter(progress);
-
 });
 
 Platform.*runLater*(() -\> {
-
 final Map\<Outbreak,String\> outbreaks = new
 TreeMap\<\>(Comparator.*reverseOrder*());
 
 if (graph != null) {
-
 final int outbreakAttributeId =
 PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(graph);
 
@@ -3506,9 +3268,7 @@ final int vertexCount = graph.getVertexCount();
 
 for (int vertexPosition = 0; vertexPosition \< vertexCount;
 vertexPosition++) {
-
 final int vertexId = graph.getVertex(vertexPosition);
-
 final String identifier = graph.getStringValue(identifierAttributeId,
 vertexId);
 
@@ -3516,69 +3276,50 @@ final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId,
 vertexId);
 
 if (outbreak != null && !outbreak.getOutbreakData().isEmpty()) {
-
 outbreaks.put(outbreak, identifier);
-
 }
-
 }
-
 }
 
 final StringBuilder summaryText = new StringBuilder(\"Outbreak
 Summary:**\\n\\n**\");
 
 for (Map.*Entry*\<Outbreak,String\> outbreak : outbreaks.entrySet()) {
-
 summaryText.append(outbreak.getValue()).append(\":
 \").append(interaction.getDisplayText(outbreak.getKey())).append(\"**\\n\\n**\");
-
 }
 
 summary.setText(summaryText.toString());
-
 setCenter(summary);
-
 });
-
 }
+```
 
 Now let's insert our pane into the top component. Note that since
 NetBeans top components use swing by default, we will need to ensure
 that our pane is constructed on the JavaFX thread explicitly using the
 **Platform.runLater** command.
 
+```java
 private JFXPanel container;
-
 private PandemicViewPane pandemicPane;
-
 public **PandemicViewTopComponent**() {
-
 ...
-
 container = new JFXPanel();
-
 Platform.*setImplicitExit*(false);
-
 Platform.*runLater*(() -\> {
-
 pandemicPane = new PandemicViewPane();
-
 container.setScene(new Scene(pandemicPane));
-
 container.getScene().getStylesheets().add(JavafxStyleManager.*getMainStyleSheet*());
-
 add(container, BorderLayout.*CENTER*);
-
 });
-
 }
+```
 
 Try running Constellation now and opening your new view. Note that the
 text field will be empty as we have not told it what to display yet.
 
-![](media/image30.png){width="6.267361111111111in"
-height="3.11875in"}
+![](media/image30.png)
 
 **7.1.3: Listening to the Graph**
 
@@ -3588,61 +3329,46 @@ is achieved using the **GraphManagerListener** and
 **GraphChangeListener** classes, which will provide you with the chance
 to react as the graph changes.
 
+```java
 public final class **PandemicViewTopComponent** extends TopComponent
 implements GraphManagerListener, GraphChangeListener {
-
 ...
 
-\@Override
-
+@Override
 public void **newActiveGraph**(Graph graph) {
-
 ...
-
 }
 
-\@Override
-
+@Override
 public void **graphOpened**(Graph graph) {
-
 ...
-
 }
 
-\@Override
-
+@Override
 public void **graphClosed**(Graph graph) {
-
 ...
-
 }
 
-\@Override
-
+@Override
 public void **graphChanged**(GraphChangeEvent event) {
-
 ...
-
 }
-
 }
+```
 
 Next up we need to define what happens when we detect a change. To do
 this, we will use the **graphChanged** method to see if the change
 affected the outbreak attribute, and update our view if necessary.
 
+```java
 private long outbreakModificationCounter = 0;
 
 private Graph currentGraph = null;
 
-\@Override
-
+@Override
 public void **graphChanged**(GraphChangeEvent event) {
-
 ReadableGraph readableGraph = currentGraph.getReadableGraph();
-
 try {
-
 final int outbreakAttributeId =
 PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(readableGraph);
 
@@ -3650,67 +3376,47 @@ final long currentOutbreakModificationCounter =
 readableGraph.getValueModificationCounter(outbreakAttributeId);
 
 if (currentOutbreakModificationCounter \> outbreakModificationCounter) {
-
 outbreakModificationCounter = currentOutbreakModificationCounter;
-
 pandemicPane.refresh(readableGraph);
-
 }
-
 } finally {
-
 readableGraph.release();
-
 }
-
 }
+```
 
 In order for this system to work, we need to keep track of the current
 active graph in order to listen to it. We also need to track the value
 for the modification counter for the outbreak attribute. We can handle
 all of this using the **newActiveGraph** method.
 
-\@Override
-
+```java
+@Override
 public void **newActiveGraph**(Graph graph) {
-
 if (currentGraph != graph) {
-
 if (currentGraph != null) {
-
 currentGraph.removeGraphChangeListener(this);
-
 currentGraph = null;
-
 }
 
 if (graph != null) {
-
 currentGraph = graph;
-
 currentGraph.addGraphChangeListener(this);
-
 ReadableGraph readableGraph = currentGraph.getReadableGraph();
 
 try {
-
 final int outbreakAttributeId =
 PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(readableGraph);
 
 outbreakModificationCounter =
 readableGraph.getValueModificationCounter(outbreakAttributeId);
-
 } finally {
-
 readableGraph.release();
-
 }
-
 }
-
 }
-
 }
+```
 
 Remove any code from the **graphOpened** and **graphClosed** methods as
 we don't wish to perform any operation for these events.
@@ -3718,39 +3424,32 @@ we don't wish to perform any operation for these events.
 Finally, we should register our top component to **GraphManager** as a
 listener.
 
+```java
 public **PandemicViewTopComponent**() {
 
 ...
 
 GraphManager.*getDefault*().addGraphManagerListener(PandemicViewTopComponent.this);
-
 }
 
-\@Override
-
+@Override
 public void **componentOpened**() {
-
 GraphManager.*getDefault*().addGraphManagerListener(this);
-
 newActiveGraph(GraphManager.*getDefault*().getActiveGraph());
-
 }
 
-\@Override
-
+@Override
 public void **componentClosed**() {
-
 GraphManager.*getDefault*().removeGraphManagerListener(this);
-
 }
+```
 
 Observe the behaviour of your new Pandemic view within Constellation.
 Note that the text field will initially be empty and will only update
 when the 'Outbreak' attribute is changed, either by running the 'Spread
 Infection' plugin, or by manually editing the 'Outbreak' attribute.
 
-![](media/image31.png){width="6.268055555555556in"
-height="3.111111111111111in"}
+![](media/image31.png)
 
 **Simplified Graph Listening Framework**
 
@@ -3771,8 +3470,7 @@ how your view should behave.
     These changes are defined by transitions between states, and are
     defined as follows:
 
-![](media/image32.png){width="5.719444444444444in"
-height="3.076388888888889in"}
+![](media/image32.png)
 
 Once you have defined these concepts, they can all be managed using a
 **monitor manager**.
@@ -3784,60 +3482,38 @@ listening framework. We again start by creating a **TopComponent** class
 and a pane to display within our top component (although we can re-use
 the pane we created in the previous exercise here).
 
-\@ConvertAsProperties(...)
-
-\@TopComponent.*Description*(...)
-
-\@TopComponent.*Registration*(...)
-
-\@ActionID(...)
-
-\@ActionReferences(...)
-
-\@TopComponent.*OpenActionRegistration*(...)
-
+```java
+@ConvertAsProperties(...)
+@TopComponent.*Description*(...)
+@TopComponent.*Registration*(...)
+@ActionID(...)
+@ActionReferences(...)
+@TopComponent.*OpenActionRegistration*(...)
 @*Messages*(...)
-
 public final class **ImprovedPandemicViewTopComponent** extends
 TopComponent {
-
 private JFXPanel container;
-
 private PandemicViewPane pandemicPane;
-
 public **ImprovedPandemicViewTopComponent** () {
-
 setName(...);
-
 setToolTipText(...);
-
 initComponents();
-
 setLayout(new BorderLayout());
-
 setPreferredSize(new Dimension(500, 500));
-
 container = new JFXPanel();
-
 Platform.*setImplicitExit*(false);
-
 Platform.*runLater*(() -\> {
-
 pandemicPane = new PandemicViewPane();
-
 container.setScene(new Scene(pandemicPane));
-
 container.getScene().getStylesheets().add(JavafxStyleManager.*getMainStyleSheet*());
-
 add(container, BorderLayout.*CENTER*);
-
 });
-
 }
 
 ...
 
 }
+```
 
 **7.2.1: Creating a Monitor Manager**
 
@@ -3849,15 +3525,13 @@ Since we could be initialising our monitor manager from either the swing
 thread of the top component or the JavaFX thread of our pane, we will
 initialise it with a counter of 2.
 
+```java
 private final MonitorManager manager;
-
 public **ImprovedPandemicViewTopComponent** () {
-
 ...
-
 manager = new MonitorManager(2);
-
 }
+```
 
 **7.2.2: Creating a Monitor**
 
@@ -3865,36 +3539,30 @@ We can then define the behaviour of our listener, starting with the
 monitor. Since we are only interested in changes in the value of the
 outbreak attribute, we should create an **AttributeValueMonitor** class.
 
+```java
 private final AttributeValueMonitor outbreakMonitor;
-
 public **ImprovedPandemicViewTopComponent** () {
-
 ...
-
 outbreakMonitor = new
 AttributeValueMonitor(PandemicConcept.*VertexAttribute*.*OUTBREAK*);
-
 }
+```
 
 **7.2.3: Creating a Listener**
 
 Lastly we need to define the behaviour of our listener when a change
 occurs. This is done using the **MonitorListener** class.
 
+```java
 private final MonitorListener listener;
-
 public **ImprovedPandemicViewTopComponent** () {
-
 ...
-
 listener = (MonitorManager monitorManager, Monitor monitor,
 GraphReadMethods graph, boolean newGraph, int updateCount) -\> {
-
 pandemicPane.refresh(graph);
-
 };
-
 }
+```
 
 **7.2.4: Creating a Transition Filter**
 
@@ -3903,25 +3571,18 @@ the **MonitorTransitionFilter** class. This class simply needs to be
 constructed with a list of **MonitorTransition** states you wish to
 respond to.
 
+```java
 private final MonitorTransitionFilter transitionFilter;
-
 public **ImprovedPandemicViewTopComponent** () {
-
 ...
-
 transitionFilter = new MonitorTransitionFilter(
-
 MonitorTransition.*UNDEFINED_TO_PRESENT*,
-
 MonitorTransition.*CHANGED*,
-
 MonitorTransition.*ADDED*,
-
 MonitorTransition.*REMOVED_AND_ADDED*
-
 );
-
 }
+```
 
 **7.2.5: Registering a Monitor**
 
@@ -3931,37 +3592,26 @@ we are starting the monitor manager when the view is opened and stopping
 it when the view is closed to prevent unnecessary operations from being
 handled when the user is not using the view.
 
+```java
 public **ImprovedPandemicViewTopComponent** () {
-
 ...
-
 manager.addMonitorListener(listener, transitionFilter, outbreakMonitor);
-
 Platform.*runLater*(() -\> {
-
 ...
-
 manager.start();
-
 });
-
 }
 
-\@Override
-
+@Override
 public void **componentOpened**() {
-
 manager.start();
-
 }
 
-\@Override
-
+@Override
 public void **componentClosed**() {
-
 manager.stop();
-
 }
+```
 
 Launch Constellation and observe that this simplified view has the same
 behaviour as our previous view.
@@ -4005,36 +3655,25 @@ To create a view using the generic top component framework, you should
 start by creating a regular Netbeans top component, and then change it
 to extend a class within the framework.
 
-\@ConvertAsProperties(...)
-
-\@TopComponent.*Description*(...)
-
-\@TopComponent.*Registration*(...)
-
-\@ActionID(...)
-
-\@ActionReferences(...)
-
-\@TopComponent.*OpenActionRegistration*(...)
-
+```java
+@ConvertAsProperties(...)
+@TopComponent.*Description*(...)
+@TopComponent.*Registration*(...)
+@ActionID(...)
+@ActionReferences(...)
+@TopComponent.*OpenActionRegistration*(...)
 @*Messages*(...)
 
 public final class **GenericPandemicViewTopComponent** extends
 JavaFxTopComponent {
-
 public **GenericPandemicViewTopComponent** () {
-
 setName(...);
-
 setToolTipText(...);
-
 initComponents();
-
 }
-
 ...
-
 }
+```
 
 **7.3.2: Adding Content**
 
@@ -4045,33 +3684,24 @@ JavaFX content to display and optionally a stylesheet to use. We should
 also initialise the content, which tells the framework to fit it into
 the top component in a standardised way.
 
+```java
 private PandemicViewPane pandemicPane;
-
 public **GenericPandemicViewTopComponent** () {
-
 ...
-
 pandemicPane = new PandemicViewPane();
-
 initContent();
-
 }
 
-\@Override
-
+@Override
 protected PandemicViewPane **createContent**() {
-
 return pandemicPane;
-
 }
 
-\@Override
-
+@Override
 protected String **createStyle**() {
-
 return null;
-
 }
+```
 
 **7.3.1: Adding Listeners**
 
@@ -4082,32 +3712,23 @@ listen to the outbreak attribute, so we will make use of the
 **addAttributeChangeHandler**() method, which asks us to map an
 attribute to a handler.
 
+```java
 private PandemicViewPane pandemicPane;
-
 public **GenericPandemicViewTopComponent** () {
-
 ...
-
 addAttributeChangeHandler(PandemicConcept.*VertexAttribute*.OUTBREAK,
 (graph) -\> {
-
 final ReadableGraph readableGraph = graph.getReadableGraph();
 
 try {
-
 pandemicPane.refresh(readableGraph);
-
 } finally {
-
 readableGraph.release();
-
 }
-
 });
-
 }
-
 }
+```
 
 **7.3.1: Handling Changes**
 
@@ -4120,13 +3741,12 @@ information on what\'s available. In our case, we will override the
 immediately by calling **manualUpdate**() to manually fire our outbreak
 attribute change handler.
 
-\@Override
-
+```java
+@Override
 public void **handleComponentOpened**() {
-
 manualUpdate();
-
 }
+```
 
 Once again, launch Constellation and observe that this generic view has
 the same behaviour as our two previous views.
@@ -4159,27 +3779,21 @@ This class simply needs to define the location of the file containing
 your 'what's new' entries and the section (or category) these entries
 belong to.
 
-\@ServiceProvider(service = WhatsNewProvider.class)
-
+```java
+@ServiceProvider(service = WhatsNewProvider.class)
 public class **PandemicWhatsNewProvider** extends WhatsNewProvider {
 
-\@Override
-
+@Override
 public String **getResource**() {
-
 return \"whatsnew.txt\";
-
 }
 
-\@Override
-
+@Override
 public String **getSection**() {
-
 return \"Pandemic\";
-
 }
-
 }
+```
 
 **8.1.2: Adding What's New Entries**
 
@@ -4337,20 +3951,17 @@ We will update this to provide more information about the execution of
 our Chain Cities plugin. Add the following code to the query method,
 directly before the return statement:
 
+```java
 \...
-
 ConstellationLogger.*getDefault*().pluginInfo(this, \"Successfully
 queried \" + query.size() + \" cities.\");
-
 Properties loggingProperties = new Properties();
-
 loggingProperties.setProperty(\"ResultCount\",
 String.*valueOf*(result.size()));
-
 ConstellationLogger.*getDefault*().pluginProperties(this,
 loggingProperties);
-
 \...
+```
 
 The code above first submits a simple information string to the logging
 system stating how many cities have been queried. Note that there is
@@ -4378,14 +3989,14 @@ passed in when you use java.util.logging.Logger. Therefore the
 recommended approach to log would be to use Logger opposed to
 System.out.println.
 
+```java
 \...
 
 private static final Logger LOGGER =
 Logger.getLogger(OutbreakUtilities.class.getName());
-
 \...
-
 LOGGER.log(Level.INFO, \"Flights: {0}\", flightCount);
+```
 
 By default the lowest level of logging is "info". To be able to log
 "fine", "finer" and "finest" you have to pass that as an argument when
@@ -4417,11 +4028,11 @@ graph is relevant to this conversation contribution, and the logic for
 building the contribution. The contribution that is built should be a
 **ConversationContribution** object.
 
-\@ServiceProvider(service = ConversationContributionProvider.class)
+```java
+@ServiceProvider(service = ConversationContributionProvider.class)
 
 public class **IconContributionProvider** extends
 ConversationContributionProvider {
-
 private final SchemaAttribute iconAttribute =
 VisualConcept.VertexAttribute.FOREGROUND_ICON;
 
@@ -4429,89 +4040,62 @@ private final SchemaAttribute flightAttribute =
 VisualConcept.TransactionAttribute.AIRLINE;
 
 public **IconContributionProvider**() {
-
 super(\"Icons\", Integer.MAX_VALUE);
-
 }
 
-\@Override
-
+@Override
 public boolean **isCompatibleWithGraph**(final GraphReadMethods graph) {
-
 return iconAttribute.get(graph) != GraphConstants.NOT_FOUND
-
 && flightAttribute.get(graph) != GraphConstants.NOT_FOUND;
-
 }
 
-\@Override
-
+@Override
 public ConversationContribution **createContribution**(final
 GraphReadMethods graph, final ConversationMessage message) {
 
 final int iconAttributeId = iconAttribute.get(graph);
-
 final int senderId = message.getSender();
 
 final ConstellationIcon senderIcon =
 graph.getObjectValue(iconAttributeId, senderId);
 
 final int flightAttributeId = flightAttribute.get(graph);
-
 final int transactionId = message.getTransaction();
 
 final String flight = graph.getStringValue(flightAttributeId,
 transactionId);
 
 return new IconContribution(message, senderIcon, flight);
-
 }
 
 private class **IconContribution** extends ConversationContribution {
-
 private final ConstellationIcon icon;
-
 private final String flight;
 
 public **IconContribution**(final ConversationMessage message, final
 ConstellationIcon icon, final String flight) {
-
 super(IconContributionProvider.this, message);
-
 this.icon = icon;
-
 this.flight = flight;
-
 }
 
-\@Override
-
+@Override
 protected Region **createContent**(final TooltipPane tips) {
-
 final VBox content = new VBox();
-
 final ImageView iconImage = new ImageView(icon.buildImage());
-
 final SelectableLabel iconLabel = new SelectableLabel(flight, true,
 null, tips, null);
-
 content.getChildren().addAll(iconImage, iconLabel);
-
 return content;
-
 }
 
-\@Override
-
+@Override
 public String **toString**() {
-
 return \"Icon Contribution\";
-
 }
-
 }
-
 }
+```
 
 **Map View**
 
@@ -4525,77 +4109,51 @@ needs to return a tile image to place there, either from a local or
 network source. Below is an example of retrieveing tiles from a local
 database.
 
-\@ServiceProvider(service = MapProvider.class)
-
+```java
+@ServiceProvider(service = MapProvider.class)
 public class **BlackAndWhiteMapProvider** extends MapProvider {
 
-\@Override
-
+@Override
 public String **getName**() {
-
 return \"Black & White\";
-
 }
 
-\@Override
-
+@Override
 public int **zoomLevels**() {
-
 return 6;
-
 }
 
-\@Override
-
+@Override
 public String **getZoomString**(final Coordinate coordinate) {
-
 final float gridSize = PApplet.pow(2, coordinate.zoom);
-
 final float negativeRow = gridSize - coordinate.row - 1;
-
 return (int) coordinate.zoom + \"/\" + (int) coordinate.column + \"/\" +
 (int) negativeRow;
-
 }
 
-\@Override
-
+@Override
 public PImage **getTile**(final Coordinate coordinate) {
-
 final File blackAndWhiteMap = ConstellationInstalledFileLocator.locate(
-
 \",odules/ext/Black&White.mbtiles\",
-
 \"au.gov.asd.tac.constellation.training.solutions\",
-
 false, BlackAndWhiteMapProvider.class.getProtectionDomain());
-
 final String connection = String.format(\"jdbc:sqlite:%s\",
 blackAndWhiteMap.getAbsolutePath());
 
 final int zoom = (int) coordinate.zoom;
-
 final float gridSize = PApplet.pow(2, coordinate.zoom);
-
 final float negativeRow = gridSize - coordinate.row - 1;
-
 final int row = (int) negativeRow;
-
 final int column = (int) coordinate.column;
-
 return MBTilesLoaderUtils.getMBTile(column, row, zoom, connection);
-
 }
 
-\@Override
-
+@Override
 public String\[\] **getTileUrls**(final Coordinate coordinate) {
-
 return null;
-
 }
-
 }
+```
 
 New tools can be overlaid on the Map View by registering a
 **MapOverlay** class. An overlay is built on top of the Processing
@@ -4603,108 +4161,71 @@ framework, which provides a high level API for rendering on your
 graphics card, and simply asks you to define what to draw on screen and
 how to handle mouse and keyboard events.
 
-\@ServiceProvider(service = MapOverlay.class)
-
+```java
+@ServiceProvider(service = MapOverlay.class)
 public class **MousePositionOverlay** extends MapOverlay {
-
 private boolean mousePressed = false;
 
-\@Override
-
+@Override
 public float **getName**() {
-
 return \"Mouse Position Overlay\";
-
 }
 
-\@Override
-
+@Override
 public float **getX**() {
-
 return renderer.getX() + renderer.getWidth() - 10 - width;
-
 }
 
-\@Override
-
+@Override
 public float **getY**() {
-
 return renderer.getY() + renderer.getHeight() - 10 - height;
-
 }
 
-\@Override
-
+@Override
 public void **overlay**() {
-
 renderer.noStroke();
-
 renderer.fill(mousePressed ? highlightColor : backgroundColor);
-
 renderer.rect(x, y, width, height);
-
 float yOffset = y + margin;
-
 final String mouseX = String.valueOf(renderer.mouseX) + \"px\";
-
 final String mouseY = String.valueOf(renderer.mouseY) + \"px\";
-
 drawLabel(\"Mouse\", x + 60, yOffset);
-
 drawValue(mouseX, x + 60, yOffset, valueBoxMediumWidth, false, false);
-
 drawValue(mouseY, x + 60 + valueBoxMediumWidth + padding, yOffset,
 valueBoxMediumWidth, false, false);
-
 }
 
-\@Override
-
+@Override
 public void **mouseMoved**(final MouseEvent event) {
-
 }
 
-\@Override
-
+@Override
 public void **mouseClicked**(final MouseEvent event) {
-
 }
 
-\@Override
-
+@Override
 public void **mousePressed**(final MouseEvent event) {
-
 mousePressed = true;
-
 }
 
-\@Override
-
+@Override
 public void **mouseDragged**(final MouseEvent event) {
-
 }
 
-\@Override
-
+@Override
 public void **mouseReleased**(final MouseEvent event) {
-
 mousePressed = false;
-
 }
 
-\@Override
-
+@Override
 public void **mouseWheel**(final MouseEvent event) {
-
 }
 
-\@Override
-
+@Override
 public void **keyPressed**(final KeyEvent event) {
-
 }
-
 }
+```
 
 New exporters can be added to the Map View by registering a
 **MapExporter** class. For convenience, you can also choose use the
@@ -4712,66 +4233,47 @@ New exporters can be added to the Map View by registering a
 takes care of all the logic surrounding extracting geo data from the
 graph
 
-\@ServiceProviders({
-
-\@ServiceProvider(service = MapExporter.class),
-
-\@ServiceProvider(service = Plugin.class)
-
+```java
+@ServiceProviders({
+@ServiceProvider(service = MapExporter.class),
+@ServiceProvider(service = Plugin.class)
 })
 
 @NbBundle\.Messages\("TextGeoExporter=Export to Text\")
-
-\@PluginInfo(pluginType = PluginType.EXPORT, tags = {\"EXPORT\"})
+@PluginInfo(pluginType = PluginType.EXPORT, tags = {\"EXPORT\"})
 
 public class **TextGeoExporter** extends AbstractGeoExportPlugin {
 
-\@Override
-
+@Override
 protected FileChooser.ExtensionFilter **getExportType**() {
-
 return new FileChooser.ExtensionFilter(\"TEXT\", \"\*txt\");
-
 }
 
-\@Override
-
+@Override
 protected void **exportGeo**(final PluginParameters parameters, final
 String uuid, final Map\<String, String\> shapes, final Map\<String,
 Map\<String, Object\>\> attributes, final File output) throws
 IOException {
 
 for (final String id : shapes.keySet()) {
-
 final String shape = shapes.get(id);
-
 try (final FileWriter writer = new FileWriter(output)) {
-
 writer.write(String.format(\"%s=%s\\n\", id, shape));
-
+}
+}
 }
 
-}
-
-}
-
-\@Override
-
+@Override
 public String **getDisplayName**() {
-
 return \"Text\";
-
 }
 
-\@Override
-
+@Override
 public String **getPluginReference**() {
-
 return this.getClass().getName();
-
 }
-
 }
+```
 
 **Analytic View**
 
@@ -4797,39 +4299,29 @@ You can also use one of the higher-level analytic plugin classes:
 -   A **GraphAnalyticPlugin** records whole-of-graph scores based on a
     set of specified attributes after running a specified plugin.
 
-\@ServiceProviders({
-
-\@ServiceProvider(service = Plugin.class),
-
-\@ServiceProvider(service = AnalyticPlugin.class)
-
+```java
+@ServiceProviders({
+@ServiceProvider(service = Plugin.class),
+@ServiceProvider(service = AnalyticPlugin.class)
 })
 
 @NbBundle\.Messages\("OutbreakCountAnalytic=Outbreak Count Analytic\")
-
-\@PluginInfo(tags = {\"ANALYTIC\"})
-
-\@AnalyticInfo(analyticCategory = \"Count\")
+@PluginInfo(tags = {\"ANALYTIC\"})
+@AnalyticInfo(analyticCategory = \"Count\")
 
 public class **OutbreakCountAnalytic** extends
 AnalyticPlugin\<ScoreResult\> {
 
 protected ScoreResult result;
 
-\@Override
-
+@Override
 public Set\<SchemaAttribute\> **getPrerequisiteAttributes**() {
-
 final Set\<SchemaAttribute\> attributes = new HashSet\<\>();
-
 attributes.add(PandemicConcept.VertexAttribute.OUTBREAK);
-
 return attributes;
-
 }
 
-\@Override
-
+@Override
 protected final void **edit**(final GraphWriteMethods graph, final
 PluginInteraction interaction, final PluginParameters parameters) throws
 InterruptedException, PluginException {
@@ -4848,64 +4340,44 @@ PandemicConcept.VertexAttribute.OUTBREAK_COUNT.ensure(graph);
 PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION).executeNow(graph);
 
 final int vertexCount = graph.getVertexCount();
-
 for (int vertexPosition = 0; vertexPosition \< vertexCount;
 vertexPosition++) {
-
 final int vertexId = graph.getVertex(vertexPosition);
-
 final Outbreak vertexOutbreak =
 graph.getObjectValue(outbreakAttributeId, vertexId);
 
 if (vertexOutbreak != null) {
-
 final String identifier = graph.getStringValue(identifierAttributeId,
 vertexId);
 
 final float score = vertexOutbreak.getNumberOfDiseases();
-
 final boolean isNull = score == (int)
 graph.getAttributeDefaultValue(outbreakCountAttributeId);
-
 result.add(new ScoreResult.ElementScore(GraphElementType.VERTEX,
 vertexId, identifier, isNull, score));
-
+}
+}
 }
 
-}
-
-}
-
-\@Override
-
+@Override
 public Set **getAnalyticAttributes**(final PluginParameters parameters)
 {
-
 final Set\<SchemaAttribute\> attributes = new HashSet\<\>();
-
 attributes.add(PandemicConcept.VertexAttribute.OUTBREAK_COUNT);
-
 return attributes;
-
 }
 
-\@Override
-
+@Override
 public ScoreResult **getResults**() {
-
 return result;
-
 }
 
-\@Override
-
+@Override
 public Class\<? extends AnalyticResult\> **getResultType**() {
-
 return ScoreResult.class;
-
 }
-
 }
+```
 
 Each analytic plugin must specify an **AnalyticResult** which determines
 the type of output the analytic produces. For example, the
@@ -4928,61 +4400,44 @@ pre-set analytic for users to run. Note that the analytic plugins
 specified must use the same result type in order for them to be
 aggregated.
 
-\@ServiceProvider(service = AnalyticQuestionDescription.class)
-
+```java
+@ServiceProvider(service = AnalyticQuestionDescription.class)
 public class **HowManyOutbreaksQuestion** implements
 AnalyticQuestionDescription {
 
-\@Override
-
+@Override
 public String **getName**() {
-
 return \"How many outbreaks?\";
-
 }
 
-\@Override
-
+@Override
 public String **getDescription**() {
-
 return \"Counts the number of outbreaks per city\";
-
 }
 
-\@Override
-
+@Override
 public List\<Class\<? extends AnalyticPlugin\<ScoreResult\>\>\>
 **getPluginClasses**() {
-
 return Arrays.asList(OutbreakCountAnalytic.class);
-
 }
 
-\@Override
-
+@Override
 public Class\<? extends AnalyticAggregator\<ScoreResult\>\>
 **getAggregatorType**() {
-
 return SumScoreAggregator.class;
-
 }
 
-\@Override
-
+@Override
 public Class\<? extends AnalyticResult\> **getResultType**() {
-
 return ScoreResult.class;
-
 }
 
-\@Override
-
+@Override
 public void **initialiseParameters**(final AnalyticPlugin plugin, final
 PluginParameters parameters) {
-
 }
-
 }
+```
 
 When an analytic plugin or question is run in the Analytic View, the
 result can be displayed within the Analytic View using an
@@ -5000,47 +4455,35 @@ the current graph. By default, the Schema View reveals information about
 attributes, vertex types, transaction types and plugins, but of course
 you can add more information using a **SchemaViewNodeProvider** class.
 
-\@ServiceProvider(service = SchemaViewNodeProvider.class)
+```java
+@ServiceProvider(service = SchemaViewNodeProvider.class)
 
 public class **PandemicNodeProvider** implements SchemaViewNodeProvider
 {
-
 private static final String INFO = \"\<Information about pandemics goes
 here\>\";
 
-\@Override
-
+@Override
 public void **setContent**(final Tab tab) {
-
 final VBox node = new VBox();
-
 final Label pandemicInfo = new Label(INFO);
-
 node.getChildren().add(pandemicInfo);
 
 Platform.runLater(() -\> {
-
 tab.setContent(node);
-
 });
-
 }
 
-\@Override
-
+@Override
 public void **discardNode**() {
-
 }
 
-\@Override
-
+@Override
 public String **getText**() {
-
 return \"Pandemic Info\";
-
 }
-
 }
+```
 
 **Chapter 10: Useful Links**
 
