@@ -260,8 +260,8 @@ some code to it and observing the output.
 
 ```java
 @Override
-public void **actionPerformed**(ActionEvent e) {
-    System.*out*.println(\"Your Environment is Configured Correctly!\");
+public void actionPerformed(final ActionEvent e) {
+    System.out.println("Your Environment is Configured Correctly!");
 }
 ```
 
@@ -539,16 +539,12 @@ class extend **RecordStoreQueryPlugin** and use the NetBeans hint
 **query(...)** method.
 
 ```java
-public class **ImportInfectedCitiesPlugin** extends
-RecordStoreQueryPlugin {
+public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin {
 
-@Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-\...
-}
+    @Override
+    protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+        ...
+    }
 }
 ```
 
@@ -564,8 +560,7 @@ of its extension mechanisms.
 
 ```java
 @ServiceProvider(service = Plugin.class)
-public class **ImportInfectedCitiesPlugin** extends
-RecordStoreQueryPlugin {
+public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin {
 ```
 
 The **ServiceProvider** annotation registers a class as providing an
@@ -584,8 +579,7 @@ plugin. Open the **PandemicPluginRegistry** class from the default
 package of the exercise module and add:
 
 ```java
-public static final String *IMPORT_INFECTED_CITIES* =
-ImportInfectedCitiesPlugin.class.getName();
+public static final String IMPORT_INFECTED_CITIES = ImportInfectedCitiesPlugin.class.getName();
 ```
 
 We will discuss how these registry classes are used in Chapter 4 when we
@@ -601,13 +595,11 @@ it as implementing the **DataAccessPlugin** interface
 
 ```java
 @ServiceProviders({
-@ServiceProvider(service = DataAccessPlugin.class),
-@ServiceProvider(service = Plugin.class)
-
+    @ServiceProvider(service = DataAccessPlugin.class),
+    @ServiceProvider(service = Plugin.class)
 })
 
-public class **ImportInfectedCitiesPlugin** extends
-RecordStoreQueryPlugin implements DataAccessPlugin {
+public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin implements DataAccessPlugin {
 ```
 
 **2.1.4: Specify the type and position of your plugin in the Data Access
@@ -624,8 +616,8 @@ implementation of **DataAccessPluginType**.
 
 ```java
 @Override
-public String **getType**() {
-return DataAccessPluginCoreType.*EXPERIMENTAL*;
+public String getType() {
+    return DataAccessPluginCoreType.EXPERIMENTAL;
 }
 ```
 
@@ -635,8 +627,8 @@ You can specify this position by implementing another method from the
 
 ```java
 @Override
-public int **getPosition**() {
-return 0;
+public int getPosition() {
+    return 0;
 }
 ```
 
@@ -651,8 +643,8 @@ overriding the **getName()** method from the **AbstractPlugin** class:
 
 ```java
 @Override
-public String **getName**() {
-return \"Import Infected Cities\";
+public String getName() {
+    return "Import Infected Cities";
 }
 ```
 
@@ -663,15 +655,13 @@ your implementation of **getName()** and replace it with an
 
 ```java
 @ServiceProviders({
-@ServiceProvider(service = DataAccessPlugin.class),
-@ServiceProvider(service = Plugin.class)
+    @ServiceProvider(service = DataAccessPlugin.class),
+    @ServiceProvider(service = Plugin.class)
 })
 
-@NbBundle.*Messages*(\"ImportInfectedCitiesPlugin=Import Infected
-Cities\")
+@NbBundle.Messages("ImportInfectedCitiesPlugin=Import Infected Cities")
 
-public class **ImportInfectedCitiesPlugin** extends
-RecordStoreQueryPlugin implements DataAccessPlugin {
+public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin implements DataAccessPlugin {
 ```
 
 Finally, remove the **UnsupportedOperationException** from the body of
@@ -681,13 +671,9 @@ nothing will be added to the graph.
 
 ```java
 @Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
-
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-System.*out*.println(\"Testing Infected Cities Plugin\");
-return new GraphRecordStore();
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    System.out.println("Testing Infected Cities Plugin");
+    return new GraphRecordStore();
 }
 ```
 
@@ -713,22 +699,14 @@ Adding nodes and transactions to the graph involves adding data to the
 we will add a single node to the graph.
 
 ```java
-\@Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
+@Override
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    RecordStore result = new GraphRecordStore();
+    result.add();
+    result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, "Me");
+    result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
 
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-RecordStore result = new GraphRecordStore();
-result.add();
-result.set(GraphRecordStoreUtilities.*SOURCE* +
-VisualConcept.VertexAttribute.*IDENTIFIER*, \"Me\");
-
-result.set(GraphRecordStoreUtilities.*SOURCE* +
-AnalyticConcept.VertexAttribute.*TYPE*,
-AnalyticConcept.*VertexType*.*PERSON*);
-
-return result;
+    return result;
 }
 ```
 
@@ -775,33 +753,19 @@ is to specify both source and destination node attributes (and
 optionally transaction attributes) in a single row of the RecordStore:
 
 ```java
-\@Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
+@Override
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
+    result.add();
+    result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, "Me");
+    result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
+	
+    result.set(GraphRecordStoreUtilities.DESTINATION + VisualConcept.VertexAttribute.IDENTIFIER, "You");
+    result.set(GraphRecordStoreUtilities.DESTINATION + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
+	
+    result.set(GraphRecordStoreUtilities.TRANSACTION + AnalyticConcept.TransactionAttribute.TYPE, AnalyticConcept.TransactionType.COMMUNICATION);
 
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-RecordStore result = new GraphRecordStore();
-result.add();
-result.set(GraphRecordStoreUtilities.*SOURCE* +
-VisualConcept.VertexAttribute.*IDENTIFIER*, \"Me\");
-
-result.set(GraphRecordStoreUtilities.*SOURCE* +
-AnalyticConcept.VertexAttribute.*TYPE*,
-AnalyticConcept.*VertexType*.*PERSON*);
-
-result.set(GraphRecordStoreUtilities.*DESTINATION* +
-VisualConcept.VertexAttribute.*IDENTIFIER*, \"You\");
-
-result.set(GraphRecordStoreUtilities.*DESTINATION* +
-AnalyticConcept.VertexAttribute.*TYPE*,
-AnalyticConcept.*VertexType*.*PERSON*);
-
-result.set(GraphRecordStoreUtilities.*TRANSACTION* +
-AnalyticConcept.TransactionAttribute.*TYPE*,
-AnalyticConcept.*TransactionType*.*COMMUNICATION*);
-
-return result;
+    return result;
 }
 ```
 
@@ -824,29 +788,18 @@ used throughout this training document to simplify our development.
 
 ```java
 @Override
-
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction, PluginParameters parameters) throws InterruptedException,
-PluginException {
-RecordStore result = new GraphRecordStore();
-for (OutbreakUtilities.*City* city :
-OutbreakUtilities.*getInfectedCities*()) {
-result.add();
-result.set(GraphRecordStoreUtilities.*SOURCE*
-\+ VisualConcept.*VertexAttribute*.*IDENTIFIER*, city.getName());
-result.set(GraphRecordStoreUtilities.*SOURCE* +
-AnalyticConcept.*VertexAttribute*.*TYPE*,
-AnalyticConcept.*VertexType*.*LOCATION*);
-result.set(GraphRecordStoreUtilities.*SOURCE* + \"Population\",
-city.getPopulation());
-result.set(GraphRecordStoreUtilities.*SOURCE*
-\+ SpatialConcept.*VertexAttribute*.*LATITUDE*, city.getLatitude());
-result.set(GraphRecordStoreUtilities.*SOURCE*
-\+ SpatialConcept.*VertexAttribute*.*LONGITUDE*, city.getLongitude());
-result.set(GraphRecordStoreUtilities.*SOURCE*
-\+ \"Outbreak\", city.getOutbreak());
-}
-return result;
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
+    for (final OutbreakUtilities.City city : OutbreakUtilities.getInfectedCities()) {
+        result.add();
+        result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, city.getName());
+        result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.LOCATION);
+        result.set(GraphRecordStoreUtilities.SOURCE + "Population", city.getPopulation());
+        result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VertexAttribute.LATITUDE, city.getLatitude());
+        result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VertexAttribute.LONGITUDE, city.getLongitude());
+        result.set(GraphRecordStoreUtilities.SOURCE + "Outbreak", city.getOutbreak());
+    }
+    return result;
 }
 ```
 
@@ -869,9 +822,7 @@ column key ("\<" + type + "\>") when specifying **RecordStore** column
 values:
 
 ```java
-result.set(GraphRecordStoreUtilities.*SOURCE* + \"Population\" + \"\<\"
-+ IntegerAttributeDescription.*ATTRIBUTE_NAME* + \"\>\",
-city.getPopulation());
+result.set(GraphRecordStoreUtilities.SOURCE + "Population" + "<" + IntegerAttributeDescription.ATTRIBUTE_NAME + ">", city.getPopulation());
 ```
 
 Running the plugin again will show that the population attribute now
@@ -883,27 +834,14 @@ task, **OutbreakUtilities** provides another convenience method that
 will do this for us. This allows us to simplify our query method:
 
 ```java
-\@Override
-
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction, PluginParameters parameters) throws InterruptedException,
-PluginException {
-
-RecordStore result = new GraphRecordStore();
-
-for (OutbreakUtilities.*City* city :
-OutbreakUtilities.*getInfectedCities*()) {
-
-result.add();
-
-OutbreakUtilities.*addCityToRecord*(city, result,
-
-GraphRecordStoreUtilities.*SOURCE*);
-
-}
-
-return result;
-
+@Override
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
+    for (final OutbreakUtilities.City city : OutbreakUtilities.getInfectedCities()) {
+        result.add();
+        OutbreakUtilities.addCityToRecord(city, result, GraphRecordStoreUtilities.SOURCE);
+    }
+    return result;
 }
 ```
 
@@ -940,8 +878,8 @@ and that it extends **AnalyticSchemaFactory**.
 
 ```java
 @ServiceProvider(service = SchemaFactory.class)
-public class **PandemicSchemaFactory** extends AnalyticSchemaFactory {
-...
+public class PandemicSchemaFactory extends AnalyticSchemaFactory {
+    ...
 }
 ```
 
@@ -952,11 +890,11 @@ any previously saved graphs which use this schema. Give
 **PandemicSchemaFactory** a unique name.
 
 ```java
-public static final String *NAME* =
-\"au.gov.asd.tac.constellation.training.schema.PandemicSchemaFactory\";
+public static final String NAME = "au.gov.asd.tac.constellation.training.schema.PandemicSchemaFactory";
+
 @Override
-public String **getName**() {
-return *NAME*;
+public String getName() {
+    return NAME;
 }
 ```
 
@@ -966,14 +904,13 @@ values will be displayed to the user within Constellation. Give
 
 ```java
 @Override
-public String **getLabel**() {
-return \"Pandemic Graph\";
+public String getLabel() {
+    return "Pandemic Graph";
 }
 
 @Override
-public String **getDescription**() {
-return \"This graph provides support for analysing a pandemic - for
-training purposes\";
+public String getDescription() {
+    return "This graph provides support for analysing a pandemic - for training purposes";
 }
 ```
 
@@ -985,8 +922,8 @@ which will ensure it is the default schema factory.
 
 ```java
 @ServiceProvider(service = SchemaFactory.class, position = 0)
-public class **PandemicSchemaFactory** extends AnalyticSchemaFactory {
-...
+public class PandemicSchemaFactory extends AnalyticSchemaFactory {
+    ...
 }
 ```
 
@@ -1019,14 +956,12 @@ registering some existing schema concepts to **PandemicSchemaFactory**.
 
 ```java
 @Override
-public Set\<Class\<? extends SchemaConcept\>\>
-**getRegisteredConcepts**() {
-final Set\<Class\<? extends SchemaConcept\>\> registeredConcepts = new
-HashSet\<\>();
-registeredConcepts.add(*ConstellationViewsConcept*.class);
-registeredConcepts.add(VisualConcept.class);
-registeredConcepts.add(AnalyticConcept.class);
-return Collections.*unmodifiableSet*(registeredConcepts);
+public Set<Class<? extends SchemaConcept>> getRegisteredConcepts() {
+    final Set<Class<? extends SchemaConcept>> registeredConcepts = new HashSet<>();
+    registeredConcepts.add(ConstellationViewsConcept.class);
+    registeredConcepts.add(VisualConcept.class);
+    registeredConcepts.add(AnalyticConcept.class);
+    return Collections.unmodifiableSet(registeredConcepts);
 }
 ```
 
@@ -1038,10 +973,10 @@ creating a pandemic schema class (which should extend as
 **AnalyticSchema**) as an inner class within **PandemicSchemaFactory**.
 
 ```java
-protected class **PandemicSchema** extends AnalyticSchema {
-public **PandemicSchema**(SchemaFactory factory) {
-super(factory);
-}
+protected class PandemicSchema extends AnalyticSchema {
+    public PandemicSchema(final SchemaFactory factory) {
+        super(factory);
+    }
 }
 ```
 
@@ -1050,8 +985,8 @@ pandemic schema is the schema it should be building.
 
 ```java
 @Override
-public Schema **createSchema**() {
-return new PandemicSchema(this);
+public Schema createSchema() {
+    return new PandemicSchema(this);
 }
 ```
 
@@ -1069,17 +1004,13 @@ previous chapter.
 
 ```java
 @Override
-public void **completeVertex**(final GraphWriteMethods graph, final int
-vertex) {
-final int typeAttributeId =
-AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
-final SchemaVertexType vertexType =
-graph.getObjectValue(typeAttributeId, vertex);
-if (AnalyticConcept.*VertexType*.*LOCATION*.equals(vertexType)) {
-graph.setStringValue(typeAttributeId, vertex, \"City\");
-}
-
-super.completeVertex(graph, vertex);
+public void completeVertex(final GraphWriteMethods graph, final int vertex) {
+    final int typeAttributeId = AnalyticConcept.VertexAttribute.TYPE.get(graph);
+    final SchemaVertexType vertexType = graph.getObjectValue(typeAttributeId, vertex);
+    if (AnalyticConcept.VertexType.LOCATION.equals(vertexType)) {
+        graph.setStringValue(typeAttributeId, vertex, "City");
+    }
+    super.completeVertex(graph, vertex);
 }
 ```
 
@@ -1117,19 +1048,18 @@ and complete the **PandemicConcept** class now, assigning
 
 ```java
 @ServiceProvider(service = SchemaConcept.class)
-public class **PandemicConcept** extends SchemaConcept {
-@Override
-public String **getName**() {
-return \"Pandemic\";
-}
+public class PandemicConcept extends SchemaConcept {
+    @Override
+    public String getName() {
+        return "Pandemic";
+    }
 
-@Override
-public Set\<Class\<? extends SchemaConcept\>\> **getParents**() {
-final Set\<Class\<? extends SchemaConcept\>\> parentSet = new
-HashSet\<\>();
-parentSet.add(AnalyticConcept.class);
-return Collections.*unmodifiableSet*(parentSet);
-}
+    @Override
+    public Set<Class<? extends SchemaConcept>> getParents() {
+        final Set<Class<? extends SchemaConcept>> parentSet = new HashSet<>();
+        parentSet.add(AnalyticConcept.class);
+        return Collections.unmodifiableSet(parentSet);
+    }
 }
 ```
 
@@ -1145,16 +1075,12 @@ that we have placed our schema attribute within the static inner class
 group attributes and types for ease of use later.
 
 ```java
-public static class ***VertexAttribute*** {
-\...
-
-public static final SchemaAttribute *OUTBREAK* = new
-SchemaAttribute.Builder(GraphElementType.*VERTEX*,
-StringAttributeDescription.*ATTRIBUTE_NAME*, \"Outbreak\")
-.setDescription(\"An outbreak consisting of one or more diseases and
-their influence\")
-.create()
-.build();
+public static class VertexAttribute {
+    ...
+    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, StringAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
+        .setDescription("An outbreak consisting of one or more diseases and their influence")
+        .create()
+        .build();
 }
 ```
 
@@ -1171,11 +1097,11 @@ class.
 
 ```java
 @Override
-public Collection\<SchemaAttribute\> **getSchemaAttributes**() {
-final List\<SchemaAttribute\> schemaAttributes = new ArrayList\<\>();
-\...
-schemaAttributes.add(*VertexAttribute*.*OUTBREAK*);
-return Collections.*unmodifiableCollection*(schemaAttributes);
+public Collection<SchemaAttribute> getSchemaAttributes() {
+    final List\<SchemaAttribute\> schemaAttributes = new ArrayList<>();
+    ...
+    schemaAttributes.add(VertexAttribute.OUTBREAK);
+    return Collections.unmodifiableCollection(schemaAttributes);
 }
 ```
 
@@ -1211,14 +1137,13 @@ the number of operations we have to define. Open and examine the
 
 ```java
 @ServiceProvider(service = AttributeDescription.class)
-public class **OutbreakAttributeDescription** extends
-AbstractObjectAttributeDescription {
-public static final String *ATTRIBUTE_NAME* = \"outbreak\";
-public static final Class\<?\> *NATIVE_CLASS* = Outbreak.class;
-public static final Outbreak *DEFAULT_VALUE* = null;
-public **OutbreakAttributeDescription**() {
-super(*ATTRIBUTE_NAME*, *NATIVE_CLASS*, *DEFAULT_VALUE*);
-}
+public class OutbreakAttributeDescription extends AbstractObjectAttributeDescription {
+    public static final String ATTRIBUTE_NAME = "outbreak";
+    public static final Class<?> NATIVE_CLASS = Outbreak.class;
+    public static final Outbreak DEFAULT_VALUE = null;
+    public OutbreakAttributeDescription() {
+        super(ATTRIBUTE_NAME, NATIVE_CLASS, DEFAULT_VALUE);
+    }
 }
 ```
 
@@ -1237,13 +1162,13 @@ the attribute description.
 
 ```java
 @Override
-public void **setString**(int id, String value) {
-data\[id\] = Outbreak.*valueOf*(value);
+public void setString(final int id, final String value) {
+    data[id] = Outbreak.valueOf(value);
 }
 
 @Override
-public String **getString**(int id) {
-return data\[id\] == null ? null : data\[id\].toString();
+public String getString(final int id) {
+    return data[id] == null ? null : data[id].toString();
 }
 ```
 
@@ -1252,16 +1177,12 @@ existing outbreak schema attribute as an outbreak type attribute instead
 of a string type attribute.
 
 ```java
-public static class ***VertexAttribute*** {
-\...
-
-public static final SchemaAttribute *OUTBREAK* = new
-SchemaAttribute.Builder(GraphElementType.*VERTEX*,
-OutbreakAttributeDescription.*ATTRIBUTE_NAME*, \"Outbreak\")
-.setDescription(\"An outbreak consisting of one or more diseases and
-their influence\")
-.create()
-.build();
+public static class VertexAttribute {
+    ...
+    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, OutbreakAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
+        .setDescription("An outbreak consisting of one or more diseases and their influence")
+        .create()
+        .build();
 }
 ```
 
@@ -1281,12 +1202,12 @@ outbreak information is lost. Now open and complete the
 
 ```java
 @ServiceProvider(service = AbstractGraphIOProvider.class)
-public class **OutbreakIOProvider** extends AbstractGraphIOProvider {
+public class OutbreakIOProvider extends AbstractGraphIOProvider {
 
-@Override
-public String **getName**() {
-return OutbreakAttributeDescription.*ATTRIBUTE_NAME*;
-}
+    @Override
+    public String getName() {
+        return OutbreakAttributeDescription.ATTRIBUTE_NAME;
+    }
 }
 ```
 
@@ -1297,29 +1218,23 @@ attribute type.
 
 ```java
 @Override
-public void **readObject**(int attributeId, int elementId, JsonNode
-jnode, GraphWriteMethods graph, Map\<Integer, Integer\> vertexMap,
-Map\<Integer, Integer\> transactionMap, GraphByteReader byteReader,
-ImmutableObjectCache cache) throws IOException {
-
-final String attributeValue = jnode.isNull() ? null : jnode.textValue();
-graph.setStringValue(attributeId, elementId, attributeValue);
+public void readObject(final int attributeId, final int elementId, final JsonNode jnode, final GraphWriteMethods graph, final Map<Integer, Integer> vertexMap,
+        final Map<Integer, Integer> transactionMap, final GraphByteReader byteReader, final ImmutableObjectCache cache) throws IOException {
+    final String attributeValue = jnode.isNull() ? null : jnode.textValue();
+    graph.setStringValue(attributeId, elementId, attributeValue);
 }
 
 @Override
-public void **writeObject**(Attribute attribute, int elementId,
-JsonGenerator jsonGenerator, GraphReadMethods graph, GraphByteWriter
-byteWriter, boolean verbose) throws IOException {
-if (verbose \|\| !graph.isDefaultValue(attribute.getId(), elementId)) {
-final String attributeValue = graph.getStringValue(attribute.getId(),
-elementId);
-
-if (attributeValue == null) {
-jsonGenerator.writeNullField(attribute.getName());
-} else {
-jsonGenerator.writeStringField(attribute.getName(), attributeValue);
-}
-}
+public void writeObject(final Attribute attribute, final int elementId, final JsonGenerator jsonGenerator, final GraphReadMethods graph, 
+        final GraphByteWriter byteWriter, final boolean verbose) throws IOException {
+    if (verbose || !graph.isDefaultValue(attribute.getId(), elementId)) {
+        final String attributeValue = graph.getStringValue(attribute.getId(), elementId);
+        if (attributeValue == null) {
+            jsonGenerator.writeNullField(attribute.getName());
+        } else {
+            jsonGenerator.writeStringField(attribute.getName(), attributeValue);
+        }
+    }
 }
 ```
 
@@ -1350,16 +1265,13 @@ modified. Note that once a type has been built, it is immutable. Let's
 go ahead and build a 'city' vertex type for **PandemicConcept**.
 
 ```java
-public static class ***VertexType*** {
-
-public static final SchemaVertexType *CITY* = new
-SchemaVertexType.Builder(\"City\")
-.setDescription(\"A node representing a city, eg. Canberra,
-Australia.\")
-.setColor(ConstellationColor.*CLOUDS*)
-.setForegroundIcon(AnalyticIconProvider.*GLOBE*)
-.setBackgroundIcon(IconManager.*getIcon*(\"Flat Square\"))
-.build();
+public static class VertexType {
+    public static final SchemaVertexType CITY = new SchemaVertexType.Builder("City")
+        .setDescription("A node representing a city, eg. Canberra, Australia.")
+        .setColor(ConstellationColor.CLOUDS)
+        .setForegroundIcon(AnalyticIconProvider.GLOBE)
+        .setBackgroundIcon(IconManager.getIcon("Flat Square"))
+        .build();
 }
 ```
 
@@ -1367,12 +1279,11 @@ Creating a transaction type involves a very similar process. Let's go
 ahead and build a 'flight' transaction type for **PandemicConcept**.
 
 ```java
-public static class ***TransactionType*** {
-public static final SchemaTransactionType *FLIGHT* = new
-SchemaTransactionType.Builder(\"Flight\")
-.setDescription(\"A flight route connecting two locations.\")
-.setColor(ConstellationColor.*BANANA*)
-.build();
+public static class TransactionType {
+    public static final SchemaTransactionType FLIGHT = new SchemaTransactionType.Builder("Flight")
+        .setDescription("A flight route connecting two locations.")
+        .setColor(ConstellationColor.BANANA)
+        .build();
 }
 ```
 
@@ -1386,20 +1297,17 @@ register them to **PandemicConcept**.
 
 ```java
 @Override
-public List\<SchemaVertexType\> **getSchemaVertexTypes**() {
-final List\<SchemaVertexType\> schemaVertexTypes = new ArrayList\<\>();
-schemaVertexTypes.add(*VertexType*.*CITY*);
-return Collections.*unmodifiableList*(schemaVertexTypes);
+public List<SchemaVertexType> getSchemaVertexTypes() {
+    final List<SchemaVertexType> schemaVertexTypes = new ArrayList<>();
+    schemaVertexTypes.add(VertexType.CITY);
+    return Collections.unmodifiableList(schemaVertexTypes);
 }
 
 @Override
-public List\<SchemaTransactionType\> **getSchemaTransactionTypes**() {
-final List\<SchemaTransactionType\> schemaTransactionTypes = new
-ArrayList\<\>();
-
-schemaTransactionTypes.add(*TransactionType*.*FLIGHT*);
-
-return Collections.*unmodifiableList*(schemaTransactionTypes);
+public List<SchemaTransactionType> getSchemaTransactionTypes() {
+    final List<SchemaTransactionType> schemaTransactionTypes = new ArrayList<>();
+    schemaTransactionTypes.add(TransactionType.FLIGHT);
+    return Collections.unmodifiableList(schemaTransactionTypes);
 }
 ```
 
@@ -1420,8 +1328,8 @@ Before we build an icon, we should create an **IconProvider**. Open
 
 ```java
 @ServiceProvider(service = IconProvider.class)
-public class **PandemicIconProvider** implements IconProvider {
-\...
+public class PandemicIconProvider implements IconProvider {
+    ...
 }
 ```
 
@@ -1435,18 +1343,16 @@ but it is worth noting that several other **IconData** implementations
 exist for loading icons in different ways.
 
 ```java
-public static final ConstellationIcon *BIOHAZARD* = new
-ConstellationIcon.Builder(\"Biohazard\", new
-FileIconData(\"modules/ext/biohazard.png\",
-\"au.gov.asd.tac.Constellation.training\"))
-.addCategory(\"Training\")
-.build();
+public static final ConstellationIcon BIOHAZARD = new ConstellationIcon.Builder("Biohazard", 
+        new FileIconData("modules/ext/biohazard.png", "au.gov.asd.tac.Constellation.training"))
+    .addCategory("Training")
+    .build();
 
 @Override
-public List\<ConstellationIcon\> **getIcons**() {
-final List\<ConstellationIcon\> pandemicIcons = new ArrayList\<\>();
-pandemicIcons.add(*BIOHAZARD*);
-return Collections.*unmodifiableList*(pandemicIcons);
+public List<ConstellationIcon> getIcons() {
+    final List<ConstellationIcon> pandemicIcons = new ArrayList<>();
+    pandemicIcons.add(BIOHAZARD);
+    return Collections.unmodifiableList(pandemicIcons);
 }
 ```
 
@@ -1463,8 +1369,8 @@ case we will use it to represent our pandemic schema. Override the
 
 ```java
 @Override
-public ConstellationIcon **getIcon**() {
-return PandemicIconProvider.*BIOHAZARD*;
+public ConstellationIcon getIcon() {
+    return PandemicIconProvider.BIOHAZARD;
 }
 ```
 
@@ -1541,21 +1447,19 @@ To add parameters to a plugin, you will need to implement the
 adding the following code to your class:
 
 ```java
-private static final String *CITIES_PARAMETER_ID* =
-PluginParameter.buildId(ImportCustomCitiesPlugin.class, \"cities\");
+private static final String CITIES_PARAMETER_ID = PluginParameter.buildId(ImportCustomCitiesPlugin.class, "cities");
 
 @Override
-public PluginParameters **createParameters**() {
-PluginParameters parameters = new PluginParameters();
-PluginParameter\<StringParameterValue\> citiesParameter =
-StringParameterType.*build*(*CITIES_PARAMETER_ID*);
-citiesParameter.setName(\"Cities\");
-citiesParameter.setDescription(\"Enter the names of cities to import,
-one per line\");
-
-StringParameterType.*setLines*(citiesParameter, 10);
-parameters.addParameter(citiesParameter);
-return parameters;
+public PluginParameters createParameters() {
+    final PluginParameters parameters = new PluginParameters();
+	
+    final PluginParameter<StringParameterValue> citiesParameter = StringParameterType.build(CITIES_PARAMETER_ID);
+    citiesParameter.setName("Cities");
+    citiesParameter.setDescription("Enter the names of cities to import, one per line");
+    StringParameterType.setLines(citiesParameter, 10);
+    parameters.addParameter(citiesParameter);
+	
+    return parameters;
 }
 ```
 
@@ -1588,27 +1492,18 @@ entered into our new parameter.
 
 ```java
 @Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
 
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-RecordStore result = new GraphRecordStore();
+    final String citiesString = parameters.getStringValue(CITIES_PARAMETER_ID);
+    final String[] cityNames = citiesString.split("\n", -1);
 
-final String citiesString =
-parameters.getStringValue(*CITIES_PARAMETER_ID*);
-
-String\[\] cityNames = citiesString.split(\"**\\n**\", -1);
-
-for (String cityName : cityNames) {
-final OutbreakUtilities.*City* city =
-OutbreakUtilities.*getCity*(cityName);
-result.add();
-
-OutbreakUtilities.*addCityToRecord*(city, result,
-GraphRecordStoreUtilities.*SOURCE*);
-}
-return result;
+    for (final String cityName : cityNames) {
+        final OutbreakUtilities.City city = OutbreakUtilities.getCity(cityName);
+        result.add();
+        OutbreakUtilities.addCityToRecord(city, result, GraphRecordStoreUtilities.SOURCE);
+    }
+    return result;
 }
 ```
 
@@ -1642,16 +1537,12 @@ Constellation provides a more elegant way of handling errors by using
 the **PluginException** class. Add a null check to your query method:
 
 ```java
-for (String cityName : cityNames) {
-final OutbreakUtilities.*City* city =
-OutbreakUtilities.*getCity*(cityName);
-
-if (city == null) {
-throw new PluginException(PluginNotificationLevel.*WARNING*, \"Unknown
-City: \" +
-cityName);
-}
-\...
+for (final String cityName : cityNames) {
+    final OutbreakUtilities.City city = OutbreakUtilities.getCity(cityName);
+    if (city == null) {
+        throw new PluginException(PluginNotificationLevel.WARNING, "Unknown City: " + cityName);
+    }
+    ...
 }
 ```
 
@@ -1697,8 +1588,8 @@ could be returned by:
 
 ```java
 @Override
-public String **getRecordStoreType**() {
-return GraphRecordStoreUtilities.*TRANSACTION*;
+public String getRecordStoreType() {
+    return GraphRecordStoreUtilities.TRANSACTION;
 }
 ```
 
@@ -1713,20 +1604,14 @@ method to print the name of each city to the console.
 
 ```java
 @Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction,
-
-PluginParameters parameters) throws InterruptedException,
-PluginException {
-
-RecordStore result = new GraphRecordStore();
-query.reset();
-while (query.next()) {
-final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-VisualConcept.VertexAttribute.*IDENTIFIER*);
-System.*out*.println(cityName);
-}
-return result;
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
+    query.reset();
+    while (query.next()) {
+        final String cityName = query.get(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER);
+        System.out.println(cityName);
+    }
+    return result;
 }
 ```
 
@@ -1745,36 +1630,23 @@ resulting flights to the graph:
 
 ```java
 @Override
-protected RecordStore **query**(RecordStore query, PluginInteraction
-interaction, PluginParameters parameters) throws InterruptedException,
-PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    final RecordStore result = new GraphRecordStore();
+    query.reset();
 
-RecordStore result = new GraphRecordStore();
-query.reset();
+    while (query.next()) {
+        final String cityName = query.get(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER);
+        for (final OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityName)) {
+            final City source = flight.getSource();
+            final City destination = flight.getDestination();
+            result.add();
 
-while (query.next()) {
-final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-VisualConcept.*VertexAttribute*.*IDENTIFIER*);
-
-for (OutbreakUtilities.*Flight* flight :
-OutbreakUtilities.*getFlights*(cityName)) {
-
-final *City* source = flight.getSource();
-final *City* destination = flight.getDestination();
-result.add();
-
-OutbreakUtilities.*addCityToRecord*(source, result,
-GraphRecordStoreUtilities.*SOURCE*);
-result.set(GraphRecordStoreUtilities.*TRANSACTION* +
-TemporalConcept.*TransactionAttribute*.*DATETIME*,
-flight.getDepartureTime());
-
-OutbreakUtilities.*addCityToRecord*(destination, result,
-GraphRecordStoreUtilities.*DESTINATION*);
-}
-}
-
-return result;
+            OutbreakUtilities.addCityToRecord(source, result, GraphRecordStoreUtilities.SOURCE);
+            result.set(GraphRecordStoreUtilities.TRANSACTION + TemporalConcept.TransactionAttribute.DATETIME, flight.getDepartureTime());
+            OutbreakUtilities.addCityToRecord(destination, result, GraphRecordStoreUtilities.DESTINATION);
+        }
+    }
+    return result;
 }
 ```
 
@@ -1794,16 +1666,12 @@ occurrence that **OutbreakUtilities** provides a convenience method for
 this also:
 
 ```java
-\...
-
-for (OutbreakUtilities.*Flight* flight :
-OutbreakUtilities.*getFlights*(cityName)) {
-result.add();
-
-OutbreakUtilities.*addFlightToRecord*(flight, result);
+...
+for (final OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityName)) {
+    result.add();
+    OutbreakUtilities.addFlightToRecord(flight, result);
 }
-
-\...
+...
 ```
 
 **4.2.3: Add Plugin Interaction**
@@ -1815,20 +1683,17 @@ display along with a status message that will update as each city is
 processed.
 
 ```java
-Modify your **ChainCitiesPlugin.query()** method:
-\...
+Modify your ChainCitiesPlugin.query() method:
+...
 
-RecordStore result = new GraphRecordStore();
+final RecordStore result = new GraphRecordStore();
 int currentStep = 0;
 query.reset();
 
 while (query.next()) {
-final String cityName = query.get(GraphRecordStoreUtilities.*SOURCE* +
-VisualConcept.VertexAttribute.*IDENTIFIER*);
-interaction.setProgress(currentStep++, query.size(), \"Processing: \" +
-cityName, true);
-
-\...
+    final String cityName = query.get(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER);
+    interaction.setProgress(currentStep++, query.size(), "Processing: " + cityName, true);
+...
 ```
 
 As we process each city, we call **setProgress(...)** on the provided
@@ -1865,15 +1730,12 @@ need to add a datetime range parameter to our plugin by implementing the
 
 ```java
 @Override
-public PluginParameters **createParameters**() {
-PluginParameters parameters = new PluginParameters();
+public PluginParameters createParameters() {
+    final PluginParameters parameters = new PluginParameters();
 
-final
-PluginParameter\<DateTimeRangeParameterType.*DateTimeRangeParameterValue*\>
-datetime =
-DateTimeRangeParameterType.*build*(CoreGlobalParameters.*DATETIME_RANGE_PARAMETER_ID*);
-parameters.addParameter(datetime);
-return parameters;
+    final PluginParameter<DateTimeRangeParameterType.DateTimeRangeParameterValue> datetime = DateTimeRangeParameterType.build(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
+    parameters.addParameter(datetime);
+    return parameters;
 }
 ```
 
@@ -1903,20 +1765,14 @@ falls within this range. Add the following to the top of our existing
 query method:
 
 ```java
-final DateTimeRange datetimeRange =
-parameters.getDateTimeRangeValue(CoreGlobalParameters.*DATETIME_RANGE_PARAMETER_ID*);
+final DateTimeRange datetimeRange = parameters.getDateTimeRangeValue(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
+final long startTime = datetimeRange.getZonedStartEnd()[0].toInstant().toEpochMilli();
+final long endTime = datetimeRange.getZonedStartEnd()[1].toInstant().toEpochMilli();
 
-final long startTime =
-datetimeRange.getZonedStartEnd()\[0\].toInstant().toEpochMilli();
-
-final long endTime =
-datetimeRange.getZonedStartEnd()\[1\].toInstant().toEpochMilli();
-
-Now adjust our call to **getFlights(...)** to use the version that that
+Now adjust our call to getFlights(...) to use the version that that
 takes a time range:
 
-for (OutbreakUtilities.*Flight* flight :
-OutbreakUtilities.*getFlights*(cityName, startTime, endTime)) {
+for (final OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityName, startTime, endTime)) {
 ```
 
 Running your plugin now will show that the datetime range entered in the
@@ -1949,26 +1805,16 @@ that we can also add functionality at this time by doing the same:
 
 ```java
 @Override
-protected void **edit**(final GraphWriteMethods wg, final
-PluginInteraction interaction, final PluginParameters parameters) throws
-InterruptedException, PluginException {
+protected void edit(final GraphWriteMethods wg, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    super.edit(wg, interaction, parameters);
 
-super.edit(wg, interaction, parameters);
+    final Plugin deselectAllPlugin = PluginRegistry.get(CorePluginRegistry.DESELECT_ALL);
+    final Plugin treesPlugin = PluginRegistry.get(ArrangementPluginRegistry.TREES);
+    final Plugin resetPlugin = PluginRegistry.get(CorePluginRegistry.RESET);
 
-final Plugin deselectAllPlugin =
-PluginRegistry.*get*(*CorePluginRegistry*.*DESELECT_ALL*);
-
-final Plugin treesPlugin =
-PluginRegistry.*get*(*ArrangementPluginRegistry*.*TREES*);
-
-final Plugin resetPlugin =
-PluginRegistry.*get*(*CorePluginRegistry*.*RESET*);
-
-PluginExecution.*withPlugin*(deselectAllPlugin).executeNow(wg);
-
-PluginExecution.*withPlugin*(treesPlugin).executeNow(wg);
-
-PluginExecution.*withPlugin*(resetPlugin).executeNow(wg);
+    PluginExecution.withPlugin(deselectAllPlugin).executeNow(wg);
+    PluginExecution.withPlugin(treesPlugin).executeNow(wg);
+    PluginExecution.withPlugin(resetPlugin).executeNow(wg);
 }
 ```
 
@@ -1999,7 +1845,7 @@ In situations like this, where a plugin is to be called with no options,
 plugin and executes it in one line:
 
 ```java
-PluginExecution.*withPlugin*(*ArrangementPluginRegistry*.*TREES*).*executeNow*(wg);
+PluginExecution.withPlugin(ArrangementPluginRegistry.TREES).executeNow(wg);
 ```
 
 **Chapter 5: Analytic Plugins**
@@ -2044,9 +1890,8 @@ could use the following loop (assuming we have a **GraphReadMethods** or
 **GraphWriteMethods** called graph):
 
 ```java
-for (int vertexPosition = 0; vertexPosition \<
-graph.getVertexCount();vertexPosition++) {
-final int vertexId = graph.getVertex(vertexPosition);
+for (int vertexPosition = 0; vertexPosition < graph.getVertexCount(); vertexPosition++) {
+    final int vertexId = graph.getVertex(vertexPosition);
 }
 ```
 
@@ -2057,14 +1902,13 @@ degree (number of neighbours) of a vertex in the graph?'
 
 ```java
 int maxDegree = 0;
-for (int vertexPosition = 0; vertexPosition \<
-graph.getVertexCount();vertexPosition++) {
-final int vertexId = graph.getVertex(vertexPosition);
-final int degree = graph.getVertexNeighbourCount(vertexId);
+for (int vertexPosition = 0; vertexPosition \< graph.getVertexCount(); vertexPosition++) {
+    final int vertexId = graph.getVertex(vertexPosition);
+    final int degree = graph.getVertexNeighbourCount(vertexId);
 
-if (degree \> maxDegree) {
-maxDegree = degree;
-}
+    if (degree > maxDegree) {
+        maxDegree = degree;
+    }
 }
 ```
 
@@ -2077,12 +1921,9 @@ on the graph. We can get this from the attribute itself in the relevant
 **SchemaConcept**.
 
 ```java
-final int populationAttributeId =
-PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
-
-final int population = graph.getIntValue(populationAttributeId,
-vertexId); graph.setIntValue(populationAttributeId, vertexId,
-population+1000);
+final int populationAttributeId = PandemicConcept.VertexAttribute.POPULATION.get(graph);
+final int population = graph.getIntValue(populationAttributeId, vertexId); 
+graph.setIntValue(populationAttributeId, vertexId, population + 1000);
 ```
 
 The above code sets the value of the population attribute for the node
@@ -2165,10 +2006,9 @@ of diseases would be even nicer. We can build such a parameter using
 **createParameters()** method to achieve this:
 
 ```java
-PluginParameters parameters = new PluginParameters();
-PluginParameter diseaseParameter =
-SingleChoiceParameterType.*build*(*DISEASE_PARAMETER_ID*);
-diseaseParameter.setName(*DISEASE_PARAMETER_LABEL*);
+final PluginParameters parameters = new PluginParameters();
+final PluginParameter diseaseParameter = SingleChoiceParameterType.build(DISEASE_PARAMETER_ID);
+diseaseParameter.setName(DISEASE_PARAMETER_LABEL);
 parameters.addParameter(diseaseParameter);
 return parameters;
 ```
@@ -2185,18 +2025,16 @@ parameters are presented to the user.
 
 ```java
 @Override
-public void **updateParameters**(Graph graph, PluginParameters
-parameters) {
+public void updateParameters(final Graph graph, final PluginParameters parameters) {
 
-final Set\<String\> diseases = new HashSet\<\>();
-final ReadableGraph readableGraph = graph.getReadableGraph();
-try {
-\...
-} finally {
-readableGraph.release();
-}
-SingleChoiceParameterType.*setOptions*(parameters.getParameters().get(*DISEASE_PARAMETER_ID*),
-new ArrayList\<\>(diseases));
+    final Set<String> diseases = new HashSet<>();
+    final ReadableGraph readableGraph = graph.getReadableGraph();
+    try {
+        ...
+    } finally {
+        readableGraph.release();
+    }
+    SingleChoiceParameterType.setOptions(parameters.getParameters().get(DISEASE_PARAMETER_ID), new ArrayList<>(diseases));
 }
 ```
 
@@ -2231,17 +2069,10 @@ population and outbreak. The following code retrieves all this
 information from the graph and the parameters.
 
 ```java
-final String diseaseName =
-parameters.getStringValue(*DISEASE_PARAMETER_ID*);
-
-final int outbreakAttributeId =
-PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(graph);
-
-final int typeAttributeId =
-AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
-
-final int populationAttributeId =
-PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
+final String diseaseName = parameters.getStringValue(DISEASE_PARAMETER_ID);
+final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(graph);
+final int typeAttributeId = AnalyticConcept.VertexAttribute.TYPE.get(graph);
+final int populationAttributeId = PandemicConcept.VertexAttribute.POPULATION.get(graph);
 ```
 
 The **get()** method used above is a shortcut for retrieving the
@@ -2262,14 +2093,10 @@ description, and a default value. It will return the ID of the newly
 added attribute.
 
 ```java
-final String percentageAfflictedAttributeName = \"percentage afflicted
-with \" + diseaseName;
+final String percentageAfflictedAttributeName = "percentage afflicted with " + diseaseName;
 
-final int percentageAfflictedAttributeId =
-graph.addAttribute(GraphElementType.*VERTEX*,
-FloatAttributeDescription.*ATTRIBUTE_NAME*,
-percentageAfflictedAttributeName, percentageAfflictedAttributeName, 0,
-null);
+final int percentageAfflictedAttributeId = graph.addAttribute(GraphElementType.VERTEX, FloatAttributeDescription.ATTRIBUTE_NAME,
+        percentageAfflictedAttributeName, percentageAfflictedAttributeName, 0, null);
 ```
 
 **5.1.4: Performing the calculations**
@@ -2282,26 +2109,17 @@ and have the disease of interest. We add the following code to complete
 the **edit** method.
 
 ```java
-for (int vertexPosition = 0; vertexPosition \<
-graph.getVertexCount();vertexPosition++) {
-final int vertexId = graph.getVertex(vertexPosition);
+for (int vertexPosition = 0; vertexPosition < graph.getVertexCount(); vertexPosition++) {
+    final int vertexId = graph.getVertex(vertexPosition);
 
-if (graph.getObjectValue(typeAttributeId,
-vertexId).equals(PandemicConcept.*VertexType*.*CITY*)) {
-final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId,
-vertexId);
-
-if (outbreak != null && outbreak.getDiseases().contains(diseaseName)) {
-final float population = graph.getIntValue(populationAttributeId,
-vertexId);
-
-final float percentageAfflicted = (100f \*
-outbreak.getAffectedPopulation(diseaseName)) / population;
-
-graph.setFloatValue(percentageAfflictedAttributeId, vertexId,
-percentageAfflicted);
-}
-}
+    if (graph.getObjectValue(typeAttributeId, vertexId).equals(PandemicConcept.VertexType.CITY)) {
+        final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId, vertexId);
+        if (outbreak != null && outbreak.getDiseases().contains(diseaseName)) {
+            final float population = graph.getIntValue(populationAttributeId, vertexId);
+            final float percentageAfflicted = (100f * outbreak.getAffectedPopulation(diseaseName)) / population;
+            graph.setFloatValue(percentageAfflictedAttributeId, vertexId, percentageAfflicted);
+        }
+    }
 }
 ```
 
@@ -2327,8 +2145,8 @@ to the registry so that we can access it nicely. The constructor should
 end up looking like this:
 
 ```java
-public **PercentageAfflictedAction**(final GraphNode context) {
-super(context, PandemicPluginRegistry.*PERCENTAGE_AFFLICTED*, true);
+public PercentageAfflictedAction(final GraphNode context) {
+    super(context, PandemicPluginRegistry.PERCENTAGE_AFFLICTED, true);
 }
 ```
 
@@ -2338,8 +2156,8 @@ top of the class:
 
 ```java
 @ActionReferences({
-@ActionReference(path = \"Menu/Tools\", position = 0),
-@ActionReference(path = \"Shortcuts\", name = \"C-P\")
+    @ActionReference(path = "Menu/Tools", position = 0),
+    @ActionReference(path = "Shortcuts", name = "C-P")
 })
 ```
 
@@ -2406,11 +2224,9 @@ iterations are as follows:
 To iterate over the neighbours of a vertex with ID vertexId , you can
 
 ```java
-for (int vertexNeighbourPosition = 0; vertexNeighbourPosition \<
-graph.getVertexNeighbourCount(vertexId); vertexNeighbourPosition++) {
-final int neighbourId = graph.getVertexNeighbour(vertexId,
-vertexNeighbourPosition);
-\...
+for (int vertexNeighbourPosition = 0; vertexNeighbourPosition < graph.getVertexNeighbourCount(vertexId); vertexNeighbourPosition++) {
+    final int neighbourId = graph.getVertexNeighbour(vertexId, vertexNeighbourPosition);
+    ...
 }
 ```
 
@@ -2419,12 +2235,9 @@ and neighbourId, you can
 
 ```java
 final int neighbourLink = graph.getLink(vertexId, neighbourId);
-for (int neighbourTransactionPosition = 0; neighbourTransactionPosition
-\< graph.getLinkTransactionCount(neighbourLink);
-neighbourTransactionPosition++) {
-final int transactionId = graph.getLinkTransaction(neighbourLink,
-neighbourTransactionPosition);
-\...
+for (int neighbourTransactionPosition = 0; neighbourTransactionPosition < graph.getLinkTransactionCount(neighbourLink); neighbourTransactionPosition++) {
+    final int transactionId = graph.getLinkTransaction(neighbourLink, neighbourTransactionPosition);
+    ...
 }
 ```
 
@@ -2459,23 +2272,13 @@ contains all the attributes relating to the display of a graph (e.g.
 color, selected, icon etc.).
 
 ```java
-final int latitudeAttributeId =
-SpatialConcept.*VertexAttribute*.*LATITUDE*.get(writableGraph);
+final int latitudeAttributeId = SpatialConcept.VertexAttribute.LATITUDE.get(writableGraph);
+final int longitudeAttributeId = SpatialConcept.VertexAttribute.LONGITUDE.get(writableGraph);
+final int yAttributeId = VisualConcept.VertexAttribute.Y.get(writableGraph);
+final int xAttributeId = VisualConcept.VertexAttribute.X.get(writableGraph);
 
-final int longitudeAttributeId =
-SpatialConcept.*VertexAttribute*.*LONGITUDE*.get(writableGraph);
-
-final int yAttributeId =
-VisualConcept.*VertexAttribute*.*Y*.get(writableGraph);
-
-final int xAttributeId =
-VisualConcept.*VertexAttribute*.*X*.get(writableGraph);
-
-if (latitudeAttributeId == GraphConstants.*NOT_FOUND* \|\|
-longitudeAttributeId == GraphConstants.*NOT_FOUND*) {
-throw new PluginException(PluginNotificationLevel.*ERROR*, \"Required
-attributes \'Geo.Latitude\' and \'Geo.Longitude\' do not exist on this
-graph!\");
+if (latitudeAttributeId == GraphConstants.NOT_FOUND || longitudeAttributeId == GraphConstants.NOT_FOUND) {
+    throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' and 'Geo.Longitude' do not exist on this graph!");
 }
 ```
 
@@ -2487,21 +2290,14 @@ attributes based on their latitude and longitude attributes.
 
 ```java
 final int vertexCount = writableGraph.getVertexCount();
+for (int vertexPosition = 0; vertexPosition < vertexCount; vertexPosition++) {
+    interaction.setProgress(vertexPosition, vertexCount, "Arranging by Geographic Coordinates...", true);
+    final int vertexId = writableGraph.getVertex(vertexPosition);
+    final float vertexLatitude = writableGraph.getFloatValue(latitudeAttributeId, vertexId);
+    final float vertexLongitude = writableGraph.getFloatValue(longitudeAttributeId, vertexId);
 
-for (int vertexPosition = 0; vertexPosition \< vertexCount;
-vertexPosition++) {
-interaction.setProgress(vertexPosition, vertexCount, \"Arranging by
-Geographic Coordinates\...\", true);
-final int vertexId = writableGraph.getVertex(vertexPosition);
-
-final float vertexLatitude =
-writableGraph.getFloatValue(latitudeAttributeId, vertexId);
-
-final float vertexLongitude =
-writableGraph.getFloatValue(longitudeAttributeId, vertexId);
-
-writableGraph.setFloatValue(yAttributeId, vertexId, vertexLatitude);
-writableGraph.setFloatValue(xAttributeId, vertexId, vertexLongitude);
+    writableGraph.setFloatValue(yAttributeId, vertexId, vertexLatitude);
+    writableGraph.setFloatValue(xAttributeId, vertexId, vertexLongitude);
 }
 ```
 
@@ -2534,9 +2330,9 @@ information. Add the following code to the **actionPerformed()** method
 to complete our arrangement:
 
 ```java
-PluginExecutor.*startWith*(PandemicPluginRegistry.*ARRANGE_BY_GEOGRAPHIC_COORDINATES*)
-.followedBy(CorePluginRegistry.*RESET*)
-.executeWriteLater(context.getGraph());
+PluginExecutor.startWith(PandemicPluginRegistry.ARRANGE_BY_GEOGRAPHIC_COORDINATES)
+    .followedBy(CorePluginRegistry.RESET)
+    .executeWriteLater(context.getGraph());
 ```
 
 Using the graph you saved earlier, run your new plugin from the Arrange
@@ -2664,10 +2460,10 @@ code to return a translator from Outbreak to String (used when the user
 requests to edit the attribute value):
 
 ```java
-if (dataType.equals(StringAttributeDescription.*ATTRIBUTE_NAME*)) {
-return v -\> {
-return v == null ? null : ((Outbreak) v).toString();
-};
+if (dataType.equals(StringAttributeDescription.ATTRIBUTE_NAME)) {
+    return v -> {
+        return v == null ? null : ((Outbreak) v).toString();
+    };
 }
 ```
 
@@ -2676,10 +2472,10 @@ code to return a translator from String to Outbreak (used when the user
 commits an edit to the attribute value):
 
 ```java
-if (dataType.equals(StringAttributeDescription.*ATTRIBUTE_NAME*)) {
-return v -\> {
-return v == null ? null : Outbreak.*valueOf*((String) v);
-};
+if (dataType.equals(StringAttributeDescription.ATTRIBUTE_NAME)) {
+    return v -> {
+        return v == null ? null : Outbreak.valueOf((String) v);
+    };
 }
 ```
 
@@ -2912,8 +2708,8 @@ a call to the super constructor with two arguments; the name and
 position of the formatter in the histogram's drop-down list.
 
 ```java
-public **TotalInfectionsFormatter**() {
-super(\"Total People Infected \", 1);
+public TotalInfectionsFormatter() {
+    super("Total People Infected ", 1);
 }
 ```
 
@@ -2925,8 +2721,7 @@ drop-down list. In this case we need to check that the bin is an
 statement achieves this:
 
 ```java
-return bin instanceof AttributeBin && ((AttributeBin)
-bin).getAttributeType().equals(OutbreakAttributeDescription.*ATTRIBUTE_NAME*);
+return bin instanceof AttributeBin && ((AttributeBin) bin).getAttributeType().equals(OutbreakAttributeDescription.ATTRIBUTE_NAME);
 ```
 
 Note that **AttributeBin** is the default bin type for all attributes
@@ -2960,12 +2755,10 @@ total number of infected people in this Outbreak.
 
 ```java
 key = bin.key == null ? -1
-: ((Outbreak) bin.key).getNumberOfDiseases() == 0 ? 0
-: ((Outbreak) bin.key).getOutbreakData().values().stream().reduce((x, y)
--\> {
-
-return x + y;
-}).get();
+    : ((Outbreak) bin.key).getNumberOfDiseases() == 0 ? 0
+    : ((Outbreak) bin.key).getOutbreakData().values().stream().reduce((x, y) -> {
+        return x + y;
+    }).get();
 ```
 
 Note that we set -1 for null because the key for this bin must be a
@@ -3011,13 +2804,14 @@ object with a single String parameter for the disease name.
 
 ```java
 @Override
-public PluginParameters **createParameters**() {
-PluginParameters parameters = new PluginParameters();
-PluginParameter diseaseNameParam =
-StringParameterType.*build*(*DISEASE_NAME_PARAMETER_ID*);
-diseaseNameParam.setName(*DISEASE_NAME_PARAMETER_LABEL*);
-parameters.addParameter(diseaseNameParam);
-return parameters;
+public PluginParameters createParameters() {
+    final PluginParameters parameters = new PluginParameters();
+	
+    final PluginParameter diseaseNameParam = StringParameterType.build(DISEASE_NAME_PARAMETER_ID);
+    diseaseNameParam.setName(DISEASE_NAME_PARAMETER_LABEL);
+    parameters.addParameter(diseaseNameParam);
+	
+    return parameters;
 }
 ```
 
@@ -3030,8 +2824,7 @@ entered by the user through to the bin's constructor. We do this by
 changing **createBin** to:
 
 ```java
-return new SpecifiedDiseaseBin((AttributeBin) bin,
-parameters.getStringValue(*DISEASE_NAME_PARAMETER*));
+return new SpecifiedDiseaseBin((AttributeBin) bin, parameters.getStringValue(DISEASE_NAME_PARAMETER));
 ```
 
 **6.6.3: Set the key and label for the bin**
@@ -3089,14 +2882,9 @@ gather all the relevant attribute values from the graph -- the type of
 the node, the node's Outbreak and the node's population.
 
 ```java
-final int typeAttr =
-AnalyticConcept.*VertexAttribute*.*TYPE*.get(graph);
-
-final int outbreakAttr =
-PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(graph);
-
-final int populationAttr =
-PandemicConcept.*VertexAttribute*.*POPULATION*.get(graph);
+final int typeAttr = AnalyticConcept.VertexAttribute.TYPE.get(graph);
+final int outbreakAttr = PandemicConcept.VertexAttribute.OUTBREAK.get(graph);
+final int populationAttr = PandemicConcept.VertexAttribute.POPULATION.get(graph);
 
 final SchemaVertexType type = graph.getObjectValue(typeAttr, vertex);
 final Outbreak outbreak = graph.getObjectValue(outbreakAttr, vertex);
@@ -3106,17 +2894,13 @@ Now we want to check, if the node is a city node, whether any disease in
 the outbreak for this vertex has a number of people infected that
 exceeds the population of the city:
 
-if (type.equals(PandemicConcept.*VertexType*.*CITY*) && outbreak !=
-null) {
-for (final int numInfected : outbreak.getOutbreakData().values()) {
-if (numInfected \> population) {
-return true;
+if (type.equals(PandemicConcept.VertexType.CITY) && outbreak != null) {
+    for (final int numInfected : outbreak.getOutbreakData().values()) {
+        if (numInfected > population) {
+            return true;
+        }
+    }
 }
-};
-
-return false;
-}
-
 return false;
 ```
 
@@ -3125,10 +2909,8 @@ check to see if the attributes we are retrieving actually exist,
 returning false if they don't:
 
 ```java
-if (typeAttr != GraphConstants.*NOT_FOUND* && outbreakAttr !=
-GraphConstants.*NOT_FOUND* && populationAttr !=
-GraphConstants.*NOT_FOUND*) {
-// \...
+if (typeAttr != GraphConstants.NOT_FOUND && outbreakAttr != GraphConstants.NOT_FOUND && populationAttr != GraphConstants.NOT_FOUND) {
+    ...
 }
 ```
 
@@ -3178,23 +2960,22 @@ provided **PandemicViewTopComponent** class.
 
 ```java
 @ConvertAsProperties(...)
-@TopComponent.*Description*(...)
-@TopComponent.*Registration*(...)
+@TopComponent.Description(...)
+@TopComponent.Registration(...)
 @ActionID(...)
 @ActionReferences({
-@ActionReference(path = \"Menu/Views\", position = 2100),
-@ActionReference(path = \"Shortcuts\", name = \"CS-Z\")})
-@TopComponent.*OpenActionRegistration*(...)
-@*Messages*(...)
-
-public final class **PandemicViewTopComponent** extends TopComponent {
-public **PandemicViewTopComponent**() {
-setName(Bundle.*CTL_PandemicViewTopComponent*());
-setToolTipText(Bundle.*HINT_PandemicViewTopComponent*());
-initComponents();
-setLayout(new BorderLayout());
-setPreferredSize(new Dimension(500, 500));
-}
+    @ActionReference(path = "Menu/Views", position = 2100),
+    @ActionReference(path = "Shortcuts", name = "CS-Z")})
+@TopComponent.OpenActionRegistration(...)
+@Messages(...)
+public final class PandemicViewTopComponent extends TopComponent {
+    public PandemicViewTopComponent() {
+        setName(Bundle.CTL_PandemicViewTopComponent());
+        setToolTipText(Bundle.HINT_PandemicViewTopComponent());
+        initComponents();
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(500, 500));
+    }
 ```
 
 **7.1.2: Creating a Pane**
@@ -3204,10 +2985,10 @@ exercise, we will make a JavaFX **BorderPane**, however for your own
 views you can choose to use any JavaFX or Swing pane.
 
 ```java
-public class **PandemicViewPane** extends BorderPane {
-public **PandemicViewPane**() {
-setPadding(new Insets(5));
-}
+public class PandemicViewPane extends BorderPane {
+    public PandemicViewPane() {
+        setPadding(new Insets(5));
+    }
 }
 ```
 
@@ -3219,20 +3000,20 @@ the plugin registry we previously created.
 ```java
 private final TextArea summary;
 private final FlowPane options;
-public **PandemicViewPane**() {
-...
+public PandemicViewPane() {
+    ...
 
-summary = new TextArea();
-setCenter(summary);
-final Button infectButton = new Button(\"Spread Infection\");
-infectButton.setOnAction(event -\> {
-PluginExecution.*withPlugin*(PandemicPluginRegistry.*SPREAD_INFECTION*).executeLater(GraphManager.*getDefault*().getActiveGraph());
-});
+    summary = new TextArea();
+    setCenter(summary);
+    final Button infectButton = new Button("Spread Infection");
+    infectButton.setOnAction(event -> {
+        PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION).executeLater(GraphManager.getDefault().getActiveGraph());
+    });
 
-options = new FlowPane();
-options.setAlignment(Pos.*CENTER_RIGHT*);
-options.getChildren().add(infectButton);
-setBottom(options);
+    options = new FlowPane();
+    options.setAlignment(Pos.CENTER_RIGHT);
+    options.getChildren().add(infectButton);
+    setBottom(options);
 }
 ```
 
@@ -3241,57 +3022,43 @@ the pane with the list of all outbreaks on the graph ordered by the
 number of unique diseases within that outbreak.
 
 ```java
-private final AbstractAttributeInteraction interaction =
-AbstractAttributeInteraction.*getInteraction*(OutbreakAttributeDescription.*ATTRIBUTE_NAME*);
+private final AbstractAttributeInteraction interaction = AbstractAttributeInteraction.getInteraction(OutbreakAttributeDescription.ATTRIBUTE_NAME);
+...
+public final void refresh(final GraphReadMethods graph) {
+    Platform.runLater(() -> {
+        final ProgressIndicator progress = new ProgressIndicator();
+        progress.setMaxSize(50, 50);
+        setCenter(progress);
 
-\...
+        final Map<Outbreak, String> outbreaks = new TreeMap<>(Comparator.reverseOrder());
+        if (graph != null) {
+            final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(graph);
+            final int identifierAttributeId = VisualConcept.VertexAttribute.IDENTIFIER.get(graph);
+            final int vertexCount = graph.getVertexCount();
 
-public final void **refresh**(final GraphReadMethods graph) {
-Platform.*runLater*(() -\> {
-final ProgressIndicator progress = new ProgressIndicator();
-progress.setMaxSize(50, 50);
-setCenter(progress);
-});
+            for (int vertexPosition = 0; vertexPosition < vertexCount; vertexPosition++) {
+                final int vertexId = graph.getVertex(vertexPosition);
+                final String identifier = graph.getStringValue(identifierAttributeId, vertexId);
+                final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId, vertexId);
 
-Platform.*runLater*(() -\> {
-final Map\<Outbreak,String\> outbreaks = new
-TreeMap\<\>(Comparator.*reverseOrder*());
+                if (outbreak != null && !outbreak.getOutbreakData().isEmpty()) {
+                    outbreaks.put(outbreak, identifier);
+                }
+            }
+        }
 
-if (graph != null) {
-final int outbreakAttributeId =
-PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(graph);
+        final StringBuilder summaryText = new StringBuilder("Outbreak Summary:\n\n");
 
-final int identifierAttributeId =
-VisualConcept.*VertexAttribute*.*IDENTIFIER*.get(graph);
+        for (final Map.Entry<Outbreak, String> outbreak : outbreaks.entrySet()) {
+            summaryText.append(outbreak.getValue())
+			    .append(": ")
+				.append(interaction.getDisplayText(outbreak.getKey()))
+				.append("\n\n");
+        }
 
-final int vertexCount = graph.getVertexCount();
-
-for (int vertexPosition = 0; vertexPosition \< vertexCount;
-vertexPosition++) {
-final int vertexId = graph.getVertex(vertexPosition);
-final String identifier = graph.getStringValue(identifierAttributeId,
-vertexId);
-
-final Outbreak outbreak = graph.getObjectValue(outbreakAttributeId,
-vertexId);
-
-if (outbreak != null && !outbreak.getOutbreakData().isEmpty()) {
-outbreaks.put(outbreak, identifier);
-}
-}
-}
-
-final StringBuilder summaryText = new StringBuilder(\"Outbreak
-Summary:**\\n\\n**\");
-
-for (Map.*Entry*\<Outbreak,String\> outbreak : outbreaks.entrySet()) {
-summaryText.append(outbreak.getValue()).append(\":
-\").append(interaction.getDisplayText(outbreak.getKey())).append(\"**\\n\\n**\");
-}
-
-summary.setText(summaryText.toString());
-setCenter(summary);
-});
+        summary.setText(summaryText.toString());
+        setCenter(summary);
+    });
 }
 ```
 
@@ -3303,16 +3070,16 @@ that our pane is constructed on the JavaFX thread explicitly using the
 ```java
 private JFXPanel container;
 private PandemicViewPane pandemicPane;
-public **PandemicViewTopComponent**() {
-...
-container = new JFXPanel();
-Platform.*setImplicitExit*(false);
-Platform.*runLater*(() -\> {
-pandemicPane = new PandemicViewPane();
-container.setScene(new Scene(pandemicPane));
-container.getScene().getStylesheets().add(JavafxStyleManager.*getMainStyleSheet*());
-add(container, BorderLayout.*CENTER*);
-});
+public PandemicViewTopComponent() {
+    ...
+    container = new JFXPanel();
+    Platform.setImplicitExit(false);
+    Platform.runLater(() -\> {
+        pandemicPane = new PandemicViewPane();
+        container.setScene(new Scene(pandemicPane));
+        container.getScene().getStylesheets().add(JavafxStyleManager.getMainStyleSheet());
+        add(container, BorderLayout.CENTER);
+    });
 }
 ```
 
@@ -3330,29 +3097,27 @@ is achieved using the **GraphManagerListener** and
 to react as the graph changes.
 
 ```java
-public final class **PandemicViewTopComponent** extends TopComponent
-implements GraphManagerListener, GraphChangeListener {
-...
+public final class PandemicViewTopComponent extends TopComponent implements GraphManagerListener, GraphChangeListener {
+    ...
+    @Override
+    public void newActiveGraph(final Graph graph) {
+        ...
+    }
 
-@Override
-public void **newActiveGraph**(Graph graph) {
-...
-}
+    @Override
+    public void graphOpened(final Graph graph) {
+        ...
+    }
 
-@Override
-public void **graphOpened**(Graph graph) {
-...
-}
+    @Override
+    public void graphClosed(final Graph graph) {
+        ...
+    }
 
-@Override
-public void **graphClosed**(Graph graph) {
-...
-}
-
-@Override
-public void **graphChanged**(GraphChangeEvent event) {
-...
-}
+    @Override
+    public void graphChanged(final GraphChangeEvent event) {
+        ...
+    }
 }
 ```
 
@@ -3362,26 +3127,22 @@ affected the outbreak attribute, and update our view if necessary.
 
 ```java
 private long outbreakModificationCounter = 0;
-
 private Graph currentGraph = null;
 
 @Override
-public void **graphChanged**(GraphChangeEvent event) {
-ReadableGraph readableGraph = currentGraph.getReadableGraph();
-try {
-final int outbreakAttributeId =
-PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(readableGraph);
+public void graphChanged(final GraphChangeEvent event) {
+    final ReadableGraph readableGraph = currentGraph.getReadableGraph();
+    try {
+        final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(readableGraph);
+        final long currentOutbreakModificationCounter = readableGraph.getValueModificationCounter(outbreakAttributeId);
 
-final long currentOutbreakModificationCounter =
-readableGraph.getValueModificationCounter(outbreakAttributeId);
-
-if (currentOutbreakModificationCounter \> outbreakModificationCounter) {
-outbreakModificationCounter = currentOutbreakModificationCounter;
-pandemicPane.refresh(readableGraph);
-}
-} finally {
-readableGraph.release();
-}
+        if (currentOutbreakModificationCounter > outbreakModificationCounter) {
+            outbreakModificationCounter = currentOutbreakModificationCounter;
+            pandemicPane.refresh(readableGraph);
+        }
+    } finally {
+        readableGraph.release();
+    }
 }
 ```
 
@@ -3392,29 +3153,25 @@ all of this using the **newActiveGraph** method.
 
 ```java
 @Override
-public void **newActiveGraph**(Graph graph) {
-if (currentGraph != graph) {
-if (currentGraph != null) {
-currentGraph.removeGraphChangeListener(this);
-currentGraph = null;
-}
+public void newActiveGraph(final Graph graph) {
+    if (currentGraph != graph) {
+        if (currentGraph != null) {
+            currentGraph.removeGraphChangeListener(this);
+            currentGraph = null;
+        }
 
-if (graph != null) {
-currentGraph = graph;
-currentGraph.addGraphChangeListener(this);
-ReadableGraph readableGraph = currentGraph.getReadableGraph();
-
-try {
-final int outbreakAttributeId =
-PandemicConcept.*VertexAttribute*.*OUTBREAK*.get(readableGraph);
-
-outbreakModificationCounter =
-readableGraph.getValueModificationCounter(outbreakAttributeId);
-} finally {
-readableGraph.release();
-}
-}
-}
+        if (graph != null) {
+            currentGraph = graph;
+            currentGraph.addGraphChangeListener(this);
+            final ReadableGraph readableGraph = currentGraph.getReadableGraph();
+            try {
+                final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(readableGraph);
+                outbreakModificationCounter = readableGraph.getValueModificationCounter(outbreakAttributeId);
+            } finally {
+                readableGraph.release();
+            }
+        }
+    }
 }
 ```
 
@@ -3425,22 +3182,20 @@ Finally, we should register our top component to **GraphManager** as a
 listener.
 
 ```java
-public **PandemicViewTopComponent**() {
-
+public PandemicViewTopComponent() {
 ...
-
-GraphManager.*getDefault*().addGraphManagerListener(PandemicViewTopComponent.this);
+GraphManager.getDefault().addGraphManagerListener(PandemicViewTopComponent.this);
 }
 
 @Override
-public void **componentOpened**() {
-GraphManager.*getDefault*().addGraphManagerListener(this);
-newActiveGraph(GraphManager.*getDefault*().getActiveGraph());
+public void componentOpened() {
+    GraphManager.getDefault().addGraphManagerListener(this);
+    newActiveGraph(GraphManager.getDefault().getActiveGraph());
 }
 
 @Override
-public void **componentClosed**() {
-GraphManager.*getDefault*().removeGraphManagerListener(this);
+public void componentClosed() {
+    GraphManager.getDefault().removeGraphManagerListener(this);
 }
 ```
 
@@ -3484,34 +3239,31 @@ the pane we created in the previous exercise here).
 
 ```java
 @ConvertAsProperties(...)
-@TopComponent.*Description*(...)
-@TopComponent.*Registration*(...)
+@TopComponent.Description(...)
+@TopComponent.Registration(...)
 @ActionID(...)
 @ActionReferences(...)
-@TopComponent.*OpenActionRegistration*(...)
-@*Messages*(...)
-public final class **ImprovedPandemicViewTopComponent** extends
-TopComponent {
-private JFXPanel container;
-private PandemicViewPane pandemicPane;
-public **ImprovedPandemicViewTopComponent** () {
-setName(...);
-setToolTipText(...);
-initComponents();
-setLayout(new BorderLayout());
-setPreferredSize(new Dimension(500, 500));
-container = new JFXPanel();
-Platform.*setImplicitExit*(false);
-Platform.*runLater*(() -\> {
-pandemicPane = new PandemicViewPane();
-container.setScene(new Scene(pandemicPane));
-container.getScene().getStylesheets().add(JavafxStyleManager.*getMainStyleSheet*());
-add(container, BorderLayout.*CENTER*);
-});
-}
-
-...
-
+@TopComponent.OpenActionRegistration(...)
+@Messages(...)
+public final class ImprovedPandemicViewTopComponent extends TopComponent {
+    private JFXPanel container;
+    private PandemicViewPane pandemicPane;
+    public ImprovedPandemicViewTopComponent () {
+        setName(...);
+        setToolTipText(...);
+        initComponents();
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(500, 500));
+        container = new JFXPanel();
+        Platform.setImplicitExit(false);
+        Platform.runLater(() -\> {
+            pandemicPane = new PandemicViewPane();
+            container.setScene(new Scene(pandemicPane));
+            container.getScene().getStylesheets().add(JavafxStyleManager.getMainStyleSheet());
+            add(container, BorderLayout.CENTER);
+        });
+    }
+    ...
 }
 ```
 
@@ -3527,9 +3279,9 @@ initialise it with a counter of 2.
 
 ```java
 private final MonitorManager manager;
-public **ImprovedPandemicViewTopComponent** () {
-...
-manager = new MonitorManager(2);
+public ImprovedPandemicViewTopComponent() {
+    ...
+    manager = new MonitorManager(2);
 }
 ```
 
@@ -3541,10 +3293,10 @@ outbreak attribute, we should create an **AttributeValueMonitor** class.
 
 ```java
 private final AttributeValueMonitor outbreakMonitor;
-public **ImprovedPandemicViewTopComponent** () {
-...
-outbreakMonitor = new
-AttributeValueMonitor(PandemicConcept.*VertexAttribute*.*OUTBREAK*);
+public ImprovedPandemicViewTopComponent() {
+    ...
+    outbreakMonitor = new
+    AttributeValueMonitor(PandemicConcept.VertexAttribute.OUTBREAK);
 }
 ```
 
@@ -3555,12 +3307,11 @@ occurs. This is done using the **MonitorListener** class.
 
 ```java
 private final MonitorListener listener;
-public **ImprovedPandemicViewTopComponent** () {
-...
-listener = (MonitorManager monitorManager, Monitor monitor,
-GraphReadMethods graph, boolean newGraph, int updateCount) -\> {
-pandemicPane.refresh(graph);
-};
+public ImprovedPandemicViewTopComponent() {
+    ...
+    listener = (final MonitorManager monitorManager, final Monitor monitor, final GraphReadMethods graph, final boolean newGraph, final int updateCount) -\> {
+        pandemicPane.refresh(graph);
+    };
 }
 ```
 
@@ -3573,13 +3324,10 @@ respond to.
 
 ```java
 private final MonitorTransitionFilter transitionFilter;
-public **ImprovedPandemicViewTopComponent** () {
-...
-transitionFilter = new MonitorTransitionFilter(
-MonitorTransition.*UNDEFINED_TO_PRESENT*,
-MonitorTransition.*CHANGED*,
-MonitorTransition.*ADDED*,
-MonitorTransition.*REMOVED_AND_ADDED*
+public ImprovedPandemicViewTopComponent() {
+    ...
+    transitionFilter = new MonitorTransitionFilter(MonitorTransition.UNDEFINED_TO_PRESENT, MonitorTransition.CHANGED,
+            MonitorTransition.ADDED, MonitorTransition.REMOVED_AND_ADDED
 );
 }
 ```
@@ -3593,23 +3341,23 @@ it when the view is closed to prevent unnecessary operations from being
 handled when the user is not using the view.
 
 ```java
-public **ImprovedPandemicViewTopComponent** () {
-...
-manager.addMonitorListener(listener, transitionFilter, outbreakMonitor);
-Platform.*runLater*(() -\> {
-...
-manager.start();
-});
+public ImprovedPandemicViewTopComponent() {
+    ...
+    manager.addMonitorListener(listener, transitionFilter, outbreakMonitor);
+    Platform.runLater(() -> {
+        ...
+        manager.start();
+    });
 }
 
 @Override
-public void **componentOpened**() {
-manager.start();
+public void componentOpened() {
+    manager.start();
 }
 
 @Override
-public void **componentClosed**() {
-manager.stop();
+public void componentClosed() {
+    manager.stop();
 }
 ```
 
@@ -3657,21 +3405,19 @@ to extend a class within the framework.
 
 ```java
 @ConvertAsProperties(...)
-@TopComponent.*Description*(...)
-@TopComponent.*Registration*(...)
+@TopComponent.Description(...)
+@TopComponent.Registration(...)
 @ActionID(...)
 @ActionReferences(...)
-@TopComponent.*OpenActionRegistration*(...)
-@*Messages*(...)
-
-public final class **GenericPandemicViewTopComponent** extends
-JavaFxTopComponent {
-public **GenericPandemicViewTopComponent** () {
-setName(...);
-setToolTipText(...);
-initComponents();
-}
-...
+@TopComponent.OpenActionRegistration(...)
+@Messages(...)
+public final class GenericPandemicViewTopComponent extends JavaFxTopComponent {
+    public GenericPandemicViewTopComponent() {
+        setName(...);
+        setToolTipText(...);
+        initComponents();
+    }
+    ...
 }
 ```
 
@@ -3686,20 +3432,20 @@ the top component in a standardised way.
 
 ```java
 private PandemicViewPane pandemicPane;
-public **GenericPandemicViewTopComponent** () {
-...
-pandemicPane = new PandemicViewPane();
-initContent();
+public GenericPandemicViewTopComponent() {
+    ...
+    pandemicPane = new PandemicViewPane();
+    initContent();
 }
 
 @Override
-protected PandemicViewPane **createContent**() {
-return pandemicPane;
+protected PandemicViewPane createContent() {
+    return pandemicPane;
 }
 
 @Override
-protected String **createStyle**() {
-return null;
+protected String createStyle() {
+    return null;
 }
 ```
 
@@ -3714,19 +3460,16 @@ attribute to a handler.
 
 ```java
 private PandemicViewPane pandemicPane;
-public **GenericPandemicViewTopComponent** () {
-...
-addAttributeChangeHandler(PandemicConcept.*VertexAttribute*.OUTBREAK,
-(graph) -\> {
-final ReadableGraph readableGraph = graph.getReadableGraph();
-
-try {
-pandemicPane.refresh(readableGraph);
-} finally {
-readableGraph.release();
-}
-});
-}
+public GenericPandemicViewTopComponent () {
+    ...
+    addAttributeChangeHandler(PandemicConcept.VertexAttribute.OUTBREAK, graph -> {
+        final ReadableGraph readableGraph = graph.getReadableGraph();
+        try {
+            pandemicPane.refresh(readableGraph);
+        } finally {
+            readableGraph.release();
+        }
+    });
 }
 ```
 
@@ -3743,8 +3486,8 @@ attribute change handler.
 
 ```java
 @Override
-public void **handleComponentOpened**() {
-manualUpdate();
+public void handleComponentOpened() {
+    manualUpdate();
 }
 ```
 
@@ -3781,17 +3524,17 @@ belong to.
 
 ```java
 @ServiceProvider(service = WhatsNewProvider.class)
-public class **PandemicWhatsNewProvider** extends WhatsNewProvider {
+public class PandemicWhatsNewProvider extends WhatsNewProvider {
 
-@Override
-public String **getResource**() {
-return \"whatsnew.txt\";
-}
+    @Override
+    public String getResource() {
+        return "whatsnew.txt";
+    }
 
-@Override
-public String **getSection**() {
-return \"Pandemic\";
-}
+    @Override
+    public String getSection() {
+        return "Pandemic";
+    }
 }
 ```
 
@@ -3952,15 +3695,12 @@ our Chain Cities plugin. Add the following code to the query method,
 directly before the return statement:
 
 ```java
-\...
-ConstellationLogger.*getDefault*().pluginInfo(this, \"Successfully
-queried \" + query.size() + \" cities.\");
-Properties loggingProperties = new Properties();
-loggingProperties.setProperty(\"ResultCount\",
-String.*valueOf*(result.size()));
-ConstellationLogger.*getDefault*().pluginProperties(this,
-loggingProperties);
-\...
+...
+ConstellationLogger.getDefault().pluginInfo(this, "Successfully queried " + query.size() + " cities.");
+final Properties loggingProperties = new Properties();
+loggingProperties.setProperty("ResultCount", String.valueOf(result.size()));
+ConstellationLogger.getDefault().pluginProperties(this, loggingProperties);
+...
 ```
 
 The code above first submits a simple information string to the logging
@@ -3990,12 +3730,10 @@ recommended approach to log would be to use Logger opposed to
 System.out.println.
 
 ```java
-\...
-
-private static final Logger LOGGER =
-Logger.getLogger(OutbreakUtilities.class.getName());
-\...
-LOGGER.log(Level.INFO, \"Flights: {0}\", flightCount);
+...
+private static final Logger LOGGER = Logger.getLogger(OutbreakUtilities.class.getName());
+...
+LOGGER.log(Level.INFO, "Flights: {0}", flightCount);
 ```
 
 By default the lowest level of logging is "info". To be able to log
@@ -4031,69 +3769,56 @@ building the contribution. The contribution that is built should be a
 ```java
 @ServiceProvider(service = ConversationContributionProvider.class)
 
-public class **IconContributionProvider** extends
-ConversationContributionProvider {
-private final SchemaAttribute iconAttribute =
-VisualConcept.VertexAttribute.FOREGROUND_ICON;
+public class IconContributionProvider extends ConversationContributionProvider {
+    private final SchemaAttribute iconAttribute = VisualConcept.VertexAttribute.FOREGROUND_ICON;
+    private final SchemaAttribute flightAttribute = VisualConcept.TransactionAttribute.AIRLINE;
 
-private final SchemaAttribute flightAttribute =
-VisualConcept.TransactionAttribute.AIRLINE;
+    public IconContributionProvider() {
+        super("Icons", Integer.MAX_VALUE);
+    }
 
-public **IconContributionProvider**() {
-super(\"Icons\", Integer.MAX_VALUE);
-}
+    @Override
+    public boolean isCompatibleWithGraph(final GraphReadMethods graph) {
+        return iconAttribute.get(graph) != GraphConstants.NOT_FOUND && flightAttribute.get(graph) != GraphConstants.NOT_FOUND;
+    }
 
-@Override
-public boolean **isCompatibleWithGraph**(final GraphReadMethods graph) {
-return iconAttribute.get(graph) != GraphConstants.NOT_FOUND
-&& flightAttribute.get(graph) != GraphConstants.NOT_FOUND;
-}
+    @Override
+    public ConversationContribution createContribution(final GraphReadMethods graph, final ConversationMessage message) {
+        final int iconAttributeId = iconAttribute.get(graph);
+        final int senderId = message.getSender();
+        final ConstellationIcon senderIcon = graph.getObjectValue(iconAttributeId, senderId);
 
-@Override
-public ConversationContribution **createContribution**(final
-GraphReadMethods graph, final ConversationMessage message) {
+        final int flightAttributeId = flightAttribute.get(graph);
+        final int transactionId = message.getTransaction();
+        final String flight = graph.getStringValue(flightAttributeId, transactionId);
 
-final int iconAttributeId = iconAttribute.get(graph);
-final int senderId = message.getSender();
+        return new IconContribution(message, senderIcon, flight);
+    }
 
-final ConstellationIcon senderIcon =
-graph.getObjectValue(iconAttributeId, senderId);
+    private class IconContribution extends ConversationContribution {
+        private final ConstellationIcon icon;
+        private final String flight;
 
-final int flightAttributeId = flightAttribute.get(graph);
-final int transactionId = message.getTransaction();
+        public IconContribution(final ConversationMessage message, final ConstellationIcon icon, final String flight) {
+            super(IconContributionProvider.this, message);
+            this.icon = icon;
+            this.flight = flight;
+        }
 
-final String flight = graph.getStringValue(flightAttributeId,
-transactionId);
+        @Override
+        protected Region createContent(final TooltipPane tips) {
+            final VBox content = new VBox();
+            final ImageView iconImage = new ImageView(icon.buildImage());
+            final SelectableLabel iconLabel = new SelectableLabel(flight, true, null, tips, null);
+            content.getChildren().addAll(iconImage, iconLabel);
+            return content;
+        }
 
-return new IconContribution(message, senderIcon, flight);
-}
-
-private class **IconContribution** extends ConversationContribution {
-private final ConstellationIcon icon;
-private final String flight;
-
-public **IconContribution**(final ConversationMessage message, final
-ConstellationIcon icon, final String flight) {
-super(IconContributionProvider.this, message);
-this.icon = icon;
-this.flight = flight;
-}
-
-@Override
-protected Region **createContent**(final TooltipPane tips) {
-final VBox content = new VBox();
-final ImageView iconImage = new ImageView(icon.buildImage());
-final SelectableLabel iconLabel = new SelectableLabel(flight, true,
-null, tips, null);
-content.getChildren().addAll(iconImage, iconLabel);
-return content;
-}
-
-@Override
-public String **toString**() {
-return \"Icon Contribution\";
-}
-}
+        @Override
+        public String toString() {
+            return "Icon Contribution";
+        }
+    }
 }
 ```
 
@@ -4111,47 +3836,43 @@ database.
 
 ```java
 @ServiceProvider(service = MapProvider.class)
-public class **BlackAndWhiteMapProvider** extends MapProvider {
+public class BlackAndWhiteMapProvider extends MapProvider {
 
-@Override
-public String **getName**() {
-return \"Black & White\";
-}
+    @Override
+    public String getName() {
+        return "Black & White";
+    }
 
-@Override
-public int **zoomLevels**() {
-return 6;
-}
+    @Override
+    public int zoomLevels() {
+        return 6;
+    }
 
-@Override
-public String **getZoomString**(final Coordinate coordinate) {
-final float gridSize = PApplet.pow(2, coordinate.zoom);
-final float negativeRow = gridSize - coordinate.row - 1;
-return (int) coordinate.zoom + \"/\" + (int) coordinate.column + \"/\" +
-(int) negativeRow;
-}
+    @Override
+    public String getZoomString(final Coordinate coordinate) {
+        final float gridSize = PApplet.pow(2, coordinate.zoom);
+        final float negativeRow = gridSize - coordinate.row - 1;
+        return (int) coordinate.zoom + "/" + (int) coordinate.column + "/" + (int) negativeRow;
+    }
 
-@Override
-public PImage **getTile**(final Coordinate coordinate) {
-final File blackAndWhiteMap = ConstellationInstalledFileLocator.locate(
-\",odules/ext/Black&White.mbtiles\",
-\"au.gov.asd.tac.constellation.training.solutions\",
-false, BlackAndWhiteMapProvider.class.getProtectionDomain());
-final String connection = String.format(\"jdbc:sqlite:%s\",
-blackAndWhiteMap.getAbsolutePath());
+    @Override
+    public PImage getTile(final Coordinate coordinate) {
+        final File blackAndWhiteMap = ConstellationInstalledFileLocator.locate(",odules/ext/Black&White.mbtiles", "au.gov.asd.tac.constellation.training.solutions", 
+		        false, BlackAndWhiteMapProvider.class.getProtectionDomain());
+        final String connection = String.format("jdbc:sqlite:%s", blackAndWhiteMap.getAbsolutePath());
 
-final int zoom = (int) coordinate.zoom;
-final float gridSize = PApplet.pow(2, coordinate.zoom);
-final float negativeRow = gridSize - coordinate.row - 1;
-final int row = (int) negativeRow;
-final int column = (int) coordinate.column;
-return MBTilesLoaderUtils.getMBTile(column, row, zoom, connection);
-}
+        final int zoom = (int) coordinate.zoom;
+        final float gridSize = PApplet.pow(2, coordinate.zoom);
+        final float negativeRow = gridSize - coordinate.row - 1;
+        final int row = (int) negativeRow;
+        final int column = (int) coordinate.column;
+        return MBTilesLoaderUtils.getMBTile(column, row, zoom, connection);
+    }
 
-@Override
-public String\[\] **getTileUrls**(final Coordinate coordinate) {
-return null;
-}
+    @Override
+    public String[] getTileUrls(final Coordinate coordinate) {
+        return null;
+    }
 }
 ```
 
@@ -4163,67 +3884,67 @@ how to handle mouse and keyboard events.
 
 ```java
 @ServiceProvider(service = MapOverlay.class)
-public class **MousePositionOverlay** extends MapOverlay {
-private boolean mousePressed = false;
+public class MousePositionOverlay extends MapOverlay {
+    private boolean mousePressed = false;
 
-@Override
-public float **getName**() {
-return \"Mouse Position Overlay\";
-}
+    @Override
+    public float getName() {
+        return "Mouse Position Overlay";
+    }
 
-@Override
-public float **getX**() {
-return renderer.getX() + renderer.getWidth() - 10 - width;
-}
+    @Override
+    public float getX() {
+        return renderer.getX() + renderer.getWidth() - 10 - width;
+    }
 
-@Override
-public float **getY**() {
-return renderer.getY() + renderer.getHeight() - 10 - height;
-}
+    @Override
+    public float getY() {
+        return renderer.getY() + renderer.getHeight() - 10 - height;
+    }
 
-@Override
-public void **overlay**() {
-renderer.noStroke();
-renderer.fill(mousePressed ? highlightColor : backgroundColor);
-renderer.rect(x, y, width, height);
-float yOffset = y + margin;
-final String mouseX = String.valueOf(renderer.mouseX) + \"px\";
-final String mouseY = String.valueOf(renderer.mouseY) + \"px\";
-drawLabel(\"Mouse\", x + 60, yOffset);
-drawValue(mouseX, x + 60, yOffset, valueBoxMediumWidth, false, false);
-drawValue(mouseY, x + 60 + valueBoxMediumWidth + padding, yOffset,
-valueBoxMediumWidth, false, false);
-}
+    @Override
+    public void overlay() {
+        renderer.noStroke();
+        renderer.fill(mousePressed ? highlightColor : backgroundColor);
+        renderer.rect(x, y, width, height);
+        float yOffset = y + margin;
+        final String mouseX = String.valueOf(renderer.mouseX) + "px";
+        final String mouseY = String.valueOf(renderer.mouseY) + "px";
+        drawLabel("Mouse", x + 60, yOffset);
+        drawValue(mouseX, x + 60, yOffset, valueBoxMediumWidth, false, false);
+        drawValue(mouseY, x + 60 + valueBoxMediumWidth + padding, yOffset,
+        valueBoxMediumWidth, false, false);
+    }
 
-@Override
-public void **mouseMoved**(final MouseEvent event) {
-}
+    @Override
+    public void mouseMoved(final MouseEvent event) {
+    }
 
-@Override
-public void **mouseClicked**(final MouseEvent event) {
-}
+    @Override
+    public void mouseClicked(final MouseEvent event) {
+    }
 
-@Override
-public void **mousePressed**(final MouseEvent event) {
-mousePressed = true;
-}
+    @Override
+    public void mousePressed(final MouseEvent event) {
+        mousePressed = true;
+    }
 
-@Override
-public void **mouseDragged**(final MouseEvent event) {
-}
+    @Override
+    public void mouseDragged(final MouseEvent event) {
+    }
 
-@Override
-public void **mouseReleased**(final MouseEvent event) {
-mousePressed = false;
-}
+    @Override
+    public void mouseReleased(final MouseEvent event) {
+        mousePressed = false;
+    }
 
-@Override
-public void **mouseWheel**(final MouseEvent event) {
-}
+    @Override
+    public void mouseWheel(final MouseEvent event) {
+    }
 
-@Override
-public void **keyPressed**(final KeyEvent event) {
-}
+    @Override
+    public void keyPressed(final KeyEvent event) {
+    }
 }
 ```
 
@@ -4235,43 +3956,38 @@ graph
 
 ```java
 @ServiceProviders({
-@ServiceProvider(service = MapExporter.class),
-@ServiceProvider(service = Plugin.class)
+    @ServiceProvider(service = MapExporter.class),
+    @ServiceProvider(service = Plugin.class)
 })
+@NbBundle.Messages("TextGeoExporter=Export to Text")
+@PluginInfo(pluginType = PluginType.EXPORT, tags = {"EXPORT"})
+public class TextGeoExporter extends AbstractGeoExportPlugin {
 
-@NbBundle\.Messages\("TextGeoExporter=Export to Text\")
-@PluginInfo(pluginType = PluginType.EXPORT, tags = {\"EXPORT\"})
+    @Override
+    protected FileChooser.ExtensionFilter getExportType() {
+        return new FileChooser.ExtensionFilter("TEXT", "*txt");
+    }
 
-public class **TextGeoExporter** extends AbstractGeoExportPlugin {
+    @Override
+    protected void exportGeo(final PluginParameters parameters, final String uuid, final Map<String, String> shapes, 
+	        final Map<String, Map<String, Object>> attributes, final File output) throws IOException {
+        for (final String id : shapes.keySet()) {
+            final String shape = shapes.get(id);
+            try (final FileWriter writer = new FileWriter(output)) {
+                writer.write(String.format("%s=%s\n", id, shape));
+            }
+        }
+    }
 
-@Override
-protected FileChooser.ExtensionFilter **getExportType**() {
-return new FileChooser.ExtensionFilter(\"TEXT\", \"\*txt\");
-}
+    @Override
+    public String getDisplayName() {
+        return "Text";
+    }
 
-@Override
-protected void **exportGeo**(final PluginParameters parameters, final
-String uuid, final Map\<String, String\> shapes, final Map\<String,
-Map\<String, Object\>\> attributes, final File output) throws
-IOException {
-
-for (final String id : shapes.keySet()) {
-final String shape = shapes.get(id);
-try (final FileWriter writer = new FileWriter(output)) {
-writer.write(String.format(\"%s=%s\\n\", id, shape));
-}
-}
-}
-
-@Override
-public String **getDisplayName**() {
-return \"Text\";
-}
-
-@Override
-public String **getPluginReference**() {
-return this.getClass().getName();
-}
+    @Override
+    public String getPluginReference() {
+        return this.getClass().getName();
+    }
 }
 ```
 
@@ -4301,81 +4017,62 @@ You can also use one of the higher-level analytic plugin classes:
 
 ```java
 @ServiceProviders({
-@ServiceProvider(service = Plugin.class),
-@ServiceProvider(service = AnalyticPlugin.class)
+    @ServiceProvider(service = Plugin.class),
+    @ServiceProvider(service = AnalyticPlugin.class)
 })
+@NbBundle.Messages("OutbreakCountAnalytic=Outbreak Count Analytic")
+@PluginInfo(tags = {"ANALYTIC"})
+@AnalyticInfo(analyticCategory = "Count")
+public class OutbreakCountAnalytic extends AnalyticPlugin<ScoreResult> {
 
-@NbBundle\.Messages\("OutbreakCountAnalytic=Outbreak Count Analytic\")
-@PluginInfo(tags = {\"ANALYTIC\"})
-@AnalyticInfo(analyticCategory = \"Count\")
+    protected ScoreResult result;
 
-public class **OutbreakCountAnalytic** extends
-AnalyticPlugin\<ScoreResult\> {
+    @Override
+    public Set<SchemaAttribute> getPrerequisiteAttributes() {
+        final Set<SchemaAttribute> attributes = new HashSet<>();
+        attributes.add(PandemicConcept.VertexAttribute.OUTBREAK);
+        return attributes;
+    }
 
-protected ScoreResult result;
+    @Override
+    protected final void edit(final GraphWriteMethods graph, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+        result = new ScoreResult();
 
-@Override
-public Set\<SchemaAttribute\> **getPrerequisiteAttributes**() {
-final Set\<SchemaAttribute\> attributes = new HashSet\<\>();
-attributes.add(PandemicConcept.VertexAttribute.OUTBREAK);
-return attributes;
-}
+        final int identifierAttributeId = VisualConcept.VertexAttribute.IDENTIFIER.get(graph);
+        final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(graph);
+        final int outbreakCountAttributeId = PandemicConcept.VertexAttribute.OUTBREAK_COUNT.ensure(graph);
 
-@Override
-protected final void **edit**(final GraphWriteMethods graph, final
-PluginInteraction interaction, final PluginParameters parameters) throws
-InterruptedException, PluginException {
+        PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION).executeNow(graph);
 
-result = new ScoreResult();
+        final int vertexCount = graph.getVertexCount();
+        for (int vertexPosition = 0; vertexPosition < vertexCount; vertexPosition++) {
+            final int vertexId = graph.getVertex(vertexPosition);
+            final Outbreak vertexOutbreak = graph.getObjectValue(outbreakAttributeId, vertexId);
+            if (vertexOutbreak != null) {
+                final String identifier = graph.getStringValue(identifierAttributeId, vertexId);
+                final float score = vertexOutbreak.getNumberOfDiseases();
+                final boolean isNull = score == (int) graph.getAttributeDefaultValue(outbreakCountAttributeId);
+                result.add(new ScoreResult.ElementScore(GraphElementType.VERTEX, vertexId, identifier, isNull, score));
+            }
+        }
+    }
 
-final int identifierAttributeId =
-VisualConcept.VertexAttribute.IDENTIFIER.get(graph);
+    @Override
+    public Set getAnalyticAttributes(final PluginParameters parameters) {
+        final Set<SchemaAttribute> attributes = new HashSet<>();
+        attributes.add(PandemicConcept.VertexAttribute.OUTBREAK_COUNT);
+        return attributes;
+    }
 
-final int outbreakAttributeId =
-PandemicConcept.VertexAttribute.OUTBREAK.get(graph);
+    @Override
+    public ScoreResult getResults() {
+        return result;
+    }
 
-final int outbreakCountAttributeId =
-PandemicConcept.VertexAttribute.OUTBREAK_COUNT.ensure(graph);
-
-PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION).executeNow(graph);
-
-final int vertexCount = graph.getVertexCount();
-for (int vertexPosition = 0; vertexPosition \< vertexCount;
-vertexPosition++) {
-final int vertexId = graph.getVertex(vertexPosition);
-final Outbreak vertexOutbreak =
-graph.getObjectValue(outbreakAttributeId, vertexId);
-
-if (vertexOutbreak != null) {
-final String identifier = graph.getStringValue(identifierAttributeId,
-vertexId);
-
-final float score = vertexOutbreak.getNumberOfDiseases();
-final boolean isNull = score == (int)
-graph.getAttributeDefaultValue(outbreakCountAttributeId);
-result.add(new ScoreResult.ElementScore(GraphElementType.VERTEX,
-vertexId, identifier, isNull, score));
-}
-}
-}
-
-@Override
-public Set **getAnalyticAttributes**(final PluginParameters parameters)
-{
-final Set\<SchemaAttribute\> attributes = new HashSet\<\>();
-attributes.add(PandemicConcept.VertexAttribute.OUTBREAK_COUNT);
-return attributes;
-}
-
-@Override
-public ScoreResult **getResults**() {
-return result;
-}
-
-@Override
-public Class\<? extends AnalyticResult\> **getResultType**() {
-return ScoreResult.class;
-}
+    @Override
+    public Class<? extends AnalyticResult> getResultType() {
+        return ScoreResult.class;
+    }
 }
 ```
 
@@ -4402,40 +4099,36 @@ aggregated.
 
 ```java
 @ServiceProvider(service = AnalyticQuestionDescription.class)
-public class **HowManyOutbreaksQuestion** implements
-AnalyticQuestionDescription {
+public class HowManyOutbreaksQuestion implements AnalyticQuestionDescription {
 
-@Override
-public String **getName**() {
-return \"How many outbreaks?\";
-}
+    @Override
+    public String getName() {
+        return "How many outbreaks?";
+    }
 
-@Override
-public String **getDescription**() {
-return \"Counts the number of outbreaks per city\";
-}
+    @Override
+    public String getDescription() {
+        return "Counts the number of outbreaks per city";
+    }
 
-@Override
-public List\<Class\<? extends AnalyticPlugin\<ScoreResult\>\>\>
-**getPluginClasses**() {
-return Arrays.asList(OutbreakCountAnalytic.class);
-}
+    @Override
+    public List<Class<? extends AnalyticPlugin<ScoreResult>>> getPluginClasses() {
+        return Arrays.asList(OutbreakCountAnalytic.class);
+    }
 
-@Override
-public Class\<? extends AnalyticAggregator\<ScoreResult\>\>
-**getAggregatorType**() {
-return SumScoreAggregator.class;
-}
+    @Override
+    public Class<? extends AnalyticAggregator<ScoreResult>> getAggregatorType() {
+        return SumScoreAggregator.class;
+    }
 
-@Override
-public Class\<? extends AnalyticResult\> **getResultType**() {
-return ScoreResult.class;
-}
+    @Override
+    public Class<? extends AnalyticResult> getResultType() {
+        return ScoreResult.class;
+    }
 
-@Override
-public void **initialiseParameters**(final AnalyticPlugin plugin, final
-PluginParameters parameters) {
-}
+    @Override
+    public void initialiseParameters(final AnalyticPlugin plugin, final PluginParameters parameters) {
+    }
 }
 ```
 
@@ -4457,31 +4150,28 @@ you can add more information using a **SchemaViewNodeProvider** class.
 
 ```java
 @ServiceProvider(service = SchemaViewNodeProvider.class)
+public class PandemicNodeProvider implements SchemaViewNodeProvider {
+    private static final String INFO = "<Information about pandemics goes here>";
 
-public class **PandemicNodeProvider** implements SchemaViewNodeProvider
-{
-private static final String INFO = \"\<Information about pandemics goes
-here\>\";
+    @Override
+    public void setContent(final Tab tab) {
+        final VBox node = new VBox();
+        final Label pandemicInfo = new Label(INFO);
+        node.getChildren().add(pandemicInfo);
 
-@Override
-public void **setContent**(final Tab tab) {
-final VBox node = new VBox();
-final Label pandemicInfo = new Label(INFO);
-node.getChildren().add(pandemicInfo);
+        Platform.runLater(() -> {
+            tab.setContent(node);
+        });
+    }
 
-Platform.runLater(() -\> {
-tab.setContent(node);
-});
-}
+    @Override
+    public void discardNode() {
+    }
 
-@Override
-public void **discardNode**() {
-}
-
-@Override
-public String **getText**() {
-return \"Pandemic Info\";
-}
+    @Override
+    public String getText() {
+        return "Pandemic Info";
+    }
 }
 ```
 
