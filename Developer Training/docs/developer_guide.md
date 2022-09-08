@@ -4209,12 +4209,12 @@ public class PandemicNodeProvider implements SchemaViewNodeProvider {
 
 Some useful reference links that one should be across are as follows:
 
--   [http://wiki.netbeans.org/FaqIndex]
+-   http://wiki.netbeans.org/FaqIndex
 
--   [http://wiki.netbeans.org/NetBeansDeveloperFAQ]
+-   http://wiki.netbeans.org/NetBeansDeveloperFAQ
 
--   [http://wiki.netbeans.org/NetBeansUserFAQ]
+-   http://wiki.netbeans.org/NetBeansUserFAQ
 
--   [https://netbeans.org/community/releases/82/relnotes.html]
+-   https://netbeans.org/community/releases/82/relnotes.html
 
--   [https://netbeans.org/community/releases/81/relnotes.html]
+-   https://netbeans.org/community/releases/81/relnotes.html
