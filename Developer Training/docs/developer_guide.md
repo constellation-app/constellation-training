@@ -542,7 +542,8 @@ class extend **RecordStoreQueryPlugin** and use the NetBeans hint
 public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin {
 
     @Override
-    protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+	        final PluginParameters parameters) throws InterruptedException, PluginException {
         ...
     }
 }
@@ -671,7 +672,8 @@ nothing will be added to the graph.
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     System.out.println("Testing Infected Cities Plugin");
     return new GraphRecordStore();
 }
@@ -700,7 +702,8 @@ we will add a single node to the graph.
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     RecordStore result = new GraphRecordStore();
     result.add();
     result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, "Me");
@@ -754,16 +757,19 @@ optionally transaction attributes) in a single row of the RecordStore:
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
     result.add();
     result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, "Me");
     result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
 	
     result.set(GraphRecordStoreUtilities.DESTINATION + VisualConcept.VertexAttribute.IDENTIFIER, "You");
-    result.set(GraphRecordStoreUtilities.DESTINATION + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
+    result.set(GraphRecordStoreUtilities.DESTINATION + AnalyticConcept.VertexAttribute.TYPE, 
+	        AnalyticConcept.VertexType.PERSON);
 	
-    result.set(GraphRecordStoreUtilities.TRANSACTION + AnalyticConcept.TransactionAttribute.TYPE, AnalyticConcept.TransactionType.COMMUNICATION);
+    result.set(GraphRecordStoreUtilities.TRANSACTION + AnalyticConcept.TransactionAttribute.TYPE, 
+	        AnalyticConcept.TransactionType.COMMUNICATION);
 
     return result;
 }
@@ -788,12 +794,14 @@ used throughout this training document to simplify our development.
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
     for (final OutbreakUtilities.City city : OutbreakUtilities.getInfectedCities()) {
         result.add();
         result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, city.getName());
-        result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.LOCATION);
+        result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, 
+		        AnalyticConcept.VertexType.LOCATION);
         result.set(GraphRecordStoreUtilities.SOURCE + "Population", city.getPopulation());
         result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VertexAttribute.LATITUDE, city.getLatitude());
         result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VertexAttribute.LONGITUDE, city.getLongitude());
@@ -822,7 +830,8 @@ column key ("\<" + type + "\>") when specifying **RecordStore** column
 values:
 
 ```java
-result.set(GraphRecordStoreUtilities.SOURCE + "Population" + "<" + IntegerAttributeDescription.ATTRIBUTE_NAME + ">", city.getPopulation());
+result.set(GraphRecordStoreUtilities.SOURCE + "Population" + "<" + IntegerAttributeDescription.ATTRIBUTE_NAME + ">", 
+        city.getPopulation());
 ```
 
 Running the plugin again will show that the population attribute now
@@ -835,7 +844,8 @@ will do this for us. This allows us to simplify our query method:
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
     for (final OutbreakUtilities.City city : OutbreakUtilities.getInfectedCities()) {
         result.add();
@@ -1077,7 +1087,8 @@ group attributes and types for ease of use later.
 ```java
 public static class VertexAttribute {
     ...
-    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, StringAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
+    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, 
+	        StringAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
         .setDescription("An outbreak consisting of one or more diseases and their influence")
         .create()
         .build();
@@ -1179,7 +1190,8 @@ of a string type attribute.
 ```java
 public static class VertexAttribute {
     ...
-    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, OutbreakAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
+    public static final SchemaAttribute OUTBREAK = new SchemaAttribute.Builder(GraphElementType.VERTEX, 
+	        OutbreakAttributeDescription.ATTRIBUTE_NAME, "Outbreak")
         .setDescription("An outbreak consisting of one or more diseases and their influence")
         .create()
         .build();
@@ -1218,15 +1230,16 @@ attribute type.
 
 ```java
 @Override
-public void readObject(final int attributeId, final int elementId, final JsonNode jnode, final GraphWriteMethods graph, final Map<Integer, Integer> vertexMap,
-        final Map<Integer, Integer> transactionMap, final GraphByteReader byteReader, final ImmutableObjectCache cache) throws IOException {
+public void readObject(final int attributeId, final int elementId, final JsonNode jnode, final GraphWriteMethods graph, 
+        final Map<Integer, Integer> vertexMap, final Map<Integer, Integer> transactionMap, 
+		final GraphByteReader byteReader, final ImmutableObjectCache cache) throws IOException {
     final String attributeValue = jnode.isNull() ? null : jnode.textValue();
     graph.setStringValue(attributeId, elementId, attributeValue);
 }
 
 @Override
-public void writeObject(final Attribute attribute, final int elementId, final JsonGenerator jsonGenerator, final GraphReadMethods graph, 
-        final GraphByteWriter byteWriter, final boolean verbose) throws IOException {
+public void writeObject(final Attribute attribute, final int elementId, final JsonGenerator jsonGenerator, 
+        final GraphReadMethods graph, final GraphByteWriter byteWriter, final boolean verbose) throws IOException {
     if (verbose || !graph.isDefaultValue(attribute.getId(), elementId)) {
         final String attributeValue = graph.getStringValue(attribute.getId(), elementId);
         if (attributeValue == null) {
@@ -1492,7 +1505,8 @@ entered into our new parameter.
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
 
     final String citiesString = parameters.getStringValue(CITIES_PARAMETER_ID);
@@ -1604,7 +1618,8 @@ method to print the name of each city to the console.
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
     query.reset();
     while (query.next()) {
@@ -1630,7 +1645,8 @@ resulting flights to the graph:
 
 ```java
 @Override
-protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     final RecordStore result = new GraphRecordStore();
     query.reset();
 
@@ -1642,7 +1658,8 @@ protected RecordStore query(final RecordStore query, final PluginInteraction int
             result.add();
 
             OutbreakUtilities.addCityToRecord(source, result, GraphRecordStoreUtilities.SOURCE);
-            result.set(GraphRecordStoreUtilities.TRANSACTION + TemporalConcept.TransactionAttribute.DATETIME, flight.getDepartureTime());
+            result.set(GraphRecordStoreUtilities.TRANSACTION + TemporalConcept.TransactionAttribute.DATETIME, 
+			        flight.getDepartureTime());
             OutbreakUtilities.addCityToRecord(destination, result, GraphRecordStoreUtilities.DESTINATION);
         }
     }
@@ -1733,7 +1750,8 @@ need to add a datetime range parameter to our plugin by implementing the
 public PluginParameters createParameters() {
     final PluginParameters parameters = new PluginParameters();
 
-    final PluginParameter<DateTimeRangeParameterType.DateTimeRangeParameterValue> datetime = DateTimeRangeParameterType.build(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
+    final PluginParameter<DateTimeRangeParameterType.DateTimeRangeParameterValue> datetime 
+	        = DateTimeRangeParameterType.build(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
     parameters.addParameter(datetime);
     return parameters;
 }
@@ -1805,7 +1823,8 @@ that we can also add functionality at this time by doing the same:
 
 ```java
 @Override
-protected void edit(final GraphWriteMethods wg, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+protected void edit(final GraphWriteMethods wg, final PluginInteraction interaction, 
+        final PluginParameters parameters) throws InterruptedException, PluginException {
     super.edit(wg, interaction, parameters);
 
     final Plugin deselectAllPlugin = PluginRegistry.get(CorePluginRegistry.DESELECT_ALL);
@@ -2095,8 +2114,9 @@ added attribute.
 ```java
 final String percentageAfflictedAttributeName = "percentage afflicted with " + diseaseName;
 
-final int percentageAfflictedAttributeId = graph.addAttribute(GraphElementType.VERTEX, FloatAttributeDescription.ATTRIBUTE_NAME,
-        percentageAfflictedAttributeName, percentageAfflictedAttributeName, 0, null);
+final int percentageAfflictedAttributeId = graph.addAttribute(GraphElementType.VERTEX, 
+        FloatAttributeDescription.ATTRIBUTE_NAME, percentageAfflictedAttributeName, percentageAfflictedAttributeName, 0, 
+		null);
 ```
 
 **5.1.4: Performing the calculations**
@@ -2224,7 +2244,8 @@ iterations are as follows:
 To iterate over the neighbours of a vertex with ID vertexId , you can
 
 ```java
-for (int vertexNeighbourPosition = 0; vertexNeighbourPosition < graph.getVertexNeighbourCount(vertexId); vertexNeighbourPosition++) {
+for (int vertexNeighbourPosition = 0; vertexNeighbourPosition < graph.getVertexNeighbourCount(vertexId); 
+        vertexNeighbourPosition++) {
     final int neighbourId = graph.getVertexNeighbour(vertexId, vertexNeighbourPosition);
     ...
 }
@@ -2235,7 +2256,8 @@ and neighbourId, you can
 
 ```java
 final int neighbourLink = graph.getLink(vertexId, neighbourId);
-for (int neighbourTransactionPosition = 0; neighbourTransactionPosition < graph.getLinkTransactionCount(neighbourLink); neighbourTransactionPosition++) {
+for (int neighbourTransactionPosition = 0; neighbourTransactionPosition < graph.getLinkTransactionCount(neighbourLink); 
+        neighbourTransactionPosition++) {
     final int transactionId = graph.getLinkTransaction(neighbourLink, neighbourTransactionPosition);
     ...
 }
@@ -2278,7 +2300,8 @@ final int yAttributeId = VisualConcept.VertexAttribute.Y.get(writableGraph);
 final int xAttributeId = VisualConcept.VertexAttribute.X.get(writableGraph);
 
 if (latitudeAttributeId == GraphConstants.NOT_FOUND || longitudeAttributeId == GraphConstants.NOT_FOUND) {
-    throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' and 'Geo.Longitude' do not exist on this graph!");
+    throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' and 'Geo.Longitude'" 
+	        + "do not exist on this graph!");
 }
 ```
 
@@ -2721,7 +2744,8 @@ drop-down list. In this case we need to check that the bin is an
 statement achieves this:
 
 ```java
-return bin instanceof AttributeBin && ((AttributeBin) bin).getAttributeType().equals(OutbreakAttributeDescription.ATTRIBUTE_NAME);
+return bin instanceof AttributeBin && ((AttributeBin) bin).getAttributeType()
+        .equals(OutbreakAttributeDescription.ATTRIBUTE_NAME);
 ```
 
 Note that **AttributeBin** is the default bin type for all attributes
@@ -2909,7 +2933,8 @@ check to see if the attributes we are retrieving actually exist,
 returning false if they don't:
 
 ```java
-if (typeAttr != GraphConstants.NOT_FOUND && outbreakAttr != GraphConstants.NOT_FOUND && populationAttr != GraphConstants.NOT_FOUND) {
+if (typeAttr != GraphConstants.NOT_FOUND && outbreakAttr != GraphConstants.NOT_FOUND 
+        && populationAttr != GraphConstants.NOT_FOUND) {
     ...
 }
 ```
@@ -3007,7 +3032,8 @@ public PandemicViewPane() {
     setCenter(summary);
     final Button infectButton = new Button("Spread Infection");
     infectButton.setOnAction(event -> {
-        PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION).executeLater(GraphManager.getDefault().getActiveGraph());
+        PluginExecution.withPlugin(PandemicPluginRegistry.SPREAD_INFECTION)
+		        .executeLater(GraphManager.getDefault().getActiveGraph());
     });
 
     options = new FlowPane();
@@ -3022,7 +3048,8 @@ the pane with the list of all outbreaks on the graph ordered by the
 number of unique diseases within that outbreak.
 
 ```java
-private final AbstractAttributeInteraction interaction = AbstractAttributeInteraction.getInteraction(OutbreakAttributeDescription.ATTRIBUTE_NAME);
+private final AbstractAttributeInteraction interaction = AbstractAttributeInteraction
+        .getInteraction(OutbreakAttributeDescription.ATTRIBUTE_NAME);
 ...
 public final void refresh(final GraphReadMethods graph) {
     Platform.runLater(() -> {
@@ -3309,7 +3336,7 @@ occurs. This is done using the **MonitorListener** class.
 private final MonitorListener listener;
 public ImprovedPandemicViewTopComponent() {
     ...
-    listener = (final MonitorManager monitorManager, final Monitor monitor, final GraphReadMethods graph, final boolean newGraph, final int updateCount) -\> {
+    listener = (monitorManager, monitor, graph, newGraph, updateCount) -> {
         pandemicPane.refresh(graph);
     };
 }
@@ -3779,7 +3806,8 @@ public class IconContributionProvider extends ConversationContributionProvider {
 
     @Override
     public boolean isCompatibleWithGraph(final GraphReadMethods graph) {
-        return iconAttribute.get(graph) != GraphConstants.NOT_FOUND && flightAttribute.get(graph) != GraphConstants.NOT_FOUND;
+        return iconAttribute.get(graph) != GraphConstants.NOT_FOUND 
+		        && flightAttribute.get(graph) != GraphConstants.NOT_FOUND;
     }
 
     @Override
@@ -3857,8 +3885,9 @@ public class BlackAndWhiteMapProvider extends MapProvider {
 
     @Override
     public PImage getTile(final Coordinate coordinate) {
-        final File blackAndWhiteMap = ConstellationInstalledFileLocator.locate(",odules/ext/Black&White.mbtiles", "au.gov.asd.tac.constellation.training.solutions", 
-		        false, BlackAndWhiteMapProvider.class.getProtectionDomain());
+        final File blackAndWhiteMap = ConstellationInstalledFileLocator.locate(",odules/ext/Black&White.mbtiles", 
+		        "au.gov.asd.tac.constellation.training.solutions", false, 
+				BlackAndWhiteMapProvider.class.getProtectionDomain());
         final String connection = String.format("jdbc:sqlite:%s", blackAndWhiteMap.getAbsolutePath());
 
         final int zoom = (int) coordinate.zoom;
@@ -4035,7 +4064,8 @@ public class OutbreakCountAnalytic extends AnalyticPlugin<ScoreResult> {
     }
 
     @Override
-    protected final void edit(final GraphWriteMethods graph, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
+    protected final void edit(final GraphWriteMethods graph, final PluginInteraction interaction, 
+	        final PluginParameters parameters) throws InterruptedException, PluginException {
         result = new ScoreResult();
 
         final int identifierAttributeId = VisualConcept.VertexAttribute.IDENTIFIER.get(graph);
