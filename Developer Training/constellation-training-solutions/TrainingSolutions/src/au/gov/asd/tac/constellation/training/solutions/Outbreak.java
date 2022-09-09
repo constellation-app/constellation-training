@@ -35,7 +35,7 @@ public class Outbreak implements Comparable<Outbreak> {
 
     public Outbreak(final Map<String, Integer> outbreakData) {
         this.outbreakData = new HashMap<>();
-        Iterator<String> iter = outbreakData.keySet().iterator();
+        final Iterator<String> iter = outbreakData.keySet().iterator();
         while (iter.hasNext()) {
             final String disease = iter.next();
             if (outbreakData.get(disease) == 0) {
@@ -62,7 +62,7 @@ public class Outbreak implements Comparable<Outbreak> {
     }
 
     public Outbreak spreadDisease(final String diseaseName, final Integer populationAffected) {
-        Outbreak spreadOutbreak = new Outbreak(outbreakData);
+        final Outbreak spreadOutbreak = new Outbreak(outbreakData);
         if (outbreakData.containsKey(diseaseName)) {
             spreadOutbreak.outbreakData.put(diseaseName, outbreakData.get(diseaseName) + populationAffected);
         } else {
@@ -72,7 +72,7 @@ public class Outbreak implements Comparable<Outbreak> {
     }
 
     public Outbreak treatDisease(final String diseaseName, final Integer populationAffected) {
-        Outbreak treatedOutbreak = new Outbreak(outbreakData);
+        final Outbreak treatedOutbreak = new Outbreak(outbreakData);
         if (outbreakData.containsKey(diseaseName)) {
             treatedOutbreak.outbreakData.put(diseaseName, outbreakData.get(diseaseName) - populationAffected);
         }
@@ -80,7 +80,7 @@ public class Outbreak implements Comparable<Outbreak> {
     }
 
     public Outbreak cureDisease(final String diseaseName) {
-        Outbreak curedOutbreak = new Outbreak(outbreakData);
+        final Outbreak curedOutbreak = new Outbreak(outbreakData);
         curedOutbreak.outbreakData.remove(diseaseName);
         return curedOutbreak;
     }
@@ -108,7 +108,7 @@ public class Outbreak implements Comparable<Outbreak> {
                 final String[] nameAndValue = disease.split(":");
                 try {
                     outbreak.outbreakData.put(nameAndValue[0], Integer.parseInt(nameAndValue[1]));
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
+                } catch (final ArrayIndexOutOfBoundsException | NumberFormatException ex) {
                     throw new IllegalArgumentException("Not a valid outbreak status");
                 }
             }
@@ -117,7 +117,7 @@ public class Outbreak implements Comparable<Outbreak> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         return obj instanceof Outbreak ? outbreakData.equals(((Outbreak) obj).outbreakData) : false;
     }
 
