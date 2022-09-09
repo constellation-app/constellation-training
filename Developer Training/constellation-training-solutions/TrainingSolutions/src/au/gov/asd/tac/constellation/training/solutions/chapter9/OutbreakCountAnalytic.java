@@ -81,7 +81,7 @@ public class OutbreakCountAnalytic extends AnalyticPlugin<ScoreResult> {
             if (vertexOutbreak != null) {
                 final String identifier = graph.getStringValue(identifierAttributeId, vertexId);
                 final float score = vertexOutbreak.getNumberOfDiseases();
-                Map<String, Float> scores = new HashMap<>();
+                final Map<String, Float> scores = new HashMap<>();
                 scores.put(identifier, score);
                 final boolean isNull = score == (int) graph.getAttributeDefaultValue(outbreakCountAttributeId);
                 result.add(new ScoreResult.ElementScore(GraphElementType.VERTEX, vertexId, identifier, isNull, scores));

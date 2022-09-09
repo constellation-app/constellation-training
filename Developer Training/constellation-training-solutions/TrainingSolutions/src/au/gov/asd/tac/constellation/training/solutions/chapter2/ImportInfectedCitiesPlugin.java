@@ -43,14 +43,14 @@ public class ImportInfectedCitiesPlugin extends RecordStoreQueryPlugin implement
 
     @Override
     protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
-        RecordStore result = new GraphRecordStore();
+        final RecordStore result = new GraphRecordStore();
 
-        for (OutbreakUtilities.City infectedCity : OutbreakUtilities.getInfectedCities()) {
+        for (final OutbreakUtilities.City infectedCity : OutbreakUtilities.getInfectedCities()) {
             result.add();
 
 //            result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VERTEX_ATTRIBUTE_IDENTIFIER, city.getName());
 //            result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VERTEX_ATTRIBUTE_TYPE, AnalyticConcept.VERTEX_TYPE_LOCATION);
-//            result.set(GraphRecordStoreUtilities.SOURCE + "Population" + "<" + IntegerAttributeDescription.ATTRIBUTE_NAME + ">", city.getPopulation());
+//            result.set(GraphRecordStoreUtilities.SOURCE + "Population<" + IntegerAttributeDescription.ATTRIBUTE_NAME + ">", city.getPopulation());
 //            result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VERTEX_ATTRIBUTE_LATITUDE, city.getLatitude());
 //            result.set(GraphRecordStoreUtilities.SOURCE + SpatialConcept.VERTEX_ATTRIBUTE_LONGITUDE, city.getLongitude());
 //            result.set(GraphRecordStoreUtilities.SOURCE + "Outbreak", city.getOutbreak());

@@ -15,9 +15,7 @@
  */
 package au.gov.asd.tac.constellation.training.solutions.chapter7;
 
-import au.gov.asd.tac.constellation.graph.GraphReadMethods;
 import au.gov.asd.tac.constellation.graph.monitor.AttributeValueMonitor;
-import au.gov.asd.tac.constellation.graph.monitor.Monitor;
 import au.gov.asd.tac.constellation.graph.monitor.MonitorListener;
 import au.gov.asd.tac.constellation.graph.monitor.MonitorManager;
 import au.gov.asd.tac.constellation.graph.monitor.MonitorTransition;
@@ -84,7 +82,7 @@ public final class ImprovedPandemicViewTopComponent extends TopComponent impleme
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(500, 500));
 
-        listener = (MonitorManager monitorManager, Monitor monitor, GraphReadMethods graph, boolean newGraph, int updateCount) -> {
+        listener = (monitorManager, monitor, graph, newGraph, updateCount) -> {
             pandemicPane.refresh(graph);
         };
         transitionFilter = new MonitorTransitionFilter(
@@ -154,7 +152,7 @@ public final class ImprovedPandemicViewTopComponent extends TopComponent impleme
     }
 
     void readProperties(final Properties p) {
-        String version = p.getProperty("version");
+        final String version = p.getProperty("version");
 // TODO read your settings according to their version
     }
 }

@@ -49,12 +49,12 @@ public class PandemicLogger extends DefaultConstellationLogger {
     }
 
     @Override
-    public void pluginStopped(Plugin plugin, PluginParameters pp) {
+    public void pluginStopped(final Plugin plugin, final PluginParameters pp) {
         LOGGER.info("Plugin Stopped...");
     }
 
     @Override
-    public void pluginProperties(Plugin plugin, Properties properties) {
+    public void pluginProperties(final Plugin plugin, final Properties properties) {
         LOGGER.log(Level.INFO, "Plugin {0} has properties {1}", new Object[]{plugin.getName(), properties});
     }
 }

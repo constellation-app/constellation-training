@@ -35,5 +35,4 @@ public class SpreadInfectionAction extends SimplePluginAction {
     public SpreadInfectionAction(final GraphNode context) {
         super(context, PandemicPluginRegistry.SPREAD_INFECTION, true);
     }
-
 }

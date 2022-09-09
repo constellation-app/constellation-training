@@ -60,12 +60,12 @@ public class ImportCustomCitiesPlugin extends RecordStoreQueryPlugin implements 
 
     @Override
     protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
-        RecordStore result = new GraphRecordStore();
+        final RecordStore result = new GraphRecordStore();
 
         final String citiesString = parameters.getStringValue(CITIES_PARAMETER_ID);
 
         if (citiesString != null) {
-            for (String cityName : citiesString.split("\n", -1)) {
+            for (final String cityName : citiesString.split("\n", -1)) {
                 final OutbreakUtilities.City city = OutbreakUtilities.getCity(cityName);
 
                 if (city == null) {
@@ -76,7 +76,6 @@ public class ImportCustomCitiesPlugin extends RecordStoreQueryPlugin implements 
                 OutbreakUtilities.addCityToRecord(city, result, GraphRecordStoreUtilities.SOURCE);
             }
         }
-
         return result;
     }
 

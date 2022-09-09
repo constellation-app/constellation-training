@@ -72,9 +72,7 @@ public class OutbreakExceedsPopulationRule extends QualityControlRule {
                         return true;
                     }
                 }
-                return false;
             }
-            return false;
         }
         return false;
     }

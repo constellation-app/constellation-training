@@ -15,9 +15,9 @@
  */
 package au.gov.asd.tac.constellation.training.solutions.chapter7;
 
-import au.gov.asd.tac.constellation.views.JavaFxTopComponent;
 import au.gov.asd.tac.constellation.graph.ReadableGraph;
 import au.gov.asd.tac.constellation.training.solutions.chapter3.PandemicConcept;
+import au.gov.asd.tac.constellation.views.JavaFxTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
@@ -60,7 +60,7 @@ public final class GenericPandemicViewTopComponent extends JavaFxTopComponent<Pa
         pandemicPane = new PandemicViewPane();
         initContent();
 
-        addAttributeValueChangeHandler(PandemicConcept.VertexAttribute.OUTBREAK, (graph) -> {
+        addAttributeValueChangeHandler(PandemicConcept.VertexAttribute.OUTBREAK, graph -> {
             final ReadableGraph readableGraph = graph.getReadableGraph();
             try {
                 pandemicPane.refresh(readableGraph);

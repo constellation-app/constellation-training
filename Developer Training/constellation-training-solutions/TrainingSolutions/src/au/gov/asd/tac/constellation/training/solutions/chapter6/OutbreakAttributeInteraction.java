@@ -86,7 +86,7 @@ public class OutbreakAttributeInteraction extends AbstractAttributeInteraction<O
                 try {
                     Outbreak.valueOf((String) v);
                     return null;
-                } catch (IllegalArgumentException ex) {
+                } catch (final IllegalArgumentException ex) {
                     return "Invalid String for OutbreakStatus";
                 }
             };

@@ -50,7 +50,7 @@ public class SpreadInfectionPlugin extends SimpleEditPlugin {
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        PluginParameter diseaseParameter = IntegerParameterType.build(NUMBER_OF_DAYS_PARAMETER_ID, new IntegerParameterValue(1));
+        final PluginParameter diseaseParameter = IntegerParameterType.build(NUMBER_OF_DAYS_PARAMETER_ID, new IntegerParameterValue(1));
         diseaseParameter.setName(NUMBER_OF_DAYS_PARAMETER_LABEL);
         parameters.addParameter(diseaseParameter);
         return parameters;
@@ -70,9 +70,9 @@ public class SpreadInfectionPlugin extends SimpleEditPlugin {
                 final Outbreak outbreak = writableGraph.getObjectValue(outbreakAttributeId, vertexId);
                 final int population = writableGraph.getIntValue(populationAttributeId, vertexId);
                 if (PandemicConcept.VertexType.CITY.equals(writableGraph.getObjectValue(vertexTypeAttributeId, vertexId))) {
-                    List<Outbreak> neighbourOutbreaks = new ArrayList<>();
-                    List<Integer> neighbourPopulations = new ArrayList<>();
-                    List<Integer> neighbourDailyFilghtVolumes = new ArrayList<>();
+                    final List<Outbreak> neighbourOutbreaks = new ArrayList<>();
+                    final List<Integer> neighbourPopulations = new ArrayList<>();
+                    final List<Integer> neighbourDailyFilghtVolumes = new ArrayList<>();
                     for (int vertexNeighbourPosition = 0; vertexNeighbourPosition < writableGraph.getVertexNeighbourCount(vertexId); vertexNeighbourPosition++) {
                         final int neighbourId = writableGraph.getVertexNeighbour(vertexId, vertexNeighbourPosition);
                         final int neighbourLink = writableGraph.getLink(vertexId, neighbourId);

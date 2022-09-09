@@ -139,7 +139,7 @@ public final class PandemicViewTopComponent extends TopComponent implements Grap
                 currentGraph = graph;
                 currentGraph.addGraphChangeListener(this);
 
-                ReadableGraph readableGraph = currentGraph.getReadableGraph();
+                final ReadableGraph readableGraph = currentGraph.getReadableGraph();
                 try {
                     final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(readableGraph);
                     outbreakModificationCounter = readableGraph.getValueModificationCounter(outbreakAttributeId);
@@ -160,7 +160,7 @@ public final class PandemicViewTopComponent extends TopComponent implements Grap
 
     @Override
     public void graphChanged(final GraphChangeEvent event) {
-        ReadableGraph readableGraph = currentGraph.getReadableGraph();
+        final ReadableGraph readableGraph = currentGraph.getReadableGraph();
         try {
             final int outbreakAttributeId = PandemicConcept.VertexAttribute.OUTBREAK.get(readableGraph);
             final long currentOutbreakModificationCounter = readableGraph.getValueModificationCounter(outbreakAttributeId);
@@ -181,7 +181,7 @@ public final class PandemicViewTopComponent extends TopComponent implements Grap
     }
 
     void readProperties(final Properties p) {
-        String version = p.getProperty("version");
+        final String version = p.getProperty("version");
         // TODO read your settings according to their version
     }
 }

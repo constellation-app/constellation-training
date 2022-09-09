@@ -48,7 +48,7 @@ public class SpecifiedDiseaseFormatter extends BinFormatter {
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        PluginParameter diseaseNameParam = StringParameterType.build(DISEASE_NAME_PARAMETER_ID);
+        final PluginParameter diseaseNameParam = StringParameterType.build(DISEASE_NAME_PARAMETER_ID);
         diseaseNameParam.setName(DISEASE_NAME_PARAMETER_LABEL);
         parameters.addParameter(diseaseNameParam);
         return parameters;
