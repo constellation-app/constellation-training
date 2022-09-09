@@ -45,7 +45,7 @@ public class PercentageAfflictedPlugin extends SimpleEditPlugin {
     }
 
     @Override
-    public void updateParameters(Graph graph, PluginParameters parameters) {
+    public void updateParameters(final Graph graph, final PluginParameters parameters) {
     }
 
     @Override

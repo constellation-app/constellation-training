@@ -33,7 +33,7 @@ public class TotalInfectionsFormatter extends BinFormatter {
     }
 
     @Override
-    public boolean appliesToBin(Bin bin) {
+    public boolean appliesToBin(final Bin bin) {
         // Make sure the bin is a bin for Outbreak attributes
         return false;
     }

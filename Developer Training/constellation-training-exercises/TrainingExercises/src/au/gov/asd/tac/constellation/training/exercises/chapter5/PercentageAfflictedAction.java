@@ -29,7 +29,7 @@ import org.openide.util.NbBundle;
 @NbBundle.Messages("CTL_PercentageAfflictedAction=Percentrage Afflicted")
 public class PercentageAfflictedAction extends SimplePluginAction {
 
-    public PercentageAfflictedAction(GraphNode context) {
+    public PercentageAfflictedAction(final GraphNode context) {
         // Pass the appropriate plugin in here
         super(context, null, true);
     }

@@ -74,7 +74,7 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
                         data.put(disease.diseaseName.getText(), Integer.parseInt(disease.numberInfected.getText()));
                     }
                 });
-            } catch (NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
                 throw new ControlsInvalidException("Non integer value entered for number infected");
             }
             return new Outbreak(data);

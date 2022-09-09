@@ -113,7 +113,7 @@ public final class ImprovedPandemicViewTopComponent extends TopComponent {
     }
 
     void readProperties(final Properties p) {
-        String version = p.getProperty("version");
+        final String version = p.getProperty("version");
 // TODO read your settings according to their version
     }
 }
