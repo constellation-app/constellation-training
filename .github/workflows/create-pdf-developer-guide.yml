@@ -1,0 +1,39 @@
+name: Create PDF Developer Guide
+
+on:
+  push:
+    branches:
+    - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create output folder
+        run: mkdir output
+
+      - name: Copy the media folder (hack)
+        run: cp -R Developer\ Training/docs/media .
+        
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: >-
+            --listings
+            --from=markdown
+            --to=pdf
+            --output=output/developer_guide.pdf
+            --toc
+            -H "Developer Training/docs/developer_guide.tex"
+            -V geometry:margin=2cm
+            "Developer Training/docs/developer_guide.md"
+            
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
