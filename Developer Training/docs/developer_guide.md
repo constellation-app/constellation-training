@@ -1109,7 +1109,7 @@ class.
 ```java
 @Override
 public Collection<SchemaAttribute> getSchemaAttributes() {
-    final List\<SchemaAttribute\> schemaAttributes = new ArrayList<>();
+    final List<SchemaAttribute> schemaAttributes = new ArrayList<>();
     ...
     schemaAttributes.add(VertexAttribute.OUTBREAK);
     return Collections.unmodifiableCollection(schemaAttributes);
@@ -1921,7 +1921,7 @@ degree (number of neighbours) of a vertex in the graph?'
 
 ```java
 int maxDegree = 0;
-for (int vertexPosition = 0; vertexPosition \< graph.getVertexCount(); vertexPosition++) {
+for (int vertexPosition = 0; vertexPosition < graph.getVertexCount(); vertexPosition++) {
     final int vertexId = graph.getVertex(vertexPosition);
     final int degree = graph.getVertexNeighbourCount(vertexId);
 
@@ -3100,7 +3100,7 @@ public PandemicViewTopComponent() {
     ...
     container = new JFXPanel();
     Platform.setImplicitExit(false);
-    Platform.runLater(() -\> {
+    Platform.runLater(() -> {
         pandemicPane = new PandemicViewPane();
         container.setScene(new Scene(pandemicPane));
         container.getScene().getStylesheets().add(JavafxStyleManager.getMainStyleSheet());
@@ -3282,7 +3282,7 @@ public final class ImprovedPandemicViewTopComponent extends TopComponent {
         setPreferredSize(new Dimension(500, 500));
         container = new JFXPanel();
         Platform.setImplicitExit(false);
-        Platform.runLater(() -\> {
+        Platform.runLater(() -> {
             pandemicPane = new PandemicViewPane();
             container.setScene(new Scene(pandemicPane));
             container.getScene().getStylesheets().add(JavafxStyleManager.getMainStyleSheet());
