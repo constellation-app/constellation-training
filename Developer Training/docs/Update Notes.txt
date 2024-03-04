@@ -1,0 +1,56 @@
+Page 14 (actionPerformed ActionEvent)
+- Uses system.out.println however It doesn't print anything to the console
+- Would it be better to use Log, or another alternative?
+
+
+Page 33 ( ConstellationIcon getIcon())
+- the function was not working with getIcon - DONE
+- changing getIcon() to getIconSymbol() fixed this issue - DONE
+
+Page 40 (for loop)
+- altering the function to accept startTime and endTime caused me issues - WORKED FOR ME
+- I left my for loop in its basic form of just OutbreakUtilities.getFlights(cityName) - UNNECESSARY
+- getDepartureTime in OutbreakUtilities was calling a method that doesn't exist anymore - LOOKS LIKE ITS ALREADY CHANGED
+- the getDepartureTime function has been changed however the pdf will still need to be altered to match it - LOOKS LIKE ITS ALREADY CHANGED
+
+Page 41 (edit function)
+- CorePluginRegistry.DESELECT_ALL should be VisualGraphPluginRegistry.DESELECT_ALL - DONE
+- CorePluginRegistry.RESET should be InteractiveGraphPluginRegistry.RESET_VIEW - DONE
+
+Page 48 (PluginExecutor, line 2 of code at the bottom of the page)
+- another RESET issue - DONE
+- corePluginRegistry.RESET = InteractiveGraphPluginRegistry.RESET_VIEW - DONE
+
+Page 54 + (bin.key issues)
+- error stating key has protected access, causing the code not to be able to use it- DONE, CODE UPDATED TO REFLECT ACTUAL FUNCITONALITY. ALSO MADE FIRST LINE OF CODE MORE APPARENT
+- key is actually a public variable
+- Maybe make a note saying if this is throwing the protected access error to build coreHistogramView first then retry
+
+
+PART 2:
+
+- Copy/Paste of code blocks also copies new lines, resulting in invalid syntax. - I COULDN'T GET THE COPY BUTTON TO SHOW ANYWAY
+
+Chapter 2:
+- 2.1.6 > The screenshot of city nodes should be typed 'Location', not 'City'. - ALREADY DONE
+
+Chapter 4:
+- 4.2.2 > make it clearer that OutbreakUtilities.addFlightToRecord(>>>) replaces the entire contents of the for loop in the previous code block. - DONE, ADDED NOTE
+- 4.2.3 > document how to display non-percentage progress.
+
+theres a weirdly formatted code block in section 4.2.4, the code goes off to the side. Looked wrong when I tried to fix it so I'm leaving it be
+
+
+Chapter 5:
+- Need to better explain GraphReadMethods/ReadableGraph vs GraphWriteMethods/WritableGraph, how they relate to locking and the importance of .release()/.commit(). - I DONT HAVE THE EXPERTISE
+- Need to better explain executeNow vs executeLater. - I DONT HAVE THE EXPERTISE
+- Recommend making 'Spread Outbreak' a step-by-step tutorial and having students build a selection plugin as an exercise. - KIND OF ALREADY IS, MAYBE THIS HAS BEEN DONE
+
+Chapter 6:
+- 6.1.2 > We should move all this to the toString() method of Outbreak. - NOT DONE, NEED TO CHANGE SOURCE TRAINING FILES
+- 6.2.2 > Add some '...' to represent code not displayed in the code block. - DONE
+- Need more code blocks, as it is easy to lose crucial details in the blocks of text (eg. returning null for valid in 6.2.3). - ADDED THE WHOLE FUNCTION IN A CODE BLOCK
+
+Chapter 7:
+- Top component screenshot is of the wrong top component (should not be 'improved').
+- Improved listening diagram is missing an underscore for the 'REMOVED_AND_ADDED' transition. - I THINK IT WAS THERE BUT FAINT, REGARDLESS I MADE THE SECOND UNDERSCORE MORE PRONOUNCED

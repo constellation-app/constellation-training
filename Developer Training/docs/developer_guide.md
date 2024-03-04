@@ -1283,7 +1283,7 @@ public static class VertexType {
         .setDescription("A node representing a city, eg. Canberra, Australia.")
         .setColor(ConstellationColor.CLOUDS)
         .setForegroundIcon(AnalyticIconProvider.GLOBE)
-        .setBackgroundIcon(IconManager.getIcon("Flat Square"))
+        .setBackgroundIcon(IconManager.getIconSymbol("Flat Square"))
         .build();
 }
 ```
@@ -1691,6 +1691,8 @@ for (final OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityNa
 ...
 ```
 
+Note: The above code replaces the **entire** for loop from previous code snippet.
+
 ### 4.2.3: Add Plugin Interaction
 
 Constellation provides mechanisms by which the plugin can provide
@@ -1827,9 +1829,9 @@ protected void edit(final GraphWriteMethods wg, final PluginInteraction interact
         final PluginParameters parameters) throws InterruptedException, PluginException {
     super.edit(wg, interaction, parameters);
 
-    final Plugin deselectAllPlugin = PluginRegistry.get(CorePluginRegistry.DESELECT_ALL);
+    final Plugin deselectAllPlugin = PluginRegistry.get(VisualGraphPluginRegistry.DESELECT_ALL);
     final Plugin treesPlugin = PluginRegistry.get(ArrangementPluginRegistry.TREES);
-    final Plugin resetPlugin = PluginRegistry.get(CorePluginRegistry.RESET);
+    final Plugin resetPlugin = PluginRegistry.get(InteractiveGraphPluginRegistry.RESET_VIEW);
 
     PluginExecution.withPlugin(deselectAllPlugin).executeNow(wg);
     PluginExecution.withPlugin(treesPlugin).executeNow(wg);
@@ -2354,7 +2356,7 @@ to complete our arrangement:
 
 ```java
 PluginExecutor.startWith(PandemicPluginRegistry.ARRANGE_BY_GEOGRAPHIC_COORDINATES)
-    .followedBy(CorePluginRegistry.RESET)
+    .followedBy(InteractiveGraphPluginRegistry.RESET_VIEW)
     .executeWriteLater(context.getGraph());
 ```
 
@@ -2483,11 +2485,13 @@ code to return a translator from Outbreak to String (used when the user
 requests to edit the attribute value):
 
 ```java
+...
 if (dataType.equals(StringAttributeDescription.ATTRIBUTE_NAME)) {
     return v -> {
         return v == null ? null : ((Outbreak) v).toString();
     };
 }
+...
 ```
 
 In **fromEditTranslator**(String dataType) we need to add the following
@@ -2495,11 +2499,13 @@ code to return a translator from String to Outbreak (used when the user
 commits an edit to the attribute value):
 
 ```java
+...
 if (dataType.equals(StringAttributeDescription.ATTRIBUTE_NAME)) {
     return v -> {
         return v == null ? null : Outbreak.valueOf((String) v);
     };
 }
+...
 ```
 
 We need to check the dataType parameter to determine which translator to
@@ -2533,6 +2539,23 @@ Implement **fromEditValidator** so that it returns a validator for
 String values that returns the message "Invalid String for Outbreak"
 whenever **Outbreak.*valueOf*()** would throw an
 **IllegalArgumentException*.***
+
+```
+@Override
+public ValueValidator fromEditValidator(final String dataType) {
+    if (dataType.equals(StringAttributeDescription.ATTRIBUTE_NAME)) {
+        return v -> {
+            try {
+                Outbreak.valueOf((String) v);
+                return null;
+            } catch (IllegalArgumentException ex) {
+                return "Invalid String for Outbreak";
+            }
+        }; 
+   }
+    return super.fromEditValidator(dataType);
+}
+```
 
 **Editor Factories**
 
@@ -2770,16 +2793,18 @@ values. There are two bits of code that need to be added to this method.
 The first thing we need to do is to make sure the key is set correctly
 in the default bin by calling
 
-bin.setKey(graph, attribute, element);
+```java
+	bin.setKey(graph, attribute, element);
+```
 
 Now bin.key will be the Outbreak attribute value corresponding to the
 graph current element. We now need to set the key for this bin to be the
 total number of infected people in this Outbreak.
 
 ```java
-key = bin.key == null ? -1
-    : ((Outbreak) bin.key).getNumberOfDiseases() == 0 ? 0
-    : ((Outbreak) bin.key).getOutbreakData().values().stream().reduce((x, y) -> {
+key = bin.getKeyAsObject() == null ? -1
+    : ((Outbreak) bin.getKeyAsObject()).getNumberOfDiseases() == 0 ? 0
+    : ((Outbreak) bin.getKeyAsObject()).getOutbreakData().values().stream().reduce((x, y) -> {
         return x + y;
     }).get();
 ```
