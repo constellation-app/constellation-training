@@ -1,1 +1,1 @@
-pandoc .\developer_guide.md -f markdown --listings -H .\developer_guide.tex -s --toc -o test.pdf
+pandoc .\developer_guide.md -f markdown --listings -H .\developer_guide.tex -s --toc -o Developer_Guide.pdf

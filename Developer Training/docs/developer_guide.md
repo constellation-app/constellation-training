@@ -3958,7 +3958,7 @@ public class MousePositionOverlay extends MapOverlay {
     @Override
     public void overlay() {
         renderer.noStroke();
-        renderer.fill(mousePressed ? highlightColor : backgroundColor);
+        renderer.fill(mousePressed ? HIGHLIGHT_COLOR : BACKGROUND_COLOR);
         renderer.rect(x, y, width, height);
         float yOffset = y + margin;
         final String mouseX = String.valueOf(renderer.mouseX) + "px";
