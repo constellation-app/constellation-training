@@ -48,7 +48,7 @@ public class PandemicArrangementPlugin extends SimpleEditPlugin {
         final int yAttributeId = VisualConcept.VertexAttribute.Y.get(writableGraph);
         final int xAttributeId = VisualConcept.VertexAttribute.X.get(writableGraph);
 
-        if (latitudeAttributeId == Graph.NOT_FOUND && longitudeAttributeId == GraphConstants.NOT_FOUND) {
+        if (latitudeAttributeId == Graph.NOT_FOUND || longitudeAttributeId == GraphConstants.NOT_FOUND) {
             throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' and 'Geo.Longitude' do not exist on this graph!");
         }
 

@@ -1283,7 +1283,7 @@ public static class VertexType {
         .setDescription("A node representing a city, eg. Canberra, Australia.")
         .setColor(ConstellationColor.CLOUDS)
         .setForegroundIcon(AnalyticIconProvider.GLOBE)
-        .setBackgroundIcon(IconManager.getIconSymbol("Flat Square"))
+        .setBackgroundIcon(IconManager.getIcon("Flat Square"))
         .build();
 }
 ```
@@ -1378,11 +1378,11 @@ extremely useful as NetBeans will often move files during a build.
 
 Finally, we should set this icon wherever we wish to use it; in this
 case we will use it to represent our pandemic schema. Override the
-**getIcon** method on **PandemiSchemaFactory** to achieve this.
+**getIconSymbol** method on **PandemiSchemaFactory** to achieve this.
 
 ```java
 @Override
-public ConstellationIcon getIcon() {
+public ConstellationIcon getIconSymbol() {
     return PandemicIconProvider.BIOHAZARD;
 }
 ```
