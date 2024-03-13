@@ -3137,7 +3137,7 @@ public PandemicViewTopComponent() {
 Try running Constellation now and opening your new view. Note that the
 text field will be empty as we have not told it what to display yet.
 
-![](media/image32.png)
+![](media/image30.PNG)
 
 ### 7.1.3: Listening to the Graph
 
