@@ -2302,7 +2302,7 @@ final int yAttributeId = VisualConcept.VertexAttribute.Y.get(writableGraph);
 final int xAttributeId = VisualConcept.VertexAttribute.X.get(writableGraph);
 
 if (latitudeAttributeId == GraphConstants.NOT_FOUND || longitudeAttributeId == GraphConstants.NOT_FOUND) {
-    throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' and 'Geo.Longitude'" 
+    throw new PluginException(PluginNotificationLevel.ERROR, "Required attributes 'Geo.Latitude' or 'Geo.Longitude'" 
 	        + "do not exist on this graph!");
 }
 ```
