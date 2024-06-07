@@ -9,6 +9,7 @@
 *.log
 *.pyc
 makefile
+*.bak
 
 build
 **/nbproject/private

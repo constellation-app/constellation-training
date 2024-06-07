@@ -34,16 +34,19 @@ in the following areas:
 
 Throughout this training document we will use the following conventions:
 
-This is a tip. Tips describe features or concepts that are nice to know
-but not crucial for a good understanding of the rest of the material.
+**TIP**: This is a tip. Tips describe features or concepts that are nice 
+to know but not crucial for a good understanding of the rest of the 
+material.
 
 **This is an important fact. Important facts describe features or
 concepts that are crucial to successful Constellation development.**
 
+```
 This is a code block. Code blocks contain valid Java code that will be
 needed to complete the development tasks in this document. In general,
 you can complete the development tasks by copy-and-pasting these code
 blocks into the skeleton classes contained in the exercises module.
+```
 
 **Required Files**
 
@@ -117,10 +120,10 @@ the following questions:
 
 # Chapter 1: Development Environment
 
-Constellation is built in Java 8 on top of the NetBeans platform, taking
+Constellation is built in Java 21 on top of the NetBeans platform, taking
 advantage of its module and windowing systems, among others. For
-information on how to install and configure Java 8 or NetBeans, refer to
-Oracle's documentation.
+information on how to install and configure Java 21 or NetBeans, refer to
+instructions on the Azul and Apache Netbeans websites.
 
 ## Exercise 1.1: Setting up your Development Environment
 
@@ -131,7 +134,7 @@ be added or removed from a NetBeans platform as required. These modules
 are stored in and managed by a **module suite**.
 
 1.  Click on *File \> New Project*, then select *Module Suite* under the
-    *NetBeans Modules* category. Click *Next*.
+    *NetBeans Modules* sub-category of *Java with Ant*. Click *Next*.
 
 ![](media/image1.png){ width=80% }
 
@@ -167,14 +170,14 @@ suite and selecting *Run*.
 
 ![](media/image5.png){ width=40% }
 
-**TIP**: Pressing the F6 key is a shortcut for running your main project. When
-you have multiple projects open, you can specify the main project by
+**TIP**: Pressing the F6 key is a shortcut for running your main project. 
+When you have multiple projects open, you can specify the main project by
 right-clicking on it and selecting "Set as Main Project". This simply
 means that NetBeans can make assumptions about what to clean, build, or
 run when you don't specify otherwise.
 
 Once Constellation has finished loading, you should be presented with
-the Constellation Tutorial Page.
+the Constellation Welcome Page.
 
 ![](media/image6.png)
 
@@ -207,9 +210,9 @@ In order to start writing code, we first need a module to store it in.
 Similar to a module suite, you can configure a module by right clicking
 an open module and selecting *Properties*.
 
-1.  Since we are working in Java 8, it is always a good idea to ensure
-    that your module is Java 8 compliant. This can be achieved by
-    clicking *Sources* and setting the *Source Level* to 1.8.
+1.  Since we are working in Java 21, it is always a good idea to ensure
+    that your module is Java 21 compliant. This can be achieved by
+    clicking *Sources* and setting the *Source Level* to 21.
 
 ![](media/image10.png){ width=80% }
 
@@ -704,7 +707,7 @@ we will add a single node to the graph.
 @Override
 protected RecordStore query(final RecordStore query, final PluginInteraction interaction, 
         final PluginParameters parameters) throws InterruptedException, PluginException {
-    RecordStore result = new GraphRecordStore();
+    final RecordStore result = new GraphRecordStore();
     result.add();
     result.set(GraphRecordStoreUtilities.SOURCE + VisualConcept.VertexAttribute.IDENTIFIER, "Me");
     result.set(GraphRecordStoreUtilities.SOURCE + AnalyticConcept.VertexAttribute.TYPE, AnalyticConcept.VertexType.PERSON);
@@ -1095,7 +1098,7 @@ public static class VertexAttribute {
 }
 ```
 
-[You also need to build a population schema attribute.]{.ul} Take some
+You also need to build a population schema attribute. Take some
 time to look over the properties which can be set using the schema
 attribute builder.
 
@@ -1340,7 +1343,7 @@ Before we build an icon, we should create an **IconProvider**. Open
 **PandemicIconProvider**; it should look something like this:
 
 ```java
-@ServiceProvider(service = IconProvider.class)
+@ServiceProvider(service = ConstellationIconProvider.class)
 public class PandemicIconProvider implements IconProvider {
     ...
 }
@@ -1565,7 +1568,7 @@ the way in which Constellation responds to the error. Depending on the
 **PluginNotificationLevel** specified, Constellation will respond in
 different ways:
 
-1.  *FATAL***,** *ERROR*: A dialog box is displayed describing the error
+1.  *FATAL*, *ERROR*: A dialog box is displayed describing the error
 
 2.  *WARNING*: A notification bubble is displayed describing the error
 
@@ -1753,20 +1756,21 @@ public PluginParameters createParameters() {
     final PluginParameters parameters = new PluginParameters();
 
     final PluginParameter<DateTimeRangeParameterType.DateTimeRangeParameterValue> datetime 
-	        = DateTimeRangeParameterType.build(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
+	        = CoreGlobalParameters.DATETIME_RANGE_PARAMETER;
     parameters.addParameter(datetime);
     return parameters;
 }
 ```
 
 A significant difference this time is that we have used a globally
-defined parameter ID, instead of creating our own as we did in the
-**ImportCustomCitiesPlugin**. Previously, we wanted to make our
-parameter ID unique so that it did not clash with other parameters in
-the application. In this case, we want to match the parameter ID of
-other data access plugins that specify a datetime range parameter. This
-will allow the Data Access View to present this parameter only once
-instead of making the users enter in the same values multiple times.
+defined parameter (with its own globally defined parameter ID), instead 
+of creating our own as we did in the **ImportCustomCitiesPlugin**. 
+Previously, we wanted to make our parameter ID unique so that it did not 
+clash with other parameters in the application. In this case, we want to 
+match the parameter ID of other data access plugins that specify a 
+datetime range parameter. This will allow the Data Access View to 
+present this parameter only once instead of making the users enter in 
+the same values multiple times.
 
 Run Constellation now and see that the datetime range parameter has not
 appeared under our plugin's heading. However, our plugin will have
@@ -2055,7 +2059,7 @@ public void updateParameters(final Graph graph, final PluginParameters parameter
     } finally {
         readableGraph.release();
     }
-    SingleChoiceParameterType.setOptions(parameters.getParameters().get(DISEASE_PARAMETER_ID), new ArrayList<>(diseases));
+    SingleChoiceParameterType.setOptions((PluginParameter<SingleChoiceParameterType.SingleChoiceParameterValue>) parameters.getParameters().get(DISEASE_PARAMETER_ID), new ArrayList<>(diseases));
 }
 ```
 
@@ -2690,7 +2694,7 @@ will ensure against failure.
 
 If you look at the 'Outbreak' attribute in the histogram now, you will
 notice that the labels are as expected but that the sorting seems
-random. This is because it is sorting by **hashcode()**as **Outbreak**
+random. This is because it is sorting by **hashcode()** as **Outbreak**
 doesn't implement **Comparable**.
 
 ### 6.4.1: Implement Comparable for Outbreak
