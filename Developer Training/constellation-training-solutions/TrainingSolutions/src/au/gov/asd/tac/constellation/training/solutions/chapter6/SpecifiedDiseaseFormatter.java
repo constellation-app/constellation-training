@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public class SpecifiedDiseaseFormatter extends BinFormatter {
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        PluginParameter diseaseNameParam = StringParameterType.build(DISEASE_NAME_PARAMETER_ID);
+        final PluginParameter diseaseNameParam = StringParameterType.build(DISEASE_NAME_PARAMETER_ID);
         diseaseNameParam.setName(DISEASE_NAME_PARAMETER_LABEL);
         parameters.addParameter(diseaseNameParam);
         return parameters;

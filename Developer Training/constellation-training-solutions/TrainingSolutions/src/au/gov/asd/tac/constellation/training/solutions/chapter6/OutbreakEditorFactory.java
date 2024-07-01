@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -62,7 +61,7 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
 
         private final List<DiseaseEntry> diseases = new ArrayList<>();
         private final VBox diseaseEntries = new VBox(5);
-        private final CheckBox noValueCheckBox = new CheckBox(NO_VALUE_LABEL);
+        //private final CheckBox noValueCheckBox = new CheckBox(NO_VALUE_LABEL);
 
         protected OutbreakEditor(final EditOperation editOperation, final DefaultGetter defaultGetter, final ValueValidator<Outbreak> validator, final String editedItemName, final Outbreak initialValue) {
             super(editOperation, defaultGetter, validator, editedItemName, initialValue);
@@ -74,13 +73,13 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
             try {
                 diseases.forEach(disease -> {
                     if (!disease.diseaseName.getText().isEmpty()) {
-                        data.put(disease.diseaseName.getText(), Integer.parseInt(disease.numberInfected.getText()));
+                        data.put(disease.diseaseName.getText(), Integer.valueOf(disease.numberInfected.getText()));
                     }
                 });
             } catch (NumberFormatException ex) {
                 throw new ControlsInvalidException("Non integer value entered for number infected");
             }
-            return noValueCheckBox.isSelected() ? null : new Outbreak(data);
+            return new Outbreak(data);
         }
 
         @Override
@@ -93,7 +92,7 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
                     new DiseaseEntry(diseases, diseaseEntries, name, number);
                 });
             }
-            noValueCheckBox.setSelected(value == null);
+            //noValueCheckBox.setSelected(value == null);
         }
 
         @Override
@@ -118,17 +117,22 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
             addPane.setAlignment(Pos.CENTER_RIGHT);
             addPane.getChildren().addAll(addButtonLabel, addButton);
 
-            noValueCheckBox.selectedProperty().addListener((o, n, v) -> {
-                addButton.setDisable(noValueCheckBox.isSelected());
-                diseaseEntries.setDisable(noValueCheckBox.isSelected());
-                update();
-            });
+//            noValueCheckBox.selectedProperty().addListener((o, n, v) -> {
+//                addButton.setDisable(noValueCheckBox.isSelected());
+//                diseaseEntries.setDisable(noValueCheckBox.isSelected());
+//                update();
+//            });
 
             final VBox controls = new VBox(10);
             controls.setPrefWidth(300);
-            controls.getChildren().addAll(diseasesScrollPane, addPane, noValueCheckBox);
+            controls.getChildren().addAll(diseasesScrollPane, addPane);
 
             return controls;
+        }
+
+        @Override
+        public boolean noValueCheckBoxAvailable() {
+            return true;
         }
 
         private class DiseaseEntry {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,12 +60,12 @@ public class ImportCustomCitiesPlugin extends RecordStoreQueryPlugin implements 
 
     @Override
     protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
-        RecordStore result = new GraphRecordStore();
+        final RecordStore result = new GraphRecordStore();
 
         final String citiesString = parameters.getStringValue(CITIES_PARAMETER_ID);
 
         if (citiesString != null) {
-            for (String cityName : citiesString.split("\n", -1)) {
+            for (final String cityName : citiesString.split("\n", -1)) {
                 final OutbreakUtilities.City city = OutbreakUtilities.getCity(cityName);
 
                 if (city == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class PandemicViewPane extends BorderPane {
 
             final StringBuilder summaryText = new StringBuilder("Outbreak Summary:\n\n");
 
-            for (Map.Entry<Outbreak, String> outbreak : outbreaks.entrySet()) {
+            for (final Map.Entry<Outbreak, String> outbreak : outbreaks.entrySet()) {
                 summaryText.append(outbreak.getValue()).append(": ").append(interaction.getDisplayText(outbreak.getKey())).append("\n\n");
             }
             summary.setText(summaryText.toString());

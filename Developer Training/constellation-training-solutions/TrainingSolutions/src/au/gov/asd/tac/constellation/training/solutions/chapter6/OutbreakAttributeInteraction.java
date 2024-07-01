@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ public class OutbreakAttributeInteraction extends AbstractAttributeInteraction<O
                 try {
                     Outbreak.valueOf((String) v);
                     return null;
-                } catch (IllegalArgumentException ex) {
+                } catch (final IllegalArgumentException ex) {
                     return "Invalid String for OutbreakStatus";
                 }
             };
