@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class TotalInfectionsFormatter extends BinFormatter {
     }
 
     @Override
-    public boolean appliesToBin(Bin bin) {
+    public boolean appliesToBin(final Bin bin) {
         // Make sure the bin is a bin for Outbreak attributes
         return false;
     }
