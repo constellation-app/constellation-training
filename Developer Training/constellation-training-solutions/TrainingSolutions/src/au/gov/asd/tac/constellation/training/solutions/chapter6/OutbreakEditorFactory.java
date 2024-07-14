@@ -61,7 +61,6 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
 
         private final List<DiseaseEntry> diseases = new ArrayList<>();
         private final VBox diseaseEntries = new VBox(5);
-        //private final CheckBox noValueCheckBox = new CheckBox(NO_VALUE_LABEL);
 
         protected OutbreakEditor(final EditOperation editOperation, final DefaultGetter defaultGetter, final ValueValidator<Outbreak> validator, final String editedItemName, final Outbreak initialValue) {
             super(editOperation, defaultGetter, validator, editedItemName, initialValue);
@@ -92,7 +91,6 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
                     new DiseaseEntry(diseases, diseaseEntries, name, number);
                 });
             }
-            //noValueCheckBox.setSelected(value == null);
         }
 
         @Override
@@ -116,12 +114,6 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
             addPane.setHgap(10);
             addPane.setAlignment(Pos.CENTER_RIGHT);
             addPane.getChildren().addAll(addButtonLabel, addButton);
-
-//            noValueCheckBox.selectedProperty().addListener((o, n, v) -> {
-//                addButton.setDisable(noValueCheckBox.isSelected());
-//                diseaseEntries.setDisable(noValueCheckBox.isSelected());
-//                update();
-//            });
 
             final VBox controls = new VBox(10);
             controls.setPrefWidth(300);
