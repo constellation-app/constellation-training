@@ -359,7 +359,7 @@ NetBeans will also provide useful hints in the margins which can be
 clicked for further options. These include automatic code generation and
 import resolution.
 
-**1.1.8: Import the Training Module**
+### 1.1.8: Import the Training Module
 
 Right click on the *Modules* directory inside your module suite and
 select *Add Existing...*. Browse to the TrainingExercises module as
