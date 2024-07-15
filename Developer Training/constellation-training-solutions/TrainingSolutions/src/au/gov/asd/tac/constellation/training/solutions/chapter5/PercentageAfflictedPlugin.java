@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,14 +54,14 @@ public class PercentageAfflictedPlugin extends SimpleEditPlugin {
     @Override
     public PluginParameters createParameters() {
         final PluginParameters parameters = new PluginParameters();
-        PluginParameter<SingleChoiceParameterValue> diseaseParameter = SingleChoiceParameterType.build(DISEASE_PARAMETER_ID);
+        final PluginParameter<SingleChoiceParameterValue> diseaseParameter = SingleChoiceParameterType.build(DISEASE_PARAMETER_ID);
         diseaseParameter.setName(DISEASE_PARAMETER_LABEL);
         parameters.addParameter(diseaseParameter);
         return parameters;
     }
 
     @Override
-    public void updateParameters(Graph graph, PluginParameters parameters) {
+    public void updateParameters(final Graph graph, final PluginParameters parameters) {
         final Set<String> diseases = new HashSet<>();
         final ReadableGraph readableGraph = graph.getReadableGraph();
         try {

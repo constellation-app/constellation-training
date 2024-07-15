@@ -181,7 +181,59 @@ the Constellation Welcome Page.
 
 ![](media/image6.png)
 
-### 1.1.4: Creating a Module
+### 1.1.4: Accessing JDK Internals
+
+While Constellation is running, try opening a new graph and see what 
+happens. What you would expect to happen is Constellation simply opens a 
+new graph, but instead you get a number of exceptions being thrown. Why 
+is that? To find that out, close Constellation and take a look at the logs 
+in the output window.
+
+In the output window, near the top of the logs for that run of 
+Constellation, you'll see this exception:
+
+```
+java.lang.reflect.InaccessibleObjectException: Unable to make field 
+    transient java.net.URLStreamHandler java.net.URL.handler accessible: 
+	module java.base does not "opens java.net" to unnamed module @27fa135a
+```
+
+As of Java 17, JDK internals are strongly encapsulated, meaning that 
+external modules can no longer access internal APIs. Constellation at 
+present though requires access to some of these internals. Without that 
+access, these kinds of exceptions get thrown. There are ways to get around 
+that but we won't go into that in any detail here. You can refer to 
+JEP-403 online for more information.
+
+The key thing to note here is that Constellation has opened up a number of 
+internals in order to work (note that Constellation was first written 
+before Java 17) and so any module suites that have Constellation as a 
+module dependency will also require these opened. This includes our newly 
+created module suite.
+
+1.	Expand your module suite, expand *Important Files* and select 
+	*Project Properties*.
+
+2.	Add the following code to the bottom of the file:
+```
+run.args.extra=-J--add-opens=java.base/java.net\=ALL-UNNAMED \
+               -J--add-opens=java.base/java.security\=ALL-UNNAMED \
+               -J--add-opens=java.desktop/javax.swing\=ALL-UNNAMED \
+               -J--add-opens=javafx.base/com.sun.javafx.event\=ALL-UNNAMED \
+               -J--add-exports=java.base/java.net\=ALL-UNNAMED \
+               -J--add-exports=java.base/java.security\=ALL-UNNAMED \
+               -J--add-exports=java.base/java.lang\=ALL-UNNAMED \
+               -J--add-exports=java.desktop/sun.awt\=ALL-UNNAMED \ 
+               -J--add-exports=java.desktop/sun.java2d\=ALL-UNNAMED \
+               -J--add-exports=javafx.base/com.sun.javafx.event\=ALL-UNNAMED
+```
+
+3.	Save the file and then clean and build your module suite.
+
+Verify it all works by running your module suite again. When you open a 
+new graph this time, no exceptions should be thrown.
+
+### 1.1.5: Creating a Module
 
 In order to start writing code, we first need a module to store it in.
 
@@ -205,7 +257,7 @@ In order to start writing code, we first need a module to store it in.
 
 ![](media/image9.png){ width=80% }
 
-### 1.1.5: Configuring a Module
+### 1.1.6: Configuring a Module
 
 Similar to a module suite, you can configure a module by right clicking
 an open module and selecting *Properties*.
@@ -236,7 +288,7 @@ an open module and selecting *Properties*.
 
 5.  Click *OK* to finalise configuration of your module.
 
-### 1.1.6: Testing your Environment
+### 1.1.7: Testing your Environment
 
 To make sure your environment is configured correctly, let's try adding
 some code to it and observing the output.
@@ -307,7 +359,7 @@ NetBeans will also provide useful hints in the margins which can be
 clicked for further options. These include automatic code generation and
 import resolution.
 
-**1.1.7: Import the Training Module**
+### 1.1.8: Import the Training Module
 
 Right click on the *Modules* directory inside your module suite and
 select *Add Existing...*. Browse to the TrainingExercises module as

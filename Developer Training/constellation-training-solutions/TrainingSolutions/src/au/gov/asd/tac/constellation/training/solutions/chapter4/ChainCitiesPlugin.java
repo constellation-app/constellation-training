@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,12 +63,11 @@ public class ChainCitiesPlugin extends RecordStoreQueryPlugin implements DataAcc
 
     @Override
     protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
-
         final DateTimeRange datetimeRange = parameters.getDateTimeRangeValue(CoreGlobalParameters.DATETIME_RANGE_PARAMETER_ID);
         final long startTime = datetimeRange.getZonedStartEnd()[0].toInstant().toEpochMilli();
         final long endTime = datetimeRange.getZonedStartEnd()[1].toInstant().toEpochMilli();
 
-        RecordStore result = new GraphRecordStore();
+        final RecordStore result = new GraphRecordStore();
 
         int currentStep = 0;
 
@@ -78,7 +77,7 @@ public class ChainCitiesPlugin extends RecordStoreQueryPlugin implements DataAcc
 
             interaction.setProgress(++currentStep, query.size(), "Processing: " + cityName, true);
 
-            for (OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityName, startTime, endTime)) {
+            for (final OutbreakUtilities.Flight flight : OutbreakUtilities.getFlights(cityName, startTime, endTime)) {
                 result.add();
                 OutbreakUtilities.addFlightToRecord(flight, result);
             }

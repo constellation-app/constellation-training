@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2019 Australian Signals Directorate
+ * Copyright 2010-2024 Australian Signals Directorate
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public class ImportCustomCitiesPlugin extends RecordStoreQueryPlugin implements 
 
     @Override
     protected RecordStore query(final RecordStore query, final PluginInteraction interaction, final PluginParameters parameters) throws InterruptedException, PluginException {
-        RecordStore result = new GraphRecordStore();
+        final RecordStore result = new GraphRecordStore();
 
         // Read cities from parameter value and add to RecordStore
         return result;
