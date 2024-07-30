@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -293,7 +294,9 @@ public class OutbreakUtilities {
          * @return the datetime when the Flight departs.
          */
         public String getDepartureTime() {
-            return ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC).toString();
+            ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+            return zonedDateTime.format(formatter);
         }
 
         /**
