@@ -293,8 +293,8 @@ public class OutbreakUtilities {
          * @return the datetime when the Flight departs.
          */
         public String getDepartureTime() {
-            ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+            final ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC);
+            final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
             return zonedDateTime.format(formatter);
         }
 
