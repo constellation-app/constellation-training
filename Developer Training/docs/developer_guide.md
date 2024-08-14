@@ -1433,7 +1433,7 @@ extremely useful as NetBeans will often move files during a build.
 
 Finally, we should set this icon wherever we wish to use it; in this
 case we will use it to represent our pandemic schema. Override the
-**getIconSymbol** method on **PandemiSchemaFactory** to achieve this.
+**getIconSymbol** method on **PandemicSchemaFactory** to achieve this.
 
 ```java
 @Override
@@ -2709,15 +2709,14 @@ inside the **DiseaseEntry** constructor since these are dynamically
 created and so the **createEditorControls** method doesn't know about
 them.
 
-### 6.3.5: Adding the ability to set null values
+### 6.3.5: The ability to set null values
 
 Observe that in **getValueFromControls** if the list of **DiseaseEntry**
 objects is empty, an Outbreak object with an empty outbreakData map is
 returned. This indicates that a city is 'Clear of Infection', which is
 different to a null value indicating a lack of information. The editor
-currently has no way of setting null. Add a checkbox to the bottom of
-the editor that explicitly sets the value to null. This will require
-following the process of steps 6.3.1 through to 6.3.4
+uses the 'No value' checkbox as a way of setting null. Test out setting
+an attribute value to null using the checkbox.
 
 **Histogram**
 
@@ -2886,8 +2885,7 @@ there needs to be some way of allowing the user to choose which disease
 they are interested in. Of course you could use a separate formatter for
 each disease, but this is rather clumsy.
 
-## Exercise 6.6: Creating the 'Number Infected with Disease' Bin
-Formatter
+## Exercise 6.6: Creating the 'Number Infected with Disease' Bin Formatter
 
 Open **SpecifiedDiseaseFormatter** from chapter 6 of the exercises
 module. Much of this class looks the same as the previous formatter --

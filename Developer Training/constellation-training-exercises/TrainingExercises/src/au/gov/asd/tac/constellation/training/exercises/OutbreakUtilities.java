@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,7 +46,7 @@ import org.openide.util.Exceptions;
  * Outbreak Utilities.
  */
 public class OutbreakUtilities {
-    
+
     private static final Logger LOGGER = Logger.getLogger(OutbreakUtilities.class.getName());
 
     private static final double DAILY_LOCAL_SPREAD_FACTOR = 0.01;
@@ -292,7 +293,9 @@ public class OutbreakUtilities {
          * @return the datetime when the Flight departs.
          */
         public String getDepartureTime() {
-            return ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC).toString();
+            final ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(departureTime), ZoneOffset.UTC);
+            final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+            return zonedDateTime.format(formatter);
         }
 
         /**
@@ -526,7 +529,7 @@ public class OutbreakUtilities {
                     if (totalScore > 1.45f) {
                         flightCount++;
                         if (flightCount % 1000 == 0) {
-                           LOGGER.log(Level.INFO, "{0} {1}", new Object[]{flightCount, failed});
+                            LOGGER.log(Level.INFO, "{0} {1}", new Object[]{flightCount, failed});
                         }
                         final long departureTime = currentTime - (long) (Math.random() * timeRange) * minuteMillis;
                         final int passengers = (int) (populationScore * 1000);
