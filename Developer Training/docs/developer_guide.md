@@ -3695,7 +3695,7 @@ it looks within Constellation.
 
 ### 8.2.2: Hooking into the Help Framework
 
-Constellation uses a series of files to find and organise help documents.
+Constellation uses a couple of files to find and organise help documents.
 Let's go through those now.
 
 -   **PandemicHelpProvider.java**: This is the *help page provider* file. 
@@ -3704,7 +3704,13 @@ Let's go through those now.
 	framework. In it are two overwritten functions:
 	-	***getHelpMap()***: This function allows us to specify unique id's
 		for our help pages, and then map those id's to the actual MD file 
-		locations
+		locations. The id's are important as they are what is used when you 
+		want to specify opening a particular help page (e.g. creating a
+		button which when clicked opens up a help page). For some existing 
+		parts of Constellation, there will already be an expectation on the 
+		format of the id. e.g. For Data Access Plugins, the id needs to 
+		match the full class name of the plugin in order for the blue help 
+		button to open the correct help page.
 	-	***getHelpTOC()***: This function allows us to specify the location
 		of the table of contents file for this module.
 
