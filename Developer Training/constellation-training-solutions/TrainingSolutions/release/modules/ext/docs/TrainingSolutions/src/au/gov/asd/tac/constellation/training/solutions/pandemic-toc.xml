@@ -3,7 +3,7 @@
 <toc version="2.0">
     <tocitem text="Training" mergetype="javax.help.SortMerge">
         <tocitem text="Pandemic" mergetype="javax.help.SortMerge">
-            <tocitem text="Import Custom Cities" target="au.gov.asd.tac.constellation.training.exercises.chapter4.ImportCustomCitiesPlugin"/>
+            <tocitem text="Import Custom Cities" target="au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin"/>
         </tocitem>
     </tocitem>
 </toc>

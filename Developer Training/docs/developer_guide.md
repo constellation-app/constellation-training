@@ -3673,39 +3673,45 @@ entry.
 
 ## Exercise 8.2: Help
 
-Constellation makes use of NetBeans' built-in **help framework** for
-providing help documentation. We are not going to go into too much
-detail on how this works, but to get you started let's jump into an
-example.
+Constellation makes use of a custom framework for providing help 
+documentation. We are not going to go into too much detail on how this works, 
+but to get you started let's jump into an example.
 
 ### 8.2.1: Writing a Help Page
 
-Help pages in Constellation are simply HTML documents. Open
-'import-custom-cities.html' and take a look at its format.
+Help pages in Constellation are simply Markdown (MD) documents. Open
+'import-custom-cities.md' and take a look at its format. You can find this 
+file located within the release/modules/ext/docs folder (after navigating a 
+few additional sub-folders). Note that because of its location, you won't 
+find the file from the *Projects* tab of Netbeans. You will need to switch to 
+the *Files* tab in order to find it.
 
-Other than linking to 'constellation.css' for some basic formatting,
-this is just a very simple HTML document. Feel free to add any text you
-wish to it now to see how it looks within Constellation.
+As you will see, this is just a very simple MD document. If you are unfamiliar 
+with Markdown syntax, there are plenty of online resources which will go through 
+that (so we won't cover that here). No specific syntax is required though to add 
+text generally (syntax will only become important if you want to format text or 
+add additional features). Feel free to add any text you wish to it now to see how 
+it looks within Constellation.
 
 ### 8.2.2: Hooking into the Help Framework
 
-NetBeans uses a series of xml files to find and organise help documents.
+Constellation uses a series of files to find and organise help documents.
 Let's go through those now.
 
--   **pandemic-hs.xml**: This is the *helpset* document, which defines a
-    collection of help documents. This document allows us to name our
-    help set, and link it to various other organisational documents
-    required by the help framework.
+-   **PandemicHelpProvider.java**: This is the *help page provider* file. 
+	Located in the base package of the Training Exercises module, this 
+	file outlines the details how to map your help pages into the help 
+	framework. In it are two overwritten functions:
+	-	***getHelpMap()***: This function allows us to specify unique id's
+		for our help pages, and then map those id's to the actual MD file 
+		locations
+	-	***getHelpTOC()***: This function allows us to specify the location
+		of the table of contents file for this module.
 
 -   **pandemic-toc.xml**: This is the *table of contents* document,
     which allows us to specify headings, groupings and order for our set
-    of help documents.
-
--   **pandemic-idx.xml**: This is the *index* document, which allows us
-    to specify unique id's for looking up help documents.
-
--   **pandemic-map**: This is the *mapping* document, which allows us to
-    map our indexes to the actual HTML help documents.
+    of help documents. This file is located alongside the module's help 
+	pages in the release/modules/ext/docs folder.
 
 You won't need to make any changes here, so try launching Constellation
 and finding the 'Import Custom Cities' help page.
