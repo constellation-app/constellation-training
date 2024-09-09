@@ -24,6 +24,8 @@ import au.gov.asd.tac.constellation.training.solutions.Outbreak;
 import au.gov.asd.tac.constellation.training.solutions.PandemicPluginRegistry;
 import au.gov.asd.tac.constellation.training.solutions.chapter3.OutbreakAttributeDescription;
 import au.gov.asd.tac.constellation.training.solutions.chapter3.PandemicConcept;
+import au.gov.asd.tac.constellation.utilities.color.ConstellationColor;
+import au.gov.asd.tac.constellation.utilities.icon.UserInterfaceIconProvider;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -33,8 +35,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import org.openide.util.HelpCtx;
 
 /**
  * Pandemic View Pane.
@@ -59,10 +64,15 @@ public class PandemicViewPane extends BorderPane {
                     .interactively(true)
                     .executeLater(GraphManager.getDefault().getActiveGraph());
         });
+        
+        final Button helpButton = new Button("", new ImageView(UserInterfaceIconProvider.HELP.buildImage(16, ConstellationColor.SKY.getJavaColor())));
+        helpButton.paddingProperty().set(new Insets(2, 0, 0, 0));
+        helpButton.setTooltip(new Tooltip("Display help for Pandemic View"));
+        helpButton.setOnAction(event -> new HelpCtx(PandemicViewPane.class.getName()).display());
 
         options = new FlowPane();
         options.setAlignment(Pos.CENTER_RIGHT);
-        options.getChildren().add(infectButton);
+        options.getChildren().addAll(infectButton, helpButton);
         setBottom(options);
     }
 

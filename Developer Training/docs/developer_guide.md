@@ -3518,7 +3518,7 @@ to extend a class within the framework.
 @ActionReferences(...)
 @TopComponent.OpenActionRegistration(...)
 @Messages(...)
-public final class GenericPandemicViewTopComponent extends JavaFxTopComponent {
+public final class GenericPandemicViewTopComponent extends JavaFxTopComponent<PandemicViewPane> {
     public GenericPandemicViewTopComponent() {
         setName(...);
         setToolTipText(...);
@@ -3721,6 +3721,45 @@ Let's go through those now.
 
 You won't need to make any changes here, so try launching Constellation
 and finding the 'Import Custom Cities' help page.
+
+### 8.2.3: Adding a Help Button
+
+As mentioned in the previous exercise, one of the things you might like to 
+do is add a help button to your functionality in order to provide users an 
+easy way to access help information. You may have already seen in an earlier 
+exercise that if you clicked on the help button next to Import Custom Cities 
+in Data Access View, it would open the help page for that plugin. We're now 
+going to add a similar button to the PandemicViewPane from Chapter 7 so that 
+when clicked we will be able to immediately open the help page for the 
+Pandemic View.
+
+Open up the PandemicViewPane from Chapter 7 and add the following code to 
+the constrcutor.
+
+```java
+public PandemicViewPane() {
+    ...
+    final Button helpButton = new Button("", new ImageView(UserInterfaceIconProvider.HELP.buildImage(16, ConstellationColor.SKY.getJavaColor())));
+	helpButton.paddingProperty().set(new Insets(2, 0, 0, 0));
+	helpButton.setTooltip(new Tooltip("Display help for Pandemic View"));
+	helpButton.setOnAction(event -> new HelpCtx(PandemicViewPane.class.getName()).display());
+	...
+	// modify the add call on options to addAll
+	options.getChildren().addAll(infectButton, helpButton);
+	...
+}
+```
+
+The parameter we are passing to the HelpCtx object is the help id of the 
+page that we want open, namely the Pandemic View help page. It is important 
+that this value matches what we have specified in the help provider file and 
+the toc file. If not, the button will open the default help page (About 
+Constellation) if it can't match the id given.
+
+So go ahead and give that a try. When you open one of the Pandemic Views we
+created earlier, you should now see a help button next to Spread Disease 
+button. When you click on that button, it should bring up the Pandemic 
+View help page.
 
 ## Exercise 8.3: Logging
 

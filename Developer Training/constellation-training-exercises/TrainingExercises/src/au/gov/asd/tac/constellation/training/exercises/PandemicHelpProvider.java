@@ -44,7 +44,8 @@ public class PandemicHelpProvider extends HelpPageProvider {
         final String pandemicModulePath = ".." + SEP + getFrontPath() + "ext" + SEP + "docs" + SEP + "TrainingExercises" + SEP + "src" + SEP + "au" + SEP + "gov" + SEP + "asd"
                 + SEP + "tac" + SEP + CODEBASE_NAME + SEP + "training" + SEP + "exercises" + SEP;
 
-        map.put("au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin", pandemicModulePath + "import-custom-cities.md");
+        map.put("au.gov.asd.tac.constellation.training.exercises.chapter4.ImportCustomCitiesPlugin", pandemicModulePath + "import-custom-cities.md");
+        map.put("au.gov.asd.tac.constellation.training.exercises.chapter7.PandemicViewPane", pandemicModulePath + "pandemic-view.md");
         return map;
     }
 

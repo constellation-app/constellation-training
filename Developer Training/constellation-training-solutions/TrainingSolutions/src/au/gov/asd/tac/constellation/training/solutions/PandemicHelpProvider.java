@@ -45,6 +45,7 @@ public class PandemicHelpProvider extends HelpPageProvider {
                 + SEP + "tac" + SEP + CODEBASE_NAME + SEP + "training" + SEP + "solutions" + SEP;
 
         map.put("au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin", pandemicModulePath + "import-custom-cities.md");
+        map.put("au.gov.asd.tac.constellation.training.solutions.chapter7.PandemicViewPane", pandemicModulePath + "pandemic-view.md");
         return map;
     }
 

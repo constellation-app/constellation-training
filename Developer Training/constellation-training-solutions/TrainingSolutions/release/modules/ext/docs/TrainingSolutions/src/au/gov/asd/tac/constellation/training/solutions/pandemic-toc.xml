@@ -4,6 +4,7 @@
     <tocitem text="Training" mergetype="javax.help.SortMerge">
         <tocitem text="Pandemic" mergetype="javax.help.SortMerge">
             <tocitem text="Import Custom Cities" target="au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin"/>
+            <tocitem text="Pandemic View" target="au.gov.asd.tac.constellation.training.solutions.chapter7.PandemicViewPane"/>
         </tocitem>
     </tocitem>
 </toc>
