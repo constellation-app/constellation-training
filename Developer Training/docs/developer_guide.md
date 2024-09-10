@@ -3734,7 +3734,7 @@ when clicked we will be able to immediately open the help page for the
 Pandemic View.
 
 Open up the PandemicViewPane from Chapter 7 and add the following code to 
-the constrcutor.
+the constructor.
 
 ```java
 public PandemicViewPane() {
