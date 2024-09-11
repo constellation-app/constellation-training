@@ -3516,7 +3516,7 @@ to extend a class within the framework.
 @ActionReferences(...)
 @TopComponent.OpenActionRegistration(...)
 @Messages(...)
-public final class GenericPandemicViewTopComponent extends JavaFxTopComponent {
+public final class GenericPandemicViewTopComponent extends JavaFxTopComponent<PandemicViewPane> {
     public GenericPandemicViewTopComponent() {
         setName(...);
         setToolTipText(...);
@@ -3671,42 +3671,93 @@ entry.
 
 ## Exercise 8.2: Help
 
-Constellation makes use of NetBeans' built-in **help framework** for
-providing help documentation. We are not going to go into too much
-detail on how this works, but to get you started let's jump into an
-example.
+Constellation makes use of a custom framework for providing help 
+documentation. We are not going to go into too much detail on how this works, 
+but to get you started let's jump into an example.
 
 ### 8.2.1: Writing a Help Page
 
-Help pages in Constellation are simply HTML documents. Open
-'import-custom-cities.html' and take a look at its format.
+Help pages in Constellation are simply Markdown (MD) documents. Open
+'import-custom-cities.md' and take a look at its format. You can find this 
+file located within the release/modules/ext/docs folder (after navigating a 
+few additional sub-folders). Note that because of its location, you won't 
+find the file from the *Projects* tab of Netbeans. You will need to switch to 
+the *Files* tab in order to find it.
 
-Other than linking to 'constellation.css' for some basic formatting,
-this is just a very simple HTML document. Feel free to add any text you
-wish to it now to see how it looks within Constellation.
+As you will see, this is just a very simple MD document. If you are unfamiliar 
+with Markdown syntax, there are plenty of online resources which will go through 
+that (so we won't cover that here). No specific syntax is required though to add 
+text generally (syntax will only become important if you want to format text or 
+add additional features). Feel free to add any text you wish to it now to see how 
+it looks within Constellation.
 
 ### 8.2.2: Hooking into the Help Framework
 
-NetBeans uses a series of xml files to find and organise help documents.
+Constellation uses a couple of files to find and organise help documents.
 Let's go through those now.
 
--   **pandemic-hs.xml**: This is the *helpset* document, which defines a
-    collection of help documents. This document allows us to name our
-    help set, and link it to various other organisational documents
-    required by the help framework.
+-   **PandemicHelpProvider.java**: This is the *help page provider* file. 
+	Located in the base package of the Training Exercises module, this 
+	file outlines the details how to map your help pages into the help 
+	framework. In it are two overwritten functions:
+	-	***getHelpMap()***: This function allows us to specify unique id's
+		for our help pages, and then map those id's to the actual MD file 
+		locations. The id's are important as they are what is used when you 
+		want to specify opening a particular help page (e.g. creating a
+		button which when clicked opens up a help page). For some existing 
+		parts of Constellation, there will already be an expectation on the 
+		format of the id. e.g. For Data Access Plugins, the id needs to 
+		match the full class name of the plugin in order for the blue help 
+		button to open the correct help page.
+	-	***getHelpTOC()***: This function allows us to specify the location
+		of the table of contents file for this module.
 
 -   **pandemic-toc.xml**: This is the *table of contents* document,
     which allows us to specify headings, groupings and order for our set
-    of help documents.
-
--   **pandemic-idx.xml**: This is the *index* document, which allows us
-    to specify unique id's for looking up help documents.
-
--   **pandemic-map**: This is the *mapping* document, which allows us to
-    map our indexes to the actual HTML help documents.
+    of help documents. This file is located alongside the module's help 
+	pages in the release/modules/ext/docs folder.
 
 You won't need to make any changes here, so try launching Constellation
 and finding the 'Import Custom Cities' help page.
+
+### 8.2.3: Adding a Help Button
+
+As mentioned in the previous exercise, one of the things you might like to 
+do is add a help button to your functionality in order to provide users an 
+easy way to access help information. You may have already seen in an earlier 
+exercise that if you clicked on the help button next to Import Custom Cities 
+in Data Access View, it would open the help page for that plugin. We're now 
+going to add a similar button to the PandemicViewPane from Chapter 7 so that 
+when clicked we will be able to immediately open the help page for the 
+Pandemic View.
+
+Open up the PandemicViewPane from Chapter 7 and add the following code to 
+the constructor.
+
+```java
+public PandemicViewPane() {
+    ...
+    final Button helpButton = new Button("", new ImageView(UserInterfaceIconProvider.HELP.buildImage(16, ConstellationColor.SKY.getJavaColor())));
+	helpButton.paddingProperty().set(new Insets(2, 0, 0, 0));
+	helpButton.setTooltip(new Tooltip("Display help for Pandemic View"));
+	helpButton.setOnAction(event -> new HelpCtx(PandemicViewPane.class.getName()).display());
+	...
+	// modify the add call on options to addAll
+	options.getChildren().addAll(infectButton, helpButton);
+	...
+}
+```
+
+The parameter we are passing to the HelpCtx object is the help id of the 
+page that we want open, namely the Pandemic View help page. It is important 
+that this value matches what we have specified in the help provider file and 
+the toc file. If not, the button will open the default help page (About 
+Constellation) if it can't match the id given.
+
+So go ahead and give that a try. When you open one of the Pandemic Views we
+created earlier, you should now see a help button next to Spread Disease 
+button. When you click on that button, it should bring up the Pandemic 
+View help page.
 
 ## Exercise 8.3: Logging
 
