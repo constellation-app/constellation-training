@@ -3679,10 +3679,9 @@ but to get you started let's jump into an example.
 
 Help pages in Constellation are simply Markdown (MD) documents. Open
 'import-custom-cities.md' and take a look at its format. You can find this 
-file located within the release/modules/ext/docs folder (after navigating a 
-few additional sub-folders). Note that because of its location, you won't 
-find the file from the *Projects* tab of Netbeans. You will need to switch to 
-the *Files* tab in order to find it.
+file located within the release/modules/ext/docs/TrainingExercises folder. Note 
+that because of its location, you won't find the file from the *Projects* tab of 
+Netbeans. You will need to switch to the *Files* tab in order to find it.
 
 As you will see, this is just a very simple MD document. If you are unfamiliar 
 with Markdown syntax, there are plenty of online resources which will go through 

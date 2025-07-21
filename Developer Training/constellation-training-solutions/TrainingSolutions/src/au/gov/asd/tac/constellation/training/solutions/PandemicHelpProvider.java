@@ -17,7 +17,6 @@ package au.gov.asd.tac.constellation.training.solutions;
 
 import au.gov.asd.tac.constellation.help.HelpPageProvider;
 import au.gov.asd.tac.constellation.help.utilities.Generator;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import org.openide.util.NbBundle;
@@ -30,8 +29,7 @@ import org.openide.util.lookup.ServiceProvider;
 @NbBundle.Messages("PandemicHelpProvider=Pandemic Help Provider")
 public class PandemicHelpProvider extends HelpPageProvider {
 
-    private static final String CODEBASE_NAME = "constellation";
-    private static final String SEP = File.separator;
+    private static final String MODULE_PATH = getFrontPath() + "ext" + SEP + "docs" + SEP + "TrainingSolutions" + SEP;
 
     /**
      * Provides a map of all the help files Maps the file name to the md file name
@@ -41,11 +39,9 @@ public class PandemicHelpProvider extends HelpPageProvider {
     @Override
     public Map<String, String> getHelpMap() {
         final Map<String, String> map = new HashMap<>();
-        final String pandemicModulePath = ".." + SEP + getFrontPath() + "ext" + SEP + "docs" + SEP + "TrainingSolutions" + SEP + "src" + SEP + "au" + SEP + "gov" + SEP + "asd"
-                + SEP + "tac" + SEP + CODEBASE_NAME + SEP + "training" + SEP + "solutions" + SEP;
 
-        map.put("au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin", pandemicModulePath + "import-custom-cities.md");
-        map.put("au.gov.asd.tac.constellation.training.solutions.chapter7.PandemicViewPane", pandemicModulePath + "pandemic-view.md");
+        map.put("au.gov.asd.tac.constellation.training.solutions.chapter4.ImportCustomCitiesPlugin", MODULE_PATH + "import-custom-cities.md");
+        map.put("au.gov.asd.tac.constellation.training.solutions.chapter7.PandemicViewPane", MODULE_PATH + "pandemic-view.md");
         return map;
     }
 
@@ -56,11 +52,10 @@ public class PandemicHelpProvider extends HelpPageProvider {
      */
     @Override
     public String getHelpTOC() {
-        return getFrontPath() + "ext" + SEP + "docs" + SEP + "TrainingSolutions" + SEP + "src" + SEP + "au" + SEP + "gov" + SEP + "asd" + SEP + "tac" + SEP
-                + CODEBASE_NAME + SEP + "training" + SEP + "solutions" + SEP + "pandemic-toc.xml";
+        return MODULE_PATH + "pandemic-toc.xml";
     }
     
-    private String getFrontPath() {
+    private static String getFrontPath() {
         // check where the application is being run from as the location of help pages is slightly different between running from a release zip and running locally from netbeans
         final boolean isRunningLocally = Generator.getBaseDirectory().contains("build" + SEP + "cluster");
         
