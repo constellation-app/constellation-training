@@ -62,4 +62,9 @@ public class HowManyOutbreaksQuestion implements AnalyticQuestionDescription {
     @Override
     public void initialiseParameters(final AnalyticPlugin plugin, final PluginParameters parameters) {
     }
+
+    @Override
+    public String getDocumentationUrl() {
+        return null;
+    }
 }

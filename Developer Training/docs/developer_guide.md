@@ -3679,10 +3679,9 @@ but to get you started let's jump into an example.
 
 Help pages in Constellation are simply Markdown (MD) documents. Open
 'import-custom-cities.md' and take a look at its format. You can find this 
-file located within the release/modules/ext/docs folder (after navigating a 
-few additional sub-folders). Note that because of its location, you won't 
-find the file from the *Projects* tab of Netbeans. You will need to switch to 
-the *Files* tab in order to find it.
+file located within the release/modules/ext/docs/TrainingExercises folder. Note 
+that because of its location, you won't find the file from the *Projects* tab of 
+Netbeans. You will need to switch to the *Files* tab in order to find it.
 
 As you will see, this is just a very simple MD document. If you are unfamiliar 
 with Markdown syntax, there are plenty of online resources which will go through 
@@ -3908,7 +3907,7 @@ chapter will explore some other ways Constellation can be built upon.
 Please refer to the Training Solutions module suite for source code and
 other resources related to this chapter.
 
-**Conversation View**
+## 9.1: Conversation View
 
 The Conversation View allows you to view any data you might define as
 content (text, images, audio, video, etc.) in a chronological flow, as
@@ -3979,7 +3978,7 @@ public class IconContributionProvider extends ConversationContributionProvider {
 }
 ```
 
-**Map View**
+## 9.2: Map View
 
 The Map View provides a geospatial view of the data in a graph. It comes
 complete with a basic set of base maps, tools and exporters, but these
@@ -4149,7 +4148,7 @@ public class TextGeoExporter extends AbstractGeoExportPlugin {
 }
 ```
 
-**Analytic View**
+## 9.3: Analytic View
 
 The Analytic View provides a way to calculate and visualise analytic
 results from a graph as well as have those results interact with that
@@ -4288,6 +4287,11 @@ public class HowManyOutbreaksQuestion implements AnalyticQuestionDescription {
     @Override
     public void initialiseParameters(final AnalyticPlugin plugin, final PluginParameters parameters) {
     }
+	
+    @Override
+    public String getDocumentationUrl() {
+        return null;
+    }
 }
 ```
 
@@ -4300,7 +4304,7 @@ run by using the **InternalVisualisationTranslator** and
 **GraphVisualisationTranslator** classes, which define the logic for
 translating a result type to a visualisation.
 
-**Schema View**
+## 9.4: Schema View
 
 The Schema View provides information about or related to the schema of
 the current graph. By default, the Schema View reveals information about
