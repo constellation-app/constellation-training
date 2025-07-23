@@ -4289,7 +4289,7 @@ public class HowManyOutbreaksQuestion implements AnalyticQuestionDescription {
     }
 	
 	@Override
-    public String getDocumentationUrl() {
+	public String getDocumentationUrl() {
         return null;
     }
 }
