@@ -21,7 +21,6 @@ import au.gov.asd.tac.constellation.training.solutions.chapter3.OutbreakAttribut
 import au.gov.asd.tac.constellation.utilities.icon.UserInterfaceIconProvider;
 import au.gov.asd.tac.constellation.views.attributeeditor.editors.AbstractEditorFactory.AbstractEditor;
 import au.gov.asd.tac.constellation.views.attributeeditor.editors.AttributeValueEditorFactory;
-import au.gov.asd.tac.constellation.views.attributeeditor.editors.operations.DefaultGetter;
 import au.gov.asd.tac.constellation.views.attributeeditor.editors.operations.EditOperation;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,10 +45,10 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = AttributeValueEditorFactory.class)
 public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak> {
-
+    
     @Override
-    public AbstractEditor<Outbreak> createEditor(final EditOperation editOperation, final DefaultGetter<Outbreak> defaultGetter, final ValueValidator<Outbreak> validator, final String editedItemName, final Outbreak initialValue) {
-        return new OutbreakEditor(editOperation, defaultGetter, validator, editedItemName, initialValue);
+    public AbstractEditor<Outbreak> createEditor(final String editedItemName, final EditOperation editOperation, final ValueValidator<Outbreak> validator, final Outbreak defaultValue, final Outbreak initialValue) {
+        return new OutbreakEditor(editedItemName, editOperation, validator, defaultValue, initialValue);
     }
 
     @Override
@@ -61,9 +60,9 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
 
         private final List<DiseaseEntry> diseases = new ArrayList<>();
         private final VBox diseaseEntries = new VBox(5);
-
-        protected OutbreakEditor(final EditOperation editOperation, final DefaultGetter defaultGetter, final ValueValidator<Outbreak> validator, final String editedItemName, final Outbreak initialValue) {
-            super(editOperation, defaultGetter, validator, editedItemName, initialValue);
+        
+        protected OutbreakEditor(final String editedItemName, final EditOperation editOperation, final ValueValidator<Outbreak> validator, final Outbreak defaultValue, final Outbreak initialValue) {
+            super(editedItemName, editOperation, validator, defaultValue, initialValue, true);
         }
 
         @Override
@@ -121,12 +120,7 @@ public class OutbreakEditorFactory extends AttributeValueEditorFactory<Outbreak>
 
             return controls;
         }
-
-        @Override
-        public boolean noValueCheckBoxAvailable() {
-            return true;
-        }
-
+        
         private class DiseaseEntry {
 
             final TextField diseaseName;
